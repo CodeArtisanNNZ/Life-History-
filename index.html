@@ -181,8 +181,8 @@
     #prophets .chip{border-color:var(--faith-line);color:var(--faith-muted)}
     @media(prefers-reduced-motion:reduce){#prophets .prophet{transition:none}}
   </style>
-  <link rel="stylesheet" href="biology.css" />\n  <link rel="stylesheet" href="life-tree.css" />
-  <link rel="stylesheet" href="prophets.css" />
+  <link rel="stylesheet" href="biology.css" />\n
+<link rel="stylesheet" href="prophets.css" />
 </head>
 <body>
   <header class="topbar">
@@ -276,23 +276,10 @@
           <div class="media-card" data-track="science" style="min-height:330px">
             <iframe title="NASA: The Solar System's Formation" width="100%" height="100%" style="border:0;position:absolute;inset:0" src="https://www.youtube-nocookie.com/embed/RT4OO0TFLHw" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
-          <article class="media-card" data-track="science" style="padding:22px;background:linear-gradient(145deg,#311d57,#e7834c 48%,#10284d);">
-            <div style="font-size:6rem;line-height:1">◉</div>
-            <div style="position:absolute;bottom:18px;left:18px;right:18px"><b style="font-family:Georgia,serif;font-size:1.4rem">Young Earth simulation</b><p style="font-size:.83rem">Use the time scrubber below to move from accretion to oceans, life and the modern planet.</p></div>
-          </article>
-        </div>
-
-        <div class="sim" data-track="science">
-          <div class="sim-grid">
-            <div id="planet" class="planet-stage" aria-hidden="true"></div>
-            <div>
-              <div class="kicker">Interactive deep-time scrubber</div>
-              <div id="simTitle" class="sim-title">4.54 billion years ago — Earth assembles</div>
-              <p id="simCopy" class="sim-copy">Rocky material accretes through collisions. The early planet is hot, frequently impacted and still differentiating into core, mantle and crust.</p>
-              <input id="timeRange" class="range" type="range" min="0" max="7" value="0" step="1" aria-label="Move through Earth history">
-              <div class="scale-labels"><span>4.54 bya</span><span>today</span></div>
-            </div>
           </div>
+
+        <div class="bio-callout" data-track="science">
+          <strong>Deep-time overview:</strong> Earth assembled about 4.54 billion years ago, cooled enough for long-lived crust and oceans, and later became home to the biological history described in the next chapter.
         </div>
       </div>
     </section>
@@ -325,28 +312,7 @@
             <div class="bio-source"><a href="https://quran.com/21/30" target="_blank" rel="noreferrer">Qur'an 21:30 ↗</a> · <a href="https://quran.com/24/45" target="_blank" rel="noreferrer">Qur'an 24:45 ↗</a></div>
           </article>
         </div>
-
-        <div class="protocell-lab" data-track="science">
-          <div class="protocell-grid">
-            <canvas id="abiogenesisCanvas" aria-label="Conceptual animation of prebiotic chemistry and protocell formation"></canvas>
-            <div>
-              <div class="kicker">Interactive concept model · not a reconstruction of one proven event</div>
-              <h3 id="abiogenesisTitle">1. Ingredients</h3>
-              <p id="abiogenesisCopy" class="sim-copy">Water, carbon-bearing molecules, minerals and energy sources existed on the young Earth. Organic molecules can also form without life.</p>
-              <div id="abiogenesisMeter" class="stage-meter"><span class="on"></span><span></span><span></span><span></span><span></span></div>
-              <div class="lab-controls">
-                <button class="lab-btn active" data-abiostage="0">Ingredients</button>
-                <button class="lab-btn" data-abiostage="1">Energy</button>
-                <button class="lab-btn" data-abiostage="2">Reaction networks</button>
-                <button class="lab-btn" data-abiostage="3">Compartments</button>
-                <button class="lab-btn" data-abiostage="4">Replication</button>
-              </div>
-              <p class="lab-note">This animation combines major research ideas for teaching. It deliberately does not imply that one specific origin-of-life route is proven.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="deep-details" data-track="science">
+<div class="deep-details" data-track="science">
           <details open>
             <summary>How could chemistry become biology?</summary>
             <div class="detail-body">
@@ -424,28 +390,7 @@
             </div>
           </details>
         </div>
-
-        <div class="transition-lab" data-track="science">
-          <div class="kicker">Interactive anatomy · water → land</div>
-          <div class="transition-tabs">
-            <button class="transition-tab active" data-transition="fish">Lobe-finned fish</button>
-            <button class="transition-tab" data-transition="tiktaalik">Tiktaalik-like mosaic</button>
-            <button class="transition-tab" data-transition="tetrapod">Early tetrapod</button>
-            <button class="transition-tab" data-transition="amniote">Amniote</button>
-          </div>
-          <div id="transitionView" class="transition-view" data-stage="fish">
-            <div class="transition-animal" aria-hidden="true">
-              <div class="tail"></div><div class="body"><span class="eye"></span></div><div class="fin"></div><div class="limb"></div>
-            </div>
-            <div>
-              <h3 id="transitionTitle">Lobe-finned fish: powerful internal fin skeletons</h3>
-              <p id="transitionCopy" class="sim-copy">Sarcopterygians had fleshy paired fins containing bones homologous to parts of tetrapod limbs. In shallow, oxygen-poor habitats, robust fins and air-breathing abilities could be useful.</p>
-              <ul id="transitionBullets" style="color:#aaa"><li>paired fins with internal bones</li><li>gills; some lineages with lungs or lung-like organs</li><li>body supported by water</li></ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="innovation-grid" data-track="science">
+<div class="innovation-grid" data-track="science">
           <article class="innovation"><div class="n">01</div><b>Jaws</b><p>Early jawed vertebrates gained a powerful new way to capture and process food, probably through modification of ancestral pharyngeal arches.</p></article>
           <article class="innovation"><div class="n">02</div><b>Paired fins → limbs</b><p>Internal bones of lobe fins form part of the anatomical story leading to humerus, radius/ulna and eventually digits.</p></article>
           <article class="innovation"><div class="n">03</div><b>Neck + stronger ribs</b><p>Separating the head from the shoulder girdle and strengthening the trunk improved movement and support in shallow water and on land.</p></article>
@@ -462,8 +407,8 @@
             <div class="section-number" style="font-size:1rem">TREE</div>
             <div>
               <div class="kicker">Explore relationships, not a straight ladder</div>
-              <h2>A zoomable Tree of Life inside Life History</h2>
-              <p class="lede">Inspired by the map-like exploration idea of OneZoom and the node-based phylogenetic navigation of Open Tree of Life, this is an original Life History visualization built for this project. It includes extinct groups that matter to our story, from trilobites and placoderms to Tiktaalik, dinosaurs and extinct hominins.</p>
+              <h2>Phylogenetic Tree of Life</h2>
+              <p class="lede">This section uses the phylogenetic simulation you provided, adapted into the Life History page with free-source images beside taxon names.</p>
             </div>
           </div>
           <iframe src="phylogenetic-tree.html" title="Interactive phylogenetic tree of life" loading="lazy" style="width:100%;height:920px;border:1px solid #303030;background:#070707;display:block"></iframe>
@@ -531,25 +476,29 @@
           <article class="anatomy-card"><div class="icon">✦</div><h3>Bird continuity</h3><p>Wishbones, feathers, hollow bones, air sacs, three-toed limbs, nesting behavior and many skeletal details connect birds with small theropod dinosaurs.</p></article>
         </div>
 
-        <div class="dino-periods" data-track="science">
-          <div class="kicker">Explore the Mesozoic</div>
-          <div class="dino-timebar" aria-hidden="true"><span title="Triassic"></span><span title="Jurassic"></span><span title="Cretaceous"></span></div>
-          <div class="dino-period-tabs">
-            <button class="dino-tab active" data-dinoperiod="triassic">Triassic</button>
-            <button class="dino-tab" data-dinoperiod="jurassic">Jurassic</button>
-            <button class="dino-tab" data-dinoperiod="cretaceous">Cretaceous</button>
-          </div>
-          <div class="dino-period-content">
-            <div>
-              <h3 id="dinoPeriodTitle">Triassic · 252–201.3 million years ago</h3>
-              <p id="dinoPeriodWorld">Earth was recovering from the end-Permian mass extinction. Pangaea dominated the globe; interiors were often hot and dry. Dinosaurs appeared and began diversifying, but many other archosaurs were initially more abundant.</p>
-              <p id="dinoPeriodSpecies"><strong>Representative dinosaurs:</strong> Eoraptor, Herrerasaurus, Coelophysis and early sauropodomorphs such as Plateosaurus. Early mammaliaforms also appeared.</p>
+        <div class="deep-details" data-track="science">
+          <details open>
+            <summary>Triassic · 252–201.3 million years ago</summary>
+            <div class="detail-body">
+              <p>Earth was recovering from the end-Permian mass extinction. Pangaea dominated the globe and many continental interiors were hot and dry. Dinosaurs appeared and diversified alongside numerous other archosaurs.</p>
+              <p><strong>Representative dinosaurs:</strong> Eoraptor, Herrerasaurus, Coelophysis and early sauropodomorphs such as Plateosaurus. Early mammaliaforms also appeared.</p>
+              <p>At the end of the Triassic, enormous Central Atlantic Magmatic Province volcanism coincided with another mass extinction. Dinosaurs survived and expanded into newly emptied ecological roles.</p>
             </div>
-            <div>
-              <div class="kicker">Major transition</div>
-              <p id="dinoPeriodEvent">At the end of the Triassic, enormous Central Atlantic Magmatic Province volcanism coincided with a mass extinction. Dinosaurs survived and expanded into newly emptied niches.</p>
+          </details>
+          <details>
+            <summary>Jurassic · 201.3–145 million years ago</summary>
+            <div class="detail-body">
+              <p>Pangaea continued to fragment. Warm climates and widespread vegetation supported giant sauropods, stegosaurs and large theropod predators.</p>
+              <p><strong>Representative dinosaurs:</strong> Diplodocus, Brachiosaurus/Giraffatitan, Stegosaurus and Allosaurus. Small feathered theropods also diversified, and Archaeopteryx records an early bird-like dinosaur by the Late Jurassic.</p>
             </div>
-          </div>
+          </details>
+          <details>
+            <summary>Cretaceous · 145–66 million years ago</summary>
+            <div class="detail-body">
+              <p>Continents separated further and flowering plants expanded. Dinosaur communities became strongly regional, including titanosaurs, hadrosaurs, ceratopsians, ankylosaurs and highly specialized theropods.</p>
+              <p><strong>Representative dinosaurs:</strong> Tyrannosaurus, Triceratops, Ankylosaurus, Velociraptor and Spinosaurus. The period ended with the K–Pg mass extinction 66 million years ago.</p>
+            </div>
+          </details>
         </div>
 
         <h3 style="margin-top:46px">The main dinosaur body plans</h3>
@@ -559,17 +508,17 @@
           <article class="dino-branch">
             <h3>Saurischian lineages</h3>
             <div class="dino-groups">
-              <div class="dino-group" data-dinogroup="theropod"><img class="mini-img" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Tyrannosaurus%20Rex%20Full%20Skeleton.JPG?width=500" alt="Tyrannosaurus rex skeleton"><div class="mini-copy"><b>Theropoda</b><small>T. rex · Allosaurus · Velociraptor · birds</small><small>WildFrogs · CC BY-SA 3.0</small></div></div>
-              <div class="dino-group" data-dinogroup="sauropod"><img class="mini-img" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Diplodocus%20skeleton%20NMNH.jpg?width=500" alt="Diplodocus skeleton"><div class="mini-copy"><b>Sauropodomorpha</b><small>Plateosaurus · Diplodocus · Brachiosaurus · titanosaurs</small><small>Ryan Schwark · CC0</small></div></div>
+              <div class="dino-group"><img class="mini-img" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Tyrannosaurus%20Rex%20Full%20Skeleton.JPG?width=500" alt="Tyrannosaurus rex skeleton"><div class="mini-copy"><b>Theropoda</b><small>T. rex · Allosaurus · Velociraptor · birds</small><small>WildFrogs · CC BY-SA 3.0</small></div></div>
+              <div class="dino-group"><img class="mini-img" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Diplodocus%20skeleton%20NMNH.jpg?width=500" alt="Diplodocus skeleton"><div class="mini-copy"><b>Sauropodomorpha</b><small>Plateosaurus · Diplodocus · Brachiosaurus · titanosaurs</small><small>Ryan Schwark · CC0</small></div></div>
             </div>
           </article>
           <article class="dino-branch">
             <h3>Ornithischian lineages</h3>
             <div class="dino-groups">
-              <div class="dino-group" data-dinogroup="ornithopod"><img class="mini-img" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Iguanodon%20skeleton.JPG?width=500" alt="Iguanodon skeleton"><div class="mini-copy"><b>Ornithopoda</b><small>Iguanodon · hadrosaurs</small><small>Laikayiu · CC BY-SA 2.5</small></div></div>
-              <div class="dino-group" data-dinogroup="ceratopsian"><img class="mini-img" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/A%20Triceratops%20skeleton.jpg?width=500" alt="Triceratops skeleton"><div class="mini-copy"><b>Ceratopsia</b><small>Psittacosaurus · Centrosaurus · Triceratops</small><small>Vanadium Erbium · CC BY 4.0</small></div></div>
-              <div class="dino-group" data-dinogroup="thyreophoran"><img class="mini-img" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Stegosaurus%20Skeleton.jpg?width=500" alt="Stegosaurus skeleton"><div class="mini-copy"><b>Thyreophora</b><small>Stegosaurus · Ankylosaurus</small><small>Motokoka · CC BY-SA 4.0</small></div></div>
-              <div class="dino-group" data-dinogroup="pachy"><img class="mini-img" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Pachycephalosaurus%20skull.jpg?width=500" alt="Pachycephalosaurus skull"><div class="mini-copy"><b>Pachycephalosauria</b><small>Pachycephalosaurus and relatives</small><small>Eduard Solà · CC BY 3.0</small></div></div>
+              <div class="dino-group"><img class="mini-img" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Iguanodon%20skeleton.JPG?width=500" alt="Iguanodon skeleton"><div class="mini-copy"><b>Ornithopoda</b><small>Iguanodon · hadrosaurs</small><small>Laikayiu · CC BY-SA 2.5</small></div></div>
+              <div class="dino-group"><img class="mini-img" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/A%20Triceratops%20skeleton.jpg?width=500" alt="Triceratops skeleton"><div class="mini-copy"><b>Ceratopsia</b><small>Psittacosaurus · Centrosaurus · Triceratops</small><small>Vanadium Erbium · CC BY 4.0</small></div></div>
+              <div class="dino-group"><img class="mini-img" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Stegosaurus%20Skeleton.jpg?width=500" alt="Stegosaurus skeleton"><div class="mini-copy"><b>Thyreophora</b><small>Stegosaurus · Ankylosaurus</small><small>Motokoka · CC BY-SA 4.0</small></div></div>
+              <div class="dino-group"><img class="mini-img" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Pachycephalosaurus%20skull.jpg?width=500" alt="Pachycephalosaurus skull"><div class="mini-copy"><b>Pachycephalosauria</b><small>Pachycephalosaurus and relatives</small><small>Eduard Solà · CC BY 3.0</small></div></div>
             </div>
           </article>
         </div>
@@ -594,10 +543,7 @@
           <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Pachycephalosaurus%20skull.jpg?width=900" alt="Pachycephalosaurus skull"><div class="body"><b>Pachycephalosaurus</b><small>Dome-skulled ornithischian.</small></div><div class="credit">Eduard Solà · CC BY 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Pachycephalosaurus%20skull.jpg" target="_blank" rel="noreferrer">source ↗</a></div></article>
           <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Archaeopteryx%2C%20Berlin%20specimen%2C%20replica.JPG?width=900" alt="Archaeopteryx Berlin specimen replica"><div class="body"><b>Archaeopteryx</b><small>Jurassic feathered avialan preserving both dinosaur-like and bird-like traits.</small></div><div class="credit">HTO · Public domain · <a href="https://commons.wikimedia.org/wiki/File:Archaeopteryx%2C%20Berlin%20specimen%2C%20replica.JPG" target="_blank" rel="noreferrer">source ↗</a></div></article>
         </div>
-
-        <div id="dinoExplain" class="dino-explain" data-track="science">Click a dinosaur group to see how its anatomy and ecology differed.</div>
-
-        <div class="deep-details" data-track="science">
+<div class="deep-details" data-track="science">
           <details open>
             <summary>Triassic: dinosaurs begin as one competitor among many</summary>
             <div class="detail-body">
@@ -628,14 +574,12 @@
           </details>
         </div>
 
-        <div class="extinction-stage" data-track="science">
-          <div class="extinction-sky"><div class="asteroid"></div><div class="dust-layer"></div><div class="extinction-ground"></div></div>
-          <div class="extinction-copy">
-            <h3>66 million years ago: the K–Pg catastrophe</h3>
-            <p><strong>Impact:</strong> a roughly 10-km-scale asteroid struck near today's Yucatán Peninsula, forming the Chicxulub crater. Ejecta, dust and sulfur-rich aerosols spread globally. Wildfires and a rapid period of darkness/cooling disrupted photosynthesis and food webs.</p>
-            <p><strong>Background stress:</strong> huge Deccan volcanic eruptions were also altering climate around this interval. Evidence strongly supports the impact as the principal immediate trigger of the end-Cretaceous mass extinction.</p>
-            <p><strong>Who survived?</strong> all non-avian dinosaurs disappeared, but birds survived. Small body size, ecological flexibility and access to resilient foods such as seeds may have helped some bird lineages persist.</p>
-          </div>
+        <div class="bio-panel" data-track="science" style="margin:26px 0">
+          <div class="track-tag"><i class="dot science-dot"></i>K–Pg extinction</div>
+          <h3>66 million years ago</h3>
+          <p><strong>Impact:</strong> a roughly 10-km-scale asteroid struck near today's Yucatán Peninsula, forming the Chicxulub crater. Ejecta, dust and sulfur-rich aerosols spread globally, disrupting photosynthesis and food webs.</p>
+          <p><strong>Background stress:</strong> Deccan volcanism was also altering climate around this interval. Evidence strongly supports the impact as the principal immediate trigger of the end-Cretaceous mass extinction.</p>
+          <p><strong>Survivors:</strong> all non-avian dinosaurs disappeared, but birds survived.</p>
         </div>
 
         <div class="myth-box" data-track="science">
@@ -669,25 +613,32 @@
           </div>
         </div>
 
-        <div class="fossil-lab" data-track="science">
-          <div class="strata" aria-label="Interactive fossilization cross section">
-            <div class="layer l1"></div><div class="layer l2"></div><div class="layer l3"></div><div class="layer l4"></div><div class="layer l5"></div>
-            <div class="fossil-water"></div><div class="fossil-bone"></div>
-          </div>
-          <div>
-            <div class="kicker">Interactive fossil maker</div>
-            <h3 id="fossilTitle">1. Death & transport</h3>
-            <p id="fossilCopy" class="sim-copy">Most organisms never fossilize. Scavengers, decay, weather and transport usually destroy remains. Fossilization becomes more likely when remains reach a place where sediment can bury them quickly.</p>
-            <div class="fossil-controls">
-              <button class="fossil-step active" data-fossilstep="0">1 · Death & transport</button>
-              <button class="fossil-step" data-fossilstep="1">2 · Rapid burial</button>
-              <button class="fossil-step" data-fossilstep="2">3 · Decay & pore space</button>
-              <button class="fossil-step" data-fossilstep="3">4 · Mineralization</button>
-              <button class="fossil-step" data-fossilstep="4">5 · Uplift & discovery</button>
+        <div class="deep-details" data-track="science">
+          <details open>
+            <summary>1 · Death, transport and rapid burial</summary>
+            <div class="detail-body">
+              <p>Most organisms never fossilize. Scavengers, decay, weather and transport normally destroy remains. Fossilization becomes more likely when remains are buried quickly by mud, sand, ash or other sediment.</p>
             </div>
-          </div>
+          </details>
+          <details>
+            <summary>2 · Decay and pore space</summary>
+            <div class="detail-body">
+              <p>Soft tissues usually decay first. Microscopic spaces inside bone, wood or shell can remain available for mineral-rich groundwater to enter.</p>
+            </div>
+          </details>
+          <details>
+            <summary>3 · Mineralization</summary>
+            <div class="detail-body">
+              <p>Minerals may precipitate into pore spaces through permineralization, or original material may be replaced by new minerals while some internal structure is preserved.</p>
+            </div>
+          </details>
+          <details>
+            <summary>4 · Rock formation, uplift and discovery</summary>
+            <div class="detail-body">
+              <p>Surrounding sediment becomes rock. Much later, uplift and erosion may expose the fossil, allowing paleontologists to document and excavate it.</p>
+            </div>
+          </details>
         </div>
-
 
         <div class="named-gallery" data-track="science">
           <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Ammonite.jpg?width=900" alt="Ammonite fossil embedded in rock"><div class="body"><b>Ammonite fossil</b><small>A real body fossil preserved in sedimentary rock.</small></div><div class="credit">Public domain · <a href="https://commons.wikimedia.org/wiki/File:Ammonite.jpg" target="_blank" rel="noreferrer">source ↗</a></div></article>
@@ -927,14 +878,7 @@
     </div>
   </footer>
 
-  <div id="modal" class="modal" aria-hidden="true">
-    <div class="modal-card">
-      <button id="closeModal" class="close" aria-label="Close">×</button>
-      <div id="modalContent"></div>
-    </div>
-  </div>
-
-  <script>
+<script>
     const modeButtons=[...document.querySelectorAll('.mode')];
     modeButtons.forEach(btn=>btn.addEventListener('click',()=>{
       modeButtons.forEach(b=>b.classList.remove('active'));btn.classList.add('active');
@@ -943,28 +887,8 @@
         el.classList.toggle('filtered-out', mode!=='all' && el.dataset.track!==mode);
       });
     }));
-
-    const stages=[
-      {t:'4.54 billion years ago — Earth assembles',c:'Rocky material accretes through collisions. The early planet is hot, frequently impacted and still differentiating into core, mantle and crust.',bg:'radial-gradient(circle at 33% 30%,#ffe5a8 0 4%,#f06a3b 18%,#73261f 42%,#16090b 70%)'},
-      {t:'~4.5 billion years ago — Moon-forming impact era',c:'A giant impact is the leading explanation for the Moon\'s formation. Early Earth remains geologically violent.',bg:'radial-gradient(circle at 40% 30%,#fff1c7 0 4%,#ff8a54 15%,#a33b2f 38%,#24100c 68%)'},
-      {t:'>4.0 billion years ago — crust, water and young oceans',c:'As the surface cools, crust stabilizes in places and liquid water becomes a persistent part of Earth\'s surface system.',bg:'radial-gradient(circle at 33% 30%,#ffd9a4 0 3%,#8d6f50 18%,#274863 43%,#071b2b 70%)'},
-      {t:'~3.5 billion years ago — clear fossil evidence of life',c:'Microbial life is documented in ancient rocks. The exact origin-of-life pathway remains an active scientific question.',bg:'radial-gradient(circle at 33% 30%,#d8f7a1 0 3%,#5ba870 18%,#1a5c65 43%,#071923 70%)'},
-      {t:'~600–541 million years ago — complex animals diversify',c:'Multicellular animal life expands, followed by the major Cambrian diversification visible in the fossil record.',bg:'radial-gradient(circle at 33% 30%,#c3ffef 0 3%,#39a69c 22%,#18517d 45%,#071829 70%)'},
-      {t:'252–66 million years ago — Mesozoic',c:'Dinosaurs, pterosaurs and marine reptiles occupy many ecosystems while mammals and birds also evolve.',bg:'radial-gradient(circle at 33% 30%,#f5df8c 0 3%,#5ea66b 22%,#24638a 45%,#071829 70%)'},
-      {t:'~300,000 years ago — Homo sapiens',c:'Fossils document our species in Africa by roughly 300,000 years ago, alongside a broader and branching history of hominins.',bg:'radial-gradient(circle at 33% 30%,#fff 0 3%,#8bd3ff 12%,#245b94 38%,#081622 65%,#000 72%)'},
-      {t:'Today',c:'One living human species, Homo sapiens, inhabits the planet. Our biological history is reconstructed from fossils, archaeology and genetics.',bg:'radial-gradient(circle at 33% 30%,#fff 0 3%,#7ec8ff 12%,#2d8e5c 30%,#245b94 50%,#081622 72%)'}
-    ];
-    const range=document.getElementById('timeRange'), planet=document.getElementById('planet');
-    function setStage(){
-      const s=stages[+range.value];
-      document.getElementById('simTitle').textContent=s.t;
-      document.getElementById('simCopy').textContent=s.c;
-      planet.style.background=s.bg;
-    }
-    range.addEventListener('input',setStage);
-
-  </script>
-  <script src="biology.js"></script>\n  <script src="life-tree.js"></script>
-  <script src="prophets.js"></script>
+</script>
+\n
+<script src="prophets.js"></script>
 </body>
 </html>
