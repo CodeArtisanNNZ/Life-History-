@@ -180,6 +180,13 @@
     #prophets .line-note{color:var(--faith-muted)}
     #prophets .chip{border-color:var(--faith-line);color:var(--faith-muted)}
     @media(prefers-reduced-motion:reduce){#prophets .prophet{transition:none}}
+
+    .language-switch{display:flex;align-items:center;gap:7px;margin-left:auto;white-space:nowrap}
+    .language-switch button{border:1px solid #595959;background:#151515;color:#eaeaea;padding:7px 11px;border-radius:5px;cursor:pointer;font-size:.75rem}
+    .language-switch button[aria-pressed="true"]{background:#f0ece4;border-color:#f0ece4;color:#101010}
+    #google_translate_element{position:absolute;left:-9999px;top:0;width:1px;height:1px;overflow:hidden}
+    body{top:0!important}.goog-te-banner-frame,.skiptranslate iframe{display:none!important}
+    @media(max-width:620px){.nav{flex-wrap:wrap}.language-switch{margin-left:0}.brand{margin-right:auto}}
   </style>
   <link rel="stylesheet" href="biology.css" />\n
 <link rel="stylesheet" href="prophets.css" />
@@ -188,7 +195,7 @@
 <body>
   <header class="topbar">
     <div class="wrap nav">
-      <div class="brand">LIFE HISTORY</div>
+      <div class="brand">LIFE HISTORY</div><div class="language-switch" role="group" aria-label="Website language"><button type="button" id="lang-en" aria-pressed="true">EN</button><button type="button" id="lang-bn" aria-pressed="false">বাংলা</button></div><div id="google_translate_element" aria-hidden="true"></div>
       <nav class="navlinks">
         <a href="#before">Before humanity</a><a href="#earth">Earth</a><a href="#life">Life</a>
         <a href="#humans">Human origins</a><a href="#prophets">Prophets</a><a href="#sources">Sources</a>
@@ -1134,5 +1141,26 @@
 </script>
 \n
 <script src="prophets.js"></script>
+<script>
+(function(){
+  const en=document.getElementById('lang-en'), bn=document.getElementById('lang-bn');
+  const saved=localStorage.getItem('life-history-language')==='bn'?'bn':'en';
+  function update(lang){document.documentElement.lang=lang;en.setAttribute('aria-pressed',String(lang==='en'));bn.setAttribute('aria-pressed',String(lang==='bn'));}
+  function selectLanguage(lang){
+    update(lang);localStorage.setItem('life-history-language',lang);
+    const box=document.querySelector('#google_translate_element select.goog-te-combo');
+    if(box){box.value=lang==='bn'?'bn':'en';box.dispatchEvent(new Event('change',{bubbles:true}));return true;}
+    return false;
+  }
+  window.lifeHistoryTranslateReady=function(){
+    new google.translate.TranslateElement({pageLanguage:'en',includedLanguages:'bn,en',autoDisplay:false},'google_translate_element');
+    let attempts=0;const poll=setInterval(function(){attempts++;if(selectLanguage(saved)||attempts>35)clearInterval(poll);},200);
+  };
+  en.addEventListener('click',()=>{if(!selectLanguage('en'))location.reload();});
+  bn.addEventListener('click',()=>{if(!selectLanguage('bn')){const original=bn.textContent;bn.textContent='বাংলা…';setTimeout(()=>bn.textContent=original,1800);}});
+  update(saved);
+})();
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=lifeHistoryTranslateReady" async defer></script>
 </body>
 </html>
