@@ -18,3 +18,215 @@
 @media(max-width:1100px){.nav{align-items:flex-start;flex-wrap:wrap}.navlinks{width:100%;overflow-x:auto;flex-wrap:nowrap;padding-bottom:8px}}
 @media(max-width:700px){.chapter-list{grid-template-columns:1fr}.chapter-pager{grid-template-columns:1fr}.chapter-nav.next{text-align:left}}
 @media(max-width:620px){.navlinks{display:flex!important;width:100%;overflow-x:auto;flex-wrap:nowrap;gap:12px;padding:3px 0 9px}.navlinks a{flex:0 0 auto}.chapter-home{padding:56px 0}}
+
+
+/* Faith visual distinction */
+:root{
+  --faith-gold:#cbb58d;
+  --faith-gold-soft:#8f7b5f;
+  --faith-cream:#eee6d7;
+  --faith-deep:#17130f;
+  --faith-panel:#211b15;
+  --faith-panel-2:#292117;
+  --faith-line:#5d4d39;
+  --faith-muted:#baaD9b;
+}
+
+/* Make the two dedicated Islamic chapters feel like a different room,
+   while keeping the same Life History design language. */
+body:has(#before),
+body:has(#prophets){
+  background:
+    radial-gradient(circle at 84% 5%,rgba(203,181,141,.08),transparent 26rem),
+    linear-gradient(180deg,#0b0a08 0,#15110d 52%,#0b0a08 100%);
+}
+body:has(#before) .topbar,
+body:has(#prophets) .topbar{
+  background:rgba(18,15,12,.94);
+  border-bottom-color:#4c4031;
+}
+body:has(#before) .modebar,
+body:has(#prophets) .modebar{
+  background:#15110d;
+  border-bottom-color:#4c4031;
+}
+body:has(#before) .navlinks a[aria-current="page"],
+body:has(#prophets) .navlinks a[aria-current="page"]{
+  color:var(--faith-cream);
+  text-decoration-color:var(--faith-gold);
+}
+body:has(#before) .brand,
+body:has(#prophets) .brand{
+  color:var(--faith-cream);
+}
+
+/* Dedicated chapter headers */
+#before,
+#prophets{
+  background:
+    linear-gradient(135deg,rgba(203,181,141,.035) 25%,transparent 25%) 0 0/34px 34px,
+    linear-gradient(315deg,rgba(203,181,141,.022) 25%,transparent 25%) 0 0/34px 34px,
+    var(--faith-deep);
+}
+#before .section-head,
+#prophets .section-head{
+  padding-bottom:24px;
+  border-bottom:1px solid var(--faith-line);
+}
+#before .section-number,
+#prophets .section-number{
+  color:var(--faith-gold-soft);
+}
+#before .kicker,
+#prophets .kicker{
+  color:var(--faith-gold);
+}
+#before h2,#before h3,
+#prophets h2,#prophets h3{
+  color:var(--faith-cream);
+}
+#before .lede,
+#prophets .lede{
+  color:#c8bcaa;
+}
+
+/* Revelation cards anywhere on the site */
+.track[data-track="revelation"],
+.bio-panel[data-track="revelation"],
+.event[data-track="revelation"],
+.bio-callout.islamic{
+  background:
+    linear-gradient(90deg,rgba(203,181,141,.06),transparent 34%),
+    var(--faith-panel)!important;
+  border-color:var(--faith-line)!important;
+  box-shadow:inset 3px 0 0 var(--faith-gold-soft);
+}
+.track[data-track="revelation"] .track-tag,
+.bio-panel[data-track="revelation"] .track-tag,
+.event[data-track="revelation"] .when{
+  color:var(--faith-gold)!important;
+}
+.track[data-track="revelation"] p,
+.bio-panel[data-track="revelation"] p,
+.event[data-track="revelation"] p,
+.bio-callout.islamic{
+  color:#c3b8a8!important;
+}
+.track[data-track="revelation"] strong,
+.bio-panel[data-track="revelation"] strong,
+.bio-callout.islamic strong{
+  color:var(--faith-cream);
+}
+
+/* Angels / jinn page */
+.unseen-card,
+.angel-card,
+.role-card,
+.jinn-type,
+.myth-item,
+.iblis-story,
+.story-step{
+  background:var(--faith-panel)!important;
+  border-color:var(--faith-line)!important;
+}
+.unseen-card,
+.angel-card,
+.jinn-type{
+  box-shadow:inset 0 3px 0 rgba(203,181,141,.26);
+}
+.angel-card .num,
+.story-step .stepn,
+.jinn-type .tag{
+  color:var(--faith-gold)!important;
+}
+.angel-card .arabic{
+  color:#d8c39d!important;
+}
+.angel-card .duty{
+  border-left-color:var(--faith-gold)!important;
+  color:#ded3c3!important;
+}
+.source-pill{
+  border-color:#66543d!important;
+  color:#ccb994!important;
+  background:#17120d;
+}
+.source-pill:hover{
+  border-color:var(--faith-gold)!important;
+  color:#fff4df!important;
+}
+.primary-warning{
+  border-color:#8a6d49!important;
+  background:#241a11!important;
+}
+
+/* Prophets page */
+.prophet-policy,
+.prophet-story,
+.prophet-family-note{
+  background:var(--faith-panel)!important;
+  border-color:var(--faith-line)!important;
+}
+.prophet-count{
+  background:var(--faith-cream)!important;
+  color:#1a1510!important;
+  border-color:var(--faith-gold)!important;
+}
+.prophet-story::before{
+  background:#6d5b43!important;
+}
+.prophet-story[open]::before{
+  background:var(--faith-gold)!important;
+}
+.prophet-name{
+  color:var(--faith-cream)!important;
+}
+.prophet-arabic{
+  color:#d8c39d!important;
+}
+.prophet-era,
+.prophet-body h4,
+.prophet-index{
+  color:#a99373!important;
+}
+.prophet-body,
+.prophet-event{
+  border-color:#443729!important;
+}
+.prophet-event{
+  background:#18130f!important;
+  color:#bdb09f!important;
+}
+.prophet-source,
+.prophet-jump{
+  border-color:#5b4a36!important;
+  background:#18130f!important;
+  color:#bda984!important;
+}
+.prophet-source:hover,
+.prophet-jump:hover{
+  border-color:var(--faith-gold)!important;
+  color:#fff3dc!important;
+}
+.prophet-search{
+  background:#18130f!important;
+  border-color:#5b4a36!important;
+  color:var(--faith-cream)!important;
+}
+.prophet-search:focus{
+  border-color:var(--faith-gold)!important;
+}
+
+/* Qur'an / hadith references get a warmer reference treatment */
+#before .source-link,
+#prophets .source-link,
+[data-track="revelation"] a{
+  text-decoration-color:#806b4f;
+  text-underline-offset:3px;
+}
+
+/* Keep navigation cards neutral; only the Islamic content itself changes. */
+@media(max-width:700px){
+  #before .section-head,
+  #prophets .section-head{padding-bottom:18px}
+}
