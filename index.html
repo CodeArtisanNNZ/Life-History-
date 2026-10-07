@@ -136,6 +136,50 @@
       .event{grid-template-columns:1fr;gap:5px;padding-left:20px}
       .modes{padding:8px 0}
     }
+
+    /* Islamic narrative: warm monochrome, visually separate from science. */
+    :root{--faith-bg:#171511;--faith-panel:#211d18;--faith-line:#54493b;--faith-ink:#eee8dc;--faith-muted:#c3b8a8;--faith-accent:#c8ae82}
+    #before,#prophets{
+      background:
+        radial-gradient(ellipse at 85% 0%,rgba(200,174,130,.075),transparent 52%),
+        repeating-linear-gradient(135deg,transparent 0 46px,rgba(245,231,205,.012) 46px 47px),
+        var(--faith-bg);
+      border-bottom-color:var(--faith-line);
+    }
+    #before .section-number,#prophets .section-number{color:#897660}
+    #before .kicker,#prophets .kicker{color:var(--faith-accent)}
+    #before .lede,#prophets .lede{color:var(--faith-muted)}
+    [data-track="revelation"].track,
+    [data-track="revelation"].event,
+    [data-track="revelation"].prophet{
+      background:var(--faith-panel);color:var(--faith-ink);
+      border-color:var(--faith-line)
+    }
+    .two-track:has(> [data-track="revelation"]) {background:var(--faith-line);border-color:var(--faith-line)}
+    .track[data-track="revelation"] p,
+    .event[data-track="revelation"] p,
+    #prophets .prophet p{color:var(--faith-muted)}
+    [data-track="revelation"] .track-tag,
+    [data-track="revelation"] .when,
+    #prophets .prophet .period{color:var(--faith-accent)}
+    [data-track="revelation"] .fact{border-top-color:var(--faith-line)}
+    [data-track="revelation"] .fact small,
+    [data-track="revelation"] .ref{color:var(--faith-muted)}
+    [data-track="revelation"] .callout{
+      background:#2a241c;border-color:var(--faith-line);color:var(--faith-ink)
+    }
+    #prophets .timeline{border-left-color:var(--faith-line)}
+    #prophets .event{padding-left:26px;border-bottom:1px solid rgba(200,174,130,.15)}
+    #prophets .event:before{background:var(--faith-accent)}
+    #prophets .prophet-grid{gap:10px}
+    #prophets .prophet{background:#211d18;border-color:var(--faith-line)}
+    #prophets .prophet:hover{background:#29231c;border-color:var(--faith-accent)}
+    #prophets .tree{background:#1d1915;border-color:var(--faith-line)}
+    #prophets .node{background:#28221b;border-color:var(--faith-line)}
+    #prophets .node.primary{border-color:var(--faith-accent)}
+    #prophets .line-note{color:var(--faith-muted)}
+    #prophets .chip{border-color:var(--faith-line);color:var(--faith-muted)}
+    @media(prefers-reduced-motion:reduce){#prophets .prophet{transition:none}}
   </style>
   <link rel="stylesheet" href="biology.css" />\n  <link rel="stylesheet" href="life-tree.css" />
 </head>
