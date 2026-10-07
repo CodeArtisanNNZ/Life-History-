@@ -62,7 +62,7 @@
  }
 
  function applySiteLogo(){
-   const src='assets/life-history-logo.jpg';
+   const src='assets/life-history-logo.png?v=4';
    document.querySelectorAll('.brand-lockup').forEach(a=>{
      a.setAttribute('href','index.html');
      a.setAttribute('aria-label','Life History home');
@@ -73,10 +73,13 @@
    });
    let icon=document.querySelector('link[rel="icon"]');
    if(!icon){icon=document.createElement('link');icon.rel='icon';document.head.appendChild(icon);}
-   icon.type='image/jpeg'; icon.href=src;
+   icon.type='image/png'; icon.href='assets/life-history-logo.png?v=4';
    let touch=document.querySelector('link[rel="apple-touch-icon"]');
    if(!touch){touch=document.createElement('link');touch.rel='apple-touch-icon';document.head.appendChild(touch);}
-   touch.href=src;
+   touch.href='assets/life-history-logo.png?v=4';
+   let shortcut=document.querySelector('link[rel="shortcut icon"]');
+   if(!shortcut){shortcut=document.createElement('link');shortcut.rel='shortcut icon';document.head.appendChild(shortcut);}
+   shortcut.type='image/png';shortcut.href='assets/life-history-logo.png?v=4';
  }
  Object.assign(copy,{
    "A visual history of life · evidence · revelation":"প্রাণের ইতিহাস · প্রমাণ · ওহি",
