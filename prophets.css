@@ -1,0 +1,115 @@
+
+/* 25 Prophets archive — text-first, no figurative depictions */
+.prophets-intro{
+  display:grid;grid-template-columns:1.05fr .95fr;gap:12px;margin:24px 0 30px;
+}
+.prophet-policy,.prophet-count{
+  border:1px solid #2d2d2d;background:#0d0d0d;padding:20px;
+}
+.prophet-count{
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  background:#f0efe9;color:#111;
+}
+.prophet-count strong{display:block;font:700 4.4rem/1 Georgia,serif}
+.prophet-count span{display:block;margin-top:4px;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;color:#555}
+.prophet-policy p{color:#a2a2a2;margin:.6rem 0}
+.prophet-policy b{color:#eee}
+
+.prophet-jumpbar{
+  display:flex;gap:6px;overflow-x:auto;padding:8px 0 14px;margin:0 0 20px;
+  scrollbar-width:thin;
+}
+.prophet-jump{
+  flex:0 0 auto;border:1px solid #333;background:#0c0c0c;color:#aaa;
+  border-radius:999px;padding:7px 10px;font-size:.68rem;cursor:pointer;
+}
+.prophet-jump:hover{border-color:#777;color:#fff}
+.prophet-jump .n{color:#666;margin-right:4px}
+
+.prophet-archive{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;
+}
+.prophet-story{
+  border:1px solid #2d2d2d;background:#0c0c0c;position:relative;overflow:hidden;
+}
+.prophet-story::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:#555;
+}
+.prophet-story[open]::before{background:#e8e6df}
+.prophet-story summary{
+  list-style:none;cursor:pointer;padding:18px 18px 17px 22px;
+  display:grid;grid-template-columns:44px 1fr auto;gap:13px;align-items:center;
+}
+.prophet-story summary::-webkit-details-marker{display:none}
+.prophet-index{
+  font:700 1.45rem/1 Georgia,serif;color:#666;text-align:center;
+}
+.prophet-name-row{min-width:0}
+.prophet-name{
+  display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;
+  font:700 1.28rem/1.2 Georgia,serif;color:#efeee9;
+}
+.prophet-arabic{
+  font-family:"Noto Naskh Arabic","Traditional Arabic",serif;
+  font-size:1.35rem;font-weight:500;direction:rtl;color:#bbb;
+}
+.prophet-era{font-size:.7rem;color:#777;margin-top:4px}
+.prophet-chevron{
+  width:28px;height:28px;border:1px solid #333;border-radius:50%;
+  display:grid;place-items:center;color:#888;font-size:1rem;
+}
+.prophet-story[open] .prophet-chevron{transform:rotate(45deg);color:#fff;border-color:#777}
+.prophet-body{padding:0 20px 22px 65px;border-top:1px solid #242424}
+.prophet-body h4{
+  margin:18px 0 7px;font-size:.69rem;letter-spacing:.09em;text-transform:uppercase;color:#777;
+}
+.prophet-body p{color:#aaa;line-height:1.65;margin:.45rem 0}
+.prophet-body strong{color:#eee}
+.prophet-events{display:grid;gap:7px;margin-top:9px}
+.prophet-event{
+  display:grid;grid-template-columns:24px 1fr;gap:8px;border:1px solid #282828;
+  background:#090909;padding:9px 10px;color:#aaa;font-size:.79rem;line-height:1.45;
+}
+.prophet-event .dotn{
+  width:22px;height:22px;border-radius:50%;border:1px solid #3a3a3a;
+  display:grid;place-items:center;color:#777;font-size:.61rem;
+}
+.prophet-sources{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.prophet-source{
+  display:inline-block;border:1px solid #303030;border-radius:999px;
+  padding:5px 8px;color:#aaa;text-decoration:none;font-size:.68rem;
+}
+.prophet-source:hover{border-color:#777;color:#fff}
+.prophet-caution{
+  margin-top:13px;border-left:2px solid #82725d;background:#14110d;
+  padding:10px 12px;color:#a99b89;font-size:.73rem;line-height:1.5;
+}
+.prophet-hadith{
+  margin-top:8px;border-left:2px solid #596c74;background:#0c1215;
+  padding:10px 12px;color:#9dafb6;font-size:.73rem;line-height:1.5;
+}
+.prophet-hadith a,.prophet-caution a{color:inherit;text-underline-offset:2px}
+
+.prophet-search{
+  margin:18px 0 14px;width:100%;border:1px solid #333;background:#0c0c0c;color:#eee;
+  padding:11px 13px;font:inherit;font-size:.83rem;outline:none;
+}
+.prophet-search:focus{border-color:#777}
+.prophet-story.hidden{display:none}
+
+.prophet-family-note{
+  margin-top:45px;border:1px solid #2f2f2f;background:#0b0b0b;padding:18px;
+}
+.prophet-family-note p{color:#999}
+
+@media(max-width:850px){
+  .prophets-intro{grid-template-columns:1fr}
+  .prophet-archive{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .prophet-story summary{grid-template-columns:34px 1fr auto;padding:15px 12px}
+  .prophet-body{padding:0 13px 18px}
+  .prophet-index{font-size:1.1rem}
+  .prophet-name{font-size:1.12rem}
+  .prophet-arabic{font-size:1.2rem}
+}
