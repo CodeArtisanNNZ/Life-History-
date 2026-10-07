@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Phylogenetic Tree of Life — Life History</title>
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<style>
+:root{
+  --bg:#070707;--panel:#0e0e0e;--panel2:#141414;--ink:#f1f1ed;--muted:#969696;
+  --line:#2f2f2f;--soft:#1d1d1d;--bacteria:#77b7ff;--archaea:#e0bc70;--euk:#a7c9ff;
+  --plants:#9dcc78;--fungi:#b8a5ef;--animals:#e1a0c2;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+body{padding:14px}
+.widget{max-width:1500px;margin:auto}
+.header{border:1px solid var(--line);background:var(--panel);padding:18px}
+.top{display:flex;gap:16px;justify-content:space-between;align-items:flex-start}
+h1{font-family:Georgia,serif;font-size:26px;margin:0 0 4px}
+.subtitle{color:var(--muted);font-size:13px}
+.actions,.chips{display:flex;gap:6px;flex-wrap:wrap}
+button,.search{border:1px solid #343434;background:#111;color:#ddd;border-radius:999px;padding:8px 11px;font-size:12px}
+button{cursor:pointer}
+button:hover,button.active{background:#eee;color:#111}
+.controls{display:grid;grid-template-columns:minmax(240px,1fr) 2fr;gap:10px;margin-top:14px}
+.search{width:100%;border-radius:6px;outline:none}
+.main{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:10px;margin-top:10px}
+.tree-card,.details{border:1px solid var(--line);background:var(--panel);min-height:650px}
+.tree-card{position:relative;overflow:hidden}
+#tree-svg{width:100%;height:650px;display:block;background:
+ radial-gradient(circle at 45% 50%,rgba(255,255,255,.025),transparent 48%),#080808}
+.zoom{position:absolute;top:12px;left:12px;z-index:5;display:grid;gap:5px}
+.zoom button{width:36px;height:36px;border-radius:6px;padding:0;background:rgba(10,10,10,.92)}
+.tree-link{fill:none;stroke:#333;stroke-width:1.5}
+.tree-node{cursor:pointer}
+.tree-node circle{stroke-width:2}
+.tree-node text{font-size:12px;font-weight:700;paint-order:stroke;stroke:#070707;stroke-width:4px;stroke-linejoin:round;pointer-events:none}
+.tree-node .node-img-frame{fill:#111;stroke:#444;stroke-width:1}
+.tree-node image{pointer-events:none}
+.tree-node.is-matched .node-img-frame{stroke:#fff;stroke-width:3}
+.details{padding:16px}
+.detail-image{width:100%;height:190px;border:1px solid #303030;background:#080808;object-fit:cover;display:block}
+.image-credit{font-size:10px;color:#777;line-height:1.35;margin:6px 0 14px}
+.image-credit a{color:#aaa}
+.rank{display:inline-block;border:1px solid #3a3a3a;border-radius:999px;padding:4px 7px;font-size:10px;color:#aaa}
+.domain{font-size:11px;font-weight:700;margin-top:14px}
+.details h2{font-family:Georgia,serif;margin:5px 0 7px;font-size:24px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:14px 0}
+.stat{border:1px solid #2b2b2b;background:#0a0a0a;padding:10px}
+.stat b{display:block;font-size:14px}.stat small{color:#777}
+.section-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#777;margin:16px 0 6px}
+.lineage{display:flex;gap:5px;flex-wrap:wrap}
+.lineage span{border:1px solid #2f2f2f;border-radius:999px;padding:4px 7px;color:#aaa;font-size:10px;cursor:pointer}
+.desc{color:#aaa;font-size:13px;line-height:1.55}
+.note{margin-top:10px;border:1px solid #2e2e2e;background:#0b0b0b;padding:10px;color:#858585;font-size:10px;line-height:1.45}
+.loading-dot{fill:#333}
+@media(max-width:980px){.main{grid-template-columns:1fr}.details{min-height:0}.tree-card{min-height:570px}#tree-svg{height:570px}}
+@media(max-width:650px){body{padding:7px}.top{display:block}.actions{margin-top:10px}.controls{grid-template-columns:1fr}.chips{max-height:84px;overflow:auto}.tree-card{min-height:510px}#tree-svg{height:510px}.details{padding:12px}}
+</style>
+</head>
+<body>
+<div class="widget">
+  <div class="header">
+    <div class="top">
+      <div><h1>Phylogenetic Tree of Life</h1><div class="subtitle">The uploaded simulation, adapted for Life History — now with a free-source image beside every taxon name.</div></div>
+      <div class="actions">
+        <button id="btn-expand">Expand All</button>
+        <button id="btn-collapse">Collapse</button>
+        <button id="btn-reset">Reset View</button>
+      </div>
+    </div>
+    <div class="controls">
+      <input id="taxon-search" class="search" placeholder="Search Homo sapiens, Aves, Fungi…" autocomplete="off">
+      <div class="chips">
+        <button class="active" data-clade="All">All</button>
+        <button data-clade="Bacteria">Bacteria</button>
+        <button data-clade="Archaea">Archaea</button>
+        <button data-clade="Eukaryota">Eukaryota</button>
+        <button data-clade="Metazoa">Animals</button>
+        <button data-clade="Viridiplantae">Plants</button>
+        <button data-clade="Fungi">Fungi</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="tree-card" id="tree-container">
+      <div class="zoom">
+        <button id="zoom-in" title="Zoom in">+</button>
+        <button id="zoom-out" title="Zoom out">−</button>
+        <button id="zoom-fit" title="Fit view">⊙</button>
+      </div>
+      <svg id="tree-svg"></svg>
+    </div>
+
+    <aside class="details">
+      <img id="detail-image" class="detail-image" alt="">
+      <div id="detail-image-credit" class="image-credit">Finding a free Wikimedia Commons image…</div>
+      <div id="detail-domain" class="domain">Domain/Clade</div>
+      <h2 id="detail-name">LUCA</h2>
+      <span id="detail-rank" class="rank">Domain Root</span>
+      <div class="stats">
+        <div class="stat"><b id="detail-mya">4,000 Mya</b><small>Origin / divergence</small></div>
+        <div class="stat"><b id="detail-species">~2–5M+</b><small>Species diversity</small></div>
+      </div>
+      <div class="section-label">Lineage ancestry</div>
+      <div id="detail-lineage" class="lineage"></div>
+      <div class="section-label">Description</div>
+      <div id="detail-desc" class="desc"></div>
+      <div class="note">Images are fetched from Wikimedia Commons only. The script accepts images marked with a free/public-domain license and displays the Commons source/license in this panel. For broad clades, the picture is a representative scientific image, not a claim that one modern organism is the ancestor of another.</div>
+    </aside>
+  </div>
+</div>
+
+<script>
+const TREE_DATA = {
+  name:"LUCA",rank:"Domain Root",divergence_mya:"4,000 Mya",domain:"LUCA",species_count:"~2-5M+",description:"Last Universal Common Ancestor: the hypothetical ancestral cell from which all cellular life on Earth descended roughly 4 billion years ago.",children:[
+    {name:"Bacteria",rank:"Domain",divergence_mya:"3,800 Mya",domain:"Bacteria",species_count:"10M+",description:"Major domain of single-celled prokaryotic microorganisms possessing peptidoglycan cell walls.",children:[
+      {name:"Proteobacteria",rank:"Phylum",divergence_mya:"3,200 Mya",domain:"Bacteria",species_count:"40,000+",description:"Diverse phylum of Gram-negative bacteria including pathogens, nitrogen-fixers, and mitochondrial ancestors.",children:[
+        {name:"Alphaproteobacteria",rank:"Class",divergence_mya:"2,000 Mya",domain:"Bacteria",species_count:"12,000+",description:"A major proteobacterial class that includes lineages close to the ancestors of mitochondria.",children:[
+          {name:"Rickettsia",rank:"Genus",divergence_mya:"1,100 Mya",domain:"Bacteria",species_count:"30+",description:"Obligate intracellular bacteria closely related to eukaryotic mitochondria."}
+        ]},
+        {name:"Escherichia coli",rank:"Species",divergence_mya:"100 Mya",domain:"Bacteria",species_count:"1",description:"Model prokaryotic organism ubiquitous in biotechnology and mammalian gut biomes."}
+      ]},
+      {name:"Cyanobacteria",rank:"Phylum",divergence_mya:"2,700 Mya",domain:"Bacteria",species_count:"6,000+",description:"Photosynthetic oxygen-producing prokaryotes central to Earth's oxygenation and to the ancestry of chloroplasts.",children:[
+        {name:"Anabaena",rank:"Genus",divergence_mya:"1,200 Mya",domain:"Bacteria",species_count:"80+",description:"Filamentous cyanobacteria capable of nitrogen fixation."}
+      ]},
+      {name:"Actinomycetota",rank:"Phylum",divergence_mya:"2,500 Mya",domain:"Bacteria",species_count:"3,000+",description:"High G+C Gram-positive bacteria important in soil ecology and natural antibiotic production."}
+    ]},
+    {name:"Archaea",rank:"Domain",divergence_mya:"3,800 Mya",domain:"Archaea",species_count:"10,000+",description:"Domain of single-celled prokaryotes with distinctive membrane chemistry and molecular machinery.",children:[
+      {name:"Asgardarchaeota",rank:"Superphylum",divergence_mya:"2,000 Mya",domain:"Archaea",species_count:"500+",description:"Archaeal group containing lineages especially close to eukaryotes in genomic analyses.",children:[
+        {name:"Lokiarchaeum",rank:"Genus",divergence_mya:"1,800 Mya",domain:"Archaea",species_count:"1",description:"An Asgard archaeal lineage first identified from deep-sea sediments."}
+      ]},
+      {name:"Euryarchaeota",rank:"Phylum",divergence_mya:"3,000 Mya",domain:"Archaea",species_count:"2,500+",description:"Traditional archaeal grouping including methanogens, halophiles and hyperthermophiles.",children:[
+        {name:"Methanothermobacter",rank:"Genus",divergence_mya:"1,500 Mya",domain:"Archaea",species_count:"10+",description:"Thermophilic methanogenic archaea."}
+      ]}
+    ]},
+    {name:"Eukaryota",rank:"Domain",divergence_mya:"2,100 Mya",domain:"Eukaryota",species_count:"1.8M+",description:"Organisms with complex cells containing nuclei and membrane-bound organelles.",children:[
+      {name:"Viridiplantae",rank:"Kingdom",divergence_mya:"1,500 Mya",domain:"Viridiplantae",species_count:"500,000+",description:"Green plants comprising green algae and land plants with chlorophylls a and b.",children:[
+        {name:"Tracheophyta",rank:"Clade",divergence_mya:"430 Mya",domain:"Viridiplantae",species_count:"350,000+",description:"Vascular plants with specialized conducting tissues such as xylem and phloem.",children:[
+          {name:"Angiosperms",rank:"Clade",divergence_mya:"140 Mya",domain:"Viridiplantae",species_count:"300,000+",description:"Flowering plants producing seeds enclosed within fruits.",children:[
+            {name:"Arabidopsis thaliana",rank:"Species",divergence_mya:"10 Mya",domain:"Viridiplantae",species_count:"1",description:"A foundational model organism in plant genetics and genomics."},
+            {name:"Rosa (Roses)",rank:"Genus",divergence_mya:"35 Mya",domain:"Viridiplantae",species_count:"300+",description:"Woody perennial flowering plants in the rose genus."}
+          ]},
+          {name:"Pinophyta (Conifers)",rank:"Division",divergence_mya:"300 Mya",domain:"Viridiplantae",species_count:"600+",description:"Cone-bearing gymnosperm seed plants including pines and redwoods."}
+        ]},
+        {name:"Bryophyta (Mosses)",rank:"Division",divergence_mya:"470 Mya",domain:"Viridiplantae",species_count:"12,000+",description:"Non-vascular land plants commonly known as mosses."}
+      ]},
+      {name:"Fungi",rank:"Kingdom",divergence_mya:"1,000 Mya",domain:"Fungi",species_count:"150,000+",description:"Heterotrophic chitin-walled organisms important to nutrient cycling and symbiosis.",children:[
+        {name:"Ascomycota",rank:"Phylum",divergence_mya:"600 Mya",domain:"Fungi",species_count:"64,000+",description:"Sac fungi producing spores inside microscopic asci.",children:[
+          {name:"Saccharomyces cerevisiae",rank:"Species",divergence_mya:"100 Mya",domain:"Fungi",species_count:"1",description:"Baker's yeast; a key organism in baking, brewing and cell biology."}
+        ]},
+        {name:"Basidiomycota",rank:"Phylum",divergence_mya:"500 Mya",domain:"Fungi",species_count:"30,000+",description:"Club fungi including mushrooms, puffballs and rusts.",children:[
+          {name:"Agaricus bisporus",rank:"Species",divergence_mya:"20 Mya",domain:"Fungi",species_count:"1",description:"The common edible button/portobello mushroom."}
+        ]}
+      ]},
+      {name:"Metazoa",rank:"Kingdom",divergence_mya:"800 Mya",domain:"Metazoa",species_count:"1.4M+",description:"Multicellular animals with differentiated cells, motility and heterotrophic nutrition.",children:[
+        {name:"Arthropoda",rank:"Phylum",divergence_mya:"550 Mya",domain:"Metazoa",species_count:"1M+",description:"Invertebrates with chitinous exoskeletons and jointed appendages.",children:[
+          {name:"Drosophila melanogaster",rank:"Species",divergence_mya:"40 Mya",domain:"Metazoa",species_count:"1",description:"Fruit fly; a cornerstone genetics research organism."}
+        ]},
+        {name:"Chordata",rank:"Phylum",divergence_mya:"530 Mya",domain:"Metazoa",species_count:"65,000+",description:"Animals possessing a notochord, dorsal nerve cord and pharyngeal structures at some life stage.",children:[
+          {name:"Aves (Birds)",rank:"Class",divergence_mya:"150 Mya",domain:"Metazoa",species_count:"10,000+",description:"Feathered, winged, bipedal endothermic archosaurian vertebrates.",children:[
+            {name:"Passer domesticus",rank:"Species",divergence_mya:"5 Mya",domain:"Metazoa",species_count:"1",description:"House sparrow; a widely distributed bird species."}
+          ]},
+          {name:"Mammalia",rank:"Class",divergence_mya:"220 Mya",domain:"Metazoa",species_count:"6,400+",description:"Endothermic amniotes characterized by hair and mammary glands.",children:[
+            {name:"Primates",rank:"Order",divergence_mya:"65 Mya",domain:"Metazoa",species_count:"500+",description:"Mammalian lineage including lemurs, monkeys, apes and humans.",children:[
+              {name:"Homo sapiens",rank:"Species",divergence_mya:"0.3 Mya",domain:"Metazoa",species_count:"1",description:"Modern humans."}
+            ]},
+            {name:"Carnivora",rank:"Order",divergence_mya:"55 Mya",domain:"Metazoa",species_count:"280+",description:"Placental mammal order including cats, dogs, bears, seals and relatives.",children:[
+              {name:"Panthera leo",rank:"Species",divergence_mya:"3 Mya",domain:"Metazoa",species_count:"1",description:"Lion; a large felid native to Africa and a small population in India."}
+            ]}
+          ]}
+        ]}
+      ]}
+    ]}
+  ]
+};
+
+const IMAGE_QUERY = {
+  "LUCA":"last universal common ancestor LUCA diagram",
+  "Bacteria":"bacteria microscopy",
+  "Proteobacteria":"Proteobacteria bacteria microscopy",
+  "Alphaproteobacteria":"Alphaproteobacteria microscopy",
+  "Rickettsia":"Rickettsia microscopy",
+  "Escherichia coli":"Escherichia coli microscopy",
+  "Cyanobacteria":"Cyanobacteria microscopy",
+  "Anabaena":"Anabaena cyanobacteria microscopy",
+  "Actinomycetota":"Actinomycetota Streptomyces microscopy",
+  "Archaea":"Archaea microscopy",
+  "Asgardarchaeota":"Asgard archaea microscopy",
+  "Lokiarchaeum":"Lokiarchaeota",
+  "Euryarchaeota":"Euryarchaeota methanogen microscopy",
+  "Methanothermobacter":"Methanothermobacter microscopy",
+  "Eukaryota":"eukaryotic cell diagram",
+  "Viridiplantae":"green plants Viridiplantae",
+  "Tracheophyta":"vascular plant fern",
+  "Angiosperms":"angiosperm flower",
+  "Arabidopsis thaliana":"Arabidopsis thaliana plant",
+  "Rosa (Roses)":"Rosa rose flower",
+  "Pinophyta (Conifers)":"Pinophyta conifer pine",
+  "Bryophyta (Mosses)":"Bryophyta moss",
+  "Fungi":"fungi mushrooms",
+  "Ascomycota":"Ascomycota fungus",
+  "Saccharomyces cerevisiae":"Saccharomyces cerevisiae microscopy",
+  "Basidiomycota":"Basidiomycota mushroom",
+  "Agaricus bisporus":"Agaricus bisporus mushroom",
+  "Metazoa":"animal diversity Metazoa",
+  "Arthropoda":"Arthropoda arthropods",
+  "Drosophila melanogaster":"Drosophila melanogaster",
+  "Chordata":"Chordata lancelet",
+  "Aves (Birds)":"Aves birds",
+  "Passer domesticus":"Passer domesticus house sparrow",
+  "Mammalia":"mammals Mammalia",
+  "Primates":"Primates monkeys apes",
+  "Homo sapiens":"Homo sapiens skull",
+  "Carnivora":"Carnivora mammals",
+  "Panthera leo":"Panthera leo lion"
+};
+
+const imageCache=new Map();
+const FALLBACK={
+  url:"https://commons.wikimedia.org/wiki/Special:FilePath/Phylogenetic_tree_of_life_LUCA.svg?width=220",
+  page:"https://commons.wikimedia.org/wiki/File:Phylogenetic_tree_of_life_LUCA.svg",
+  license:"CC BY-SA 4.0",artist:"Chiswick Chap",title:"Tree of life"
+};
+function stripHtml(s){const d=document.createElement('div');d.innerHTML=s||'';return d.textContent.trim()}
+function freeLicense(s){return /CC\s|Creative Commons|Public domain|CC0|GFDL|PD-/i.test(s||'')}
+async function getImage(data){
+  if(imageCache.has(data.name)) return imageCache.get(data.name);
+  const promise=(async()=>{
+    const q=IMAGE_QUERY[data.name]||data.name;
+    const url="https://commons.wikimedia.org/w/api.php?origin=*&action=query&generator=search&gsrnamespace=6&gsrlimit=10&gsrsearch="+encodeURIComponent(q)+"&prop=imageinfo&iiprop=url%7Cextmetadata&iiurlwidth=220&format=json";
+    try{
+      const res=await fetch(url);
+      const json=await res.json();
+      const pages=Object.values(json.query?.pages||{});
+      for(const p of pages){
+        const ii=p.imageinfo?.[0]; if(!ii) continue;
+        const m=ii.extmetadata||{};
+        const lic=stripHtml(m.LicenseShortName?.value||m.UsageTerms?.value||"");
+        const media=(ii.thumburl||ii.url||"");
+        if(!media || !freeLicense(lic)) continue;
+        const title=(p.title||"").replace(/^File:/,"");
+        if(/\.og[gv]$|\.webm$|\.mp4$/i.test(title)) continue;
+        return {
+          url:ii.thumburl||ii.url,
+          page:"https://commons.wikimedia.org/?curid="+p.pageid,
+          license:lic||"Free license",
+          artist:stripHtml(m.Artist?.value||m.Credit?.value||"Wikimedia Commons contributor"),
+          title
+        };
+      }
+    }catch(e){}
+    return FALLBACK;
+  })();
+  imageCache.set(data.name,promise);
+  return promise;
+}
+
+function color(domain){
+  return {Bacteria:"#77b7ff",Archaea:"#e0bc70",Eukaryota:"#a7c9ff",Viridiplantae:"#9dcc78",Fungi:"#b8a5ef",Metazoa:"#e1a0c2"}[domain]||"#aaa";
+}
+
+let root,svg,gTree,gLink,gNode,zoom,width,height,idCounter=0;
+const duration=350;
+
+function collapse(d){if(d.children){d._children=d.children;d._children.forEach(collapse);d.children=null}}
+function expand(d){if(d._children){d.children=d._children;d._children=null} if(d.children)d.children.forEach(expand)}
+function allNodes(d){return d.descendants().concat(d.descendants().flatMap(x=>x._children||[]))}
+
+function init(){
+  const container=document.getElementById("tree-container");
+  width=container.clientWidth||800;height=document.getElementById("tree-svg").clientHeight||650;
+  svg=d3.select("#tree-svg");svg.selectAll("*").remove();
+  zoom=d3.zoom().scaleExtent([.25,3.2]).on("zoom",e=>gTree.attr("transform",e.transform));
+  svg.call(zoom).on("dblclick.zoom",null);
+  gTree=svg.append("g");gLink=gTree.append("g");gNode=gTree.append("g");
+  root=d3.hierarchy(TREE_DATA,d=>d.children);root.x0=height/2;root.y0=50;
+  root.children.forEach(collapse);
+  selectNode(root);update(root);resetView();
+
+  document.getElementById("zoom-in").onclick=()=>svg.transition().duration(200).call(zoom.scaleBy,1.3);
+  document.getElementById("zoom-out").onclick=()=>svg.transition().duration(200).call(zoom.scaleBy,.75);
+  document.getElementById("zoom-fit").onclick=resetView;
+  document.getElementById("btn-reset").onclick=resetView;
+  document.getElementById("btn-expand").onclick=()=>{expand(root);update(root);setTimeout(resetView,400)};
+  document.getElementById("btn-collapse").onclick=()=>{root.children?.forEach(collapse);update(root);resetView()};
+}
+
+function resetView(){
+  if(!svg||!root)return;
+  const t=d3.zoomIdentity.translate(55,height/2-root.x0).scale(.82);
+  svg.transition().duration(450).call(zoom.transform,t);
+}
+
+function update(source){
+  const tree=d3.tree().nodeSize([54,220]);tree(root);
+  const nodes=root.descendants(),links=root.links();
+  nodes.forEach(d=>d.y=d.depth*220);
+
+  const node=gNode.selectAll("g.tree-node").data(nodes,d=>d.id||(d.id=++idCounter));
+  const enter=node.enter().append("g").attr("class","tree-node")
+    .attr("transform",d=>`translate(${source.y0},${source.x0})`)
+    .on("click",(event,d)=>{
+      if(d.children){d._children=d.children;d.children=null}else if(d._children){d.children=d._children;d._children=null}
+      selectNode(d);update(d);
+    })
+    .on("mouseover",(event,d)=>highlight(d,true))
+    .on("mouseout",(event,d)=>highlight(d,false));
+
+  enter.append("circle").attr("r",1e-6).attr("fill","#111").attr("stroke",d=>color(d.data.domain));
+  enter.append("rect").attr("class","node-img-frame").attr("x",13).attr("y",-18).attr("width",36).attr("height",36).attr("rx",5);
+  enter.append("image").attr("class","node-photo").attr("x",14).attr("y",-17).attr("width",34).attr("height",34).attr("preserveAspectRatio","xMidYMid slice");
+  enter.append("text").attr("dy",".32em").attr("x",57).attr("text-anchor","start").attr("fill","#eee").text(d=>d.data.name);
+
+  const merged=node.merge(enter);
+  merged.transition().duration(duration).attr("transform",d=>`translate(${d.y},${d.x})`);
+  merged.select("circle").transition().duration(duration).attr("r",d=>(d.children||d._children)?6:4).attr("fill",d=>d._children?color(d.data.domain):"#111").attr("stroke",d=>color(d.data.domain));
+
+  merged.each(function(d){
+    const sel=d3.select(this).select("image.node-photo");
+    if(!sel.attr("href")){
+      getImage(d.data).then(img=>sel.attr("href",img.url));
+    }
+  });
+
+  const exit=node.exit().transition().duration(duration).attr("transform",d=>`translate(${source.y},${source.x})`).remove();
+  exit.select("circle").attr("r",1e-6);
+
+  const link=gLink.selectAll("path.tree-link").data(links,d=>d.target.id);
+  const linkEnter=link.enter().append("path").attr("class","tree-link").attr("d",()=>{
+    const o={x:source.x0,y:source.y0};return d3.linkHorizontal()({source:o,target:o});
+  });
+  link.merge(linkEnter).transition().duration(duration).attr("d",d3.linkHorizontal().x(d=>d.y).y(d=>d.x));
+  link.exit().transition().duration(duration).attr("d",()=>{
+    const o={x:source.x,y:source.y};return d3.linkHorizontal()({source:o,target:o});
+  }).remove();
+
+  nodes.forEach(d=>{d.x0=d.x;d.y0=d.y});
+}
+
+function highlight(d,on){
+  const anc=new Set(d.ancestors());
+  gNode.selectAll("g.tree-node").style("opacity",n=>on?(anc.has(n)?1:.22):1);
+  gLink.selectAll("path.tree-link")
+    .attr("stroke",l=>on&&anc.has(l.target)?color(d.data.domain):"#333")
+    .attr("stroke-width",l=>on&&anc.has(l.target)?2.6:1.5)
+    .attr("stroke-opacity",l=>on?(anc.has(l.target)?1:.12):1);
+}
+
+async function selectNode(d){
+  const data=d.data;
+  document.getElementById("detail-name").textContent=data.name;
+  document.getElementById("detail-rank").textContent=data.rank||"Taxon";
+  const domain=document.getElementById("detail-domain");
+  domain.textContent="Domain/Clade: "+(data.domain||"LUCA");domain.style.color=color(data.domain);
+  document.getElementById("detail-mya").textContent=data.divergence_mya||"N/A";
+  document.getElementById("detail-species").textContent=data.species_count||"N/A";
+  document.getElementById("detail-desc").textContent=data.description||"";
+  const lin=document.getElementById("detail-lineage");lin.innerHTML="";
+  d.ancestors().reverse().forEach((n,i)=>{
+    const s=document.createElement("span");s.textContent=n.data.name;s.onclick=()=>selectNode(n);lin.appendChild(s);
+  });
+  const img=await getImage(data);
+  const el=document.getElementById("detail-image");el.src=img.url;el.alt=data.name;
+  document.getElementById("detail-image-credit").innerHTML=`<a href="${img.page}" target="_blank" rel="noreferrer">${img.title||data.name}</a> · ${img.license}${img.artist?" · "+img.artist:""}`;
+}
+
+function findAllNodes(){
+  const out=[];function walk(n){out.push(n);(n.children||n._children||[]).forEach(walk)}walk(root);return out;
+}
+document.getElementById("taxon-search").addEventListener("input",e=>{
+  const q=e.target.value.trim().toLowerCase();
+  gNode.selectAll("g.tree-node").classed("is-matched",false);
+  if(!q)return;
+  const matched=findAllNodes().filter(d=>d.data.name.toLowerCase().includes(q));
+  if(!matched.length)return;
+  matched.forEach(d=>{let c=d;while(c.parent){if(c.parent._children){c.parent.children=c.parent._children;c.parent._children=null}c=c.parent}});
+  update(root);setTimeout(()=>{
+    gNode.selectAll("g.tree-node").classed("is-matched",d=>matched.includes(d));selectNode(matched[0]);
+  },duration+20);
+});
+
+document.querySelectorAll("[data-clade]").forEach(btn=>btn.addEventListener("click",()=>{
+  document.querySelectorAll("[data-clade]").forEach(b=>b.classList.remove("active"));btn.classList.add("active");
+  const c=btn.dataset.clade;
+  if(c==="All"){root.children?.forEach(collapse);update(root);resetView();return}
+  const target=findAllNodes().find(d=>d.data.name===c||d.data.domain===c);
+  if(target){
+    let cur=target;while(cur.parent){if(cur.parent._children){cur.parent.children=cur.parent._children;cur.parent._children=null}cur=cur.parent}
+    expand(target);selectNode(target);update(target);setTimeout(resetView,380);
+  }
+}));
+window.addEventListener("resize",()=>{height=document.getElementById("tree-svg").clientHeight||650;});
+init();
+</script>
+</body>
+</html>
