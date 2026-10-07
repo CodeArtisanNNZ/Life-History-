@@ -205,7 +205,7 @@
   <link rel="stylesheet" href="story.css" />
 <link rel="icon" type="image/svg+xml" href="assets/life-history-logo.svg"><meta property="og:site_name" content="Life History"><meta property="og:image" content="assets/life-history-logo.svg"><style>.brand-lockup{display:inline-flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}.brand-icon{width:38px;height:38px;border-radius:50%;object-fit:cover;background:#f7f4ef}.footer-brand{display:inline-flex;align-items:center;gap:10px}.footer-brand img{width:32px;height:32px;border-radius:50%}@media(max-width:620px){.brand-icon{width:32px;height:32px}.brand-lockup{font-size:.7rem}}</style>  <link rel="stylesheet" href="pages.css" />
 <meta name="theme-color" content="#0a0a0a"></head>
-<body>
+<body class="home-page">
   <header class="topbar">
     <div class="wrap nav">
       <a class="brand brand-lockup" href="index.html" aria-current="page" aria-label="Life History home"><img class="brand-icon" src="assets/life-history-logo.svg" alt=""><span>LIFE HISTORY</span></a><div class="language-switch" role="group" aria-label="Website language"><button type="button" id="lang-en" aria-pressed="true">EN</button><button type="button" id="lang-bn" aria-pressed="false">বাংলা</button></div><div id="google_translate_element" aria-hidden="true"></div>
@@ -223,84 +223,72 @@
       </nav>
     </div>
   </header>
-
-  <div class="modebar">
-    <div class="wrap modes">
-      <button class="mode active" data-mode="all">Combined story</button>
-      <button class="mode" data-mode="science">Science only</button>
-      <button class="mode" data-mode="revelation">Islamic sources only</button>
-      <div class="legend"><span><i class="dot science-dot"></i>scientific evidence</span><span><i class="dot revelation-dot"></i>Qur'an / sahih hadith</span></div>
-    </div>
-  </div>
-
-  <main>
-<section class="hero" id="top">
-      <div class="wrap hero-grid">
+<main>
+  <section class="ref-home-hero" id="top">
+    <div class="ref-home-frame">
+      <aside class="ref-home-rail ref-home-rail-left">
+        <span class="ref-rail-no">01</span>
+        <div class="ref-rail-rule"></div>
         <div>
-          <div class="eyebrow">A visual history of life, evidence & revelation</div>
-          <h1><span>LIFE</span><span>HISTORY</span></h1>
-          <p class="hero-copy">From the unseen creation described in Islam to a young Earth, the first cells, dinosaurs, extinct hominins and the prophetic story through Muhammad ﷺ — with scientific evidence and revelation kept clearly distinct.</p>
+          <div class="ref-rail-label">SCIENCE</div>
+          <p>Fossils, genetics, rocks, anatomy and the changing history of life.</p>
+          <a href="earth.html">Start with Earth →</a>
         </div>
-        <aside class="hero-note">
-          <b>Reading rule.</b><br>
-          A scientific date is not called a Qur'anic date. A Qur'anic statement is not presented as fossil evidence. Where the Qur'an and authentic hadith do not give a date, this site says <em>date not specified</em>.
-        </aside>
+      </aside>
+
+      <div class="ref-home-center">
+        <div class="ref-home-kicker">A visual history of life · evidence · revelation</div>
+        <img class="ref-home-logo" src="assets/life-history-logo.jpg" alt="Life History">
+        <h1 class="ref-home-title"><span>LIFE</span><span>HISTORY</span></h1>
+        <p class="ref-home-copy">From the earliest Earth and the first life to dinosaurs, human origins and the prophetic story—built so one question naturally leads to another.</p>
+        <div class="ref-home-actions">
+          <a class="ref-primary" href="#chapters">Explore the chapters</a>
+          <a class="ref-secondary" href="why.html">Why I built this</a>
+        </div>
       </div>
-    </section>
-<section class="chapter-home">
-  <div class="wrap">
-    <div class="chapter-home-head">
-      <div class="kicker">Choose a chapter</div>
-      <h2>Explore Life History one page at a time.</h2>
-      <p class="lede">The one-scroll layout is now divided into separate pages. Pick a chapter below, then move through the story with Previous and Next.</p>
+
+      <aside class="ref-home-rail ref-home-rail-right">
+        <span class="ref-rail-no">02</span>
+        <div class="ref-rail-rule"></div>
+        <div>
+          <div class="ref-rail-label">REVELATION</div>
+          <p>Angels, jinn, Adam and the prophets through Qur'an and authentic Islamic sources.</p>
+          <a href="before-humanity.html">Begin before humanity →</a>
+        </div>
+      </aside>
     </div>
-    <div class="chapter-list"><a class="chapter-card" href="before-humanity.html">
-  <span class="chapter-no">01</span>
-  <div><b>Before humanity</b><small>Angels, jinn, Iblis and the unseen</small></div>
-  <span class="chapter-arrow">→</span>
-</a>
-<a class="chapter-card" href="earth.html">
-  <span class="chapter-no">02</span>
-  <div><b>Earth</b><small>How Earth and the solar system formed</small></div>
-  <span class="chapter-arrow">→</span>
-</a>
-<a class="chapter-card" href="life.html">
-  <span class="chapter-no">03</span>
-  <div><b>Life</b><small>Origins of life, evolution and the Tree of Life</small></div>
-  <span class="chapter-arrow">→</span>
-</a>
-<a class="chapter-card" href="dinosaurs.html">
-  <span class="chapter-no">04</span>
-  <div><b>Dinosaurs</b><small>Reptile evolution, dinosaur diversity and extinction</small></div>
-  <span class="chapter-arrow">→</span>
-</a>
-<a class="chapter-card" href="fossils.html">
-  <span class="chapter-no">05</span>
-  <div><b>Fossils</b><small>Fossilization, dating and fossil fuels</small></div>
-  <span class="chapter-arrow">→</span>
-</a>
-<a class="chapter-card" href="humans.html">
-  <span class="chapter-no">06</span>
-  <div><b>Human origins</b><small>Hominins, fossils and Homo sapiens</small></div>
-  <span class="chapter-arrow">→</span>
-</a>
-<a class="chapter-card" href="prophets.html">
-  <span class="chapter-no">07</span>
-  <div><b>Prophets</b><small>The 25 prophets and their Qur’anic stories</small></div>
-  <span class="chapter-arrow">→</span>
-</a>
-<a class="chapter-card" href="why.html">
-  <span class="chapter-no">08</span>
-  <div><b>Why I built this</b><small>The personal story behind this project</small></div>
-  <span class="chapter-arrow">→</span>
-</a>
-<a class="chapter-card" href="sources.html">
-  <span class="chapter-no">09</span>
-  <div><b>Sources</b><small>Research method, references and image policy</small></div>
-  <span class="chapter-arrow">→</span>
-</a></div>
-  </div>
-</section>
+
+    <div class="ref-home-meta">
+      <span><b>4.54B</b> years of Earth history</span>
+      <span><b>25</b> prophets in the archive</span>
+      <span><b>2</b> source tracks kept distinct</span>
+      <span><b>1</b> story built for curiosity</span>
+    </div>
+  </section>
+
+  <section class="ref-chapters" id="chapters">
+    <div class="wrap">
+      <div class="ref-chapters-head">
+        <div>
+          <div class="kicker">Choose where to enter</div>
+          <h2>Nine chapters. One connected history.</h2>
+        </div>
+        <p>Each chapter is its own page. Move in order, or jump straight to the question that brought you here.</p>
+      </div>
+
+      <div class="ref-chapter-grid">
+        <a class="ref-chapter ref-chapter-wide" href="before-humanity.html"><span class="ref-chapter-no">01</span><div><b>Before humanity</b><small>Angels, jinn, Ajajil / Iblis and the unseen</small></div><i>↗</i></a>
+        <a class="ref-chapter" href="earth.html"><span class="ref-chapter-no">02</span><div><b>Earth</b><small>How a planet formed beside a young Sun</small></div><i>↗</i></a>
+        <a class="ref-chapter ref-chapter-tall" href="life.html"><span class="ref-chapter-no">03</span><div><b>Life</b><small>From chemistry and cells to the branching Tree of Life</small></div><i>↗</i></a>
+        <a class="ref-chapter" href="dinosaurs.html"><span class="ref-chapter-no">04</span><div><b>Dinosaurs</b><small>Evolution, diversity, birds and extinction</small></div><i>↗</i></a>
+        <a class="ref-chapter" href="fossils.html"><span class="ref-chapter-no">05</span><div><b>Fossils</b><small>Preservation, dating and fossil fuels</small></div><i>↗</i></a>
+        <a class="ref-chapter ref-chapter-wide" href="humans.html"><span class="ref-chapter-no">06</span><div><b>Human origins</b><small>Hominins, ancient DNA and Homo sapiens</small></div><i>↗</i></a>
+        <a class="ref-chapter ref-chapter-faith" href="prophets.html"><span class="ref-chapter-no">07</span><div><b>Prophets</b><small>All 25 names and their Qur'an-first stories</small></div><i>↗</i></a>
+        <a class="ref-chapter" href="why.html"><span class="ref-chapter-no">08</span><div><b>Why I built this</b><small>A tiny gift that became a whole learning world</small></div><i>↗</i></a>
+        <a class="ref-chapter" href="sources.html"><span class="ref-chapter-no">09</span><div><b>Sources</b><small>Research method, references and image policy</small></div><i>↗</i></a>
+      </div>
+    </div>
+  </section>
 </main>
 
   <footer class="footer">
