@@ -98,10 +98,8 @@
 
 .extinction-stage{border:1px solid #2c2c2c;background:#070707;overflow:hidden;margin:26px 0}
 .extinction-sky{height:250px;position:relative;background:linear-gradient(#102138,#301b13 70%,#080808);transition:1s}
-.asteroid{position:absolute;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,#f58c4b 35%,#522115 70%);right:16%;top:26px;box-shadow:0 0 25px #ff9f62;animation:asteroidFly 5s infinite ease-in}
-@keyframes asteroidFly{0%{transform:translate(0,0) scale(.7)}65%{transform:translate(-150px,120px) scale(1)}67%{opacity:1}72%,100%{transform:translate(-165px,138px) scale(2);opacity:0}}
-.dust-layer{position:absolute;inset:0;background:rgba(45,33,25,0);animation:dustFall 5s infinite}
-@keyframes dustFall{0%,64%{background:rgba(45,33,25,0)}72%{background:rgba(70,49,31,.55)}100%{background:rgba(5,7,9,.78)}}
+.asteroid{position:absolute;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,#f58c4b 35%,#522115 70%);right:16%;top:26px;box-shadow:0 0 25px #ff9f62;}
+.dust-layer{position:absolute;inset:0;background:rgba(45,33,25,0);}
 .extinction-ground{position:absolute;left:0;right:0;bottom:0;height:62px;background:#161309}
 .extinction-copy{padding:18px;color:#aaa}
 .extinction-copy strong{color:#fff}
