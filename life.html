@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Life History — a visual journey through natural history and the Islamic narrative, carefully keeping scientific evidence and revelation distinct." />
+  <title>Life & Evolution — Life History</title>
+  <style>
+    :root{
+      --ink:#0a0a0a;--paper:#f4f2ed;--muted:#a5a5a5;--line:#2a2a2a;--panel:#111;
+      --science:#8bd3ff;--revelation:#f7d77b;--life:#8ee0a1;--danger:#ff9b9b;
+      --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--ink);color:#f6f6f2;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+    a{color:inherit}
+    button,input{font:inherit}
+    .wrap{width:min(var(--max),calc(100% - 34px));margin:auto}
+    .topbar{position:sticky;top:0;z-index:20;background:rgba(10,10,10,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+    .nav{min-height:64px;display:flex;align-items:center;gap:20px;justify-content:space-between}
+    .brand{font-weight:900;letter-spacing:.22em;font-size:.8rem}
+    .navlinks{display:flex;gap:16px;flex-wrap:wrap}
+    .navlinks a{font-size:.76rem;color:#bdbdbd;text-decoration:none}
+    .navlinks a:hover{color:#fff}
+    .hero{min-height:86vh;display:grid;align-items:end;padding:70px 0 44px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+    .hero:before{content:"";position:absolute;inset:0;background:
+      linear-gradient(90deg,transparent 49.85%,#1c1c1c 50%,transparent 50.15%),
+      linear-gradient(#111 1px,transparent 1px);background-size:100% 100%,100% 76px;opacity:.6;pointer-events:none}
+    .hero-grid{display:grid;grid-template-columns:1.45fr .55fr;gap:40px;position:relative;z-index:1}
+    .eyebrow,.kicker{font-size:.72rem;text-transform:uppercase;letter-spacing:.18em;color:#9e9e9e}
+    h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(4rem,12vw,10.5rem);line-height:.77;margin:18px 0 24px;letter-spacing:-.065em;font-weight:400}
+    h1 span{display:block}
+    .hero-copy{max-width:690px;font-size:clamp(1rem,1.6vw,1.3rem);color:#c7c7c7}
+    .hero-note{align-self:end;border-left:1px solid #fff;padding-left:20px;color:#c8c8c8;font-size:.9rem}
+    .modebar{position:sticky;top:64px;z-index:19;background:#0d0d0d;border-bottom:1px solid var(--line)}
+    .modes{display:flex;gap:8px;align-items:center;padding:10px 0;overflow:auto}
+    .mode{border:1px solid #3a3a3a;background:transparent;color:#bbb;padding:8px 13px;border-radius:999px;cursor:pointer;white-space:nowrap;font-size:.78rem}
+    .mode.active{background:#f3f3ef;color:#0a0a0a;border-color:#f3f3ef}
+    .legend{margin-left:auto;display:flex;gap:14px;font-size:.7rem;color:#999;white-space:nowrap}
+    .dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}
+    .science-dot{background:var(--science)} .revelation-dot{background:var(--revelation)}
+    section{padding:84px 0;border-bottom:1px solid var(--line)}
+    .section-head{display:grid;grid-template-columns:180px 1fr;gap:24px;margin-bottom:34px}
+    .section-number{font-family:Georgia,serif;font-size:3rem;color:#424242;line-height:1}
+    h2{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(2.25rem,5vw,5rem);letter-spacing:-.045em;line-height:.96;margin:0}
+    h3{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:1.55rem;margin:.2rem 0 .7rem}
+    .lede{max-width:760px;color:#b8b8b8;font-size:1.02rem;margin-top:14px}
+    .two-track{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+    .track{background:#0b0b0b;padding:28px;min-height:280px}
+    .track-tag{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px}
+    .track p{color:#bcbcbc}
+    .fact{padding:13px 0;border-top:1px solid #282828}
+    .fact strong{display:block;color:#fff;margin-bottom:3px}
+    .fact small{color:#888}
+    .callout{border:1px solid #3c3c3c;padding:20px;margin-top:20px;background:#0f0f0f}
+    .callout strong{color:#fff}
+    .source-link{font-size:.76rem;color:#cfcfcf;text-underline-offset:3px}
+    .uncertain{display:inline-block;border:1px dashed #777;padding:3px 8px;border-radius:999px;font-size:.67rem;color:#aaa;text-transform:uppercase;letter-spacing:.08em}
+    .media-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+    .media-card{position:relative;min-height:330px;overflow:hidden;background:#151515;border:1px solid #252525}
+    .media-card img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.05)}
+    .media-card .cap{position:absolute;left:0;right:0;bottom:0;padding:48px 16px 14px;background:linear-gradient(transparent,rgba(0,0,0,.88));font-size:.78rem}
+    .media-card .cap b{display:block;font-size:1rem}
+    .timeline{display:grid;gap:0;border-left:1px solid #424242;margin-left:10px}
+    .event{display:grid;grid-template-columns:180px 1fr;gap:24px;padding:23px 0 23px 26px;position:relative}
+    .event:before{content:"";position:absolute;width:9px;height:9px;border-radius:50%;left:-5px;top:30px;background:#d9d9d9}
+    .event[data-track="science"]:before{background:var(--science)}
+    .event[data-track="revelation"]:before{background:var(--revelation)}
+    .when{font-size:.8rem;color:#9f9f9f}
+    .event p{margin:.35rem 0;color:#b6b6b6;max-width:740px}
+    .chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+    .chip{font-size:.67rem;border:1px solid #363636;border-radius:999px;padding:4px 8px;color:#aaa}
+    .sim{border:1px solid #303030;background:#0e0e0e;padding:24px;margin-top:26px}
+    .sim-grid{display:grid;grid-template-columns:260px 1fr;gap:30px;align-items:center}
+    .planet-stage{aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 33% 30%,#fff 0 3%,#86c5ff 12%,#245b94 38%,#081622 65%,#000 72%);box-shadow:0 0 70px rgba(125,190,255,.18);transition:.5s}
+    .range{width:100%;accent-color:#fff}
+    .sim-title{font-family:Georgia,serif;font-size:2rem;margin:.3rem 0}
+    .sim-copy{color:#b9b9b9;min-height:74px}
+    .scale-labels{display:flex;justify-content:space-between;color:#777;font-size:.66rem}
+    .era-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#252525;border:1px solid #252525;margin-top:26px}
+    .era{background:#0c0c0c;padding:20px;min-height:190px}
+    .era b{font-family:Georgia,serif;font-size:1.25rem}
+    .era .time{font-size:.72rem;color:#999;margin:4px 0 12px}
+    .era p{font-size:.86rem;color:#aaa}
+    .species-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .species{border:1px solid #2c2c2c;background:#0e0e0e;padding:19px}
+    .species .age{font-size:.7rem;color:var(--science);letter-spacing:.06em;text-transform:uppercase}
+    .species p{font-size:.88rem;color:#aaa}
+    .split-warning{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#333;border:1px solid #333;margin:28px 0}
+    .split-warning>div{background:#0d0d0d;padding:22px}
+    .quote{font-family:Georgia,serif;font-size:1.22rem;color:#e9e9e5;margin:10px 0}
+    .ref{font-size:.7rem;color:#8e8e8e}
+    .prophet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+    .prophet{border:1px solid #2a2a2a;padding:18px;background:#0d0d0d;cursor:pointer;transition:.2s}
+    .prophet:hover{border-color:#777;transform:translateY(-2px)}
+    .prophet .name{font-family:Georgia,serif;font-size:1.3rem}
+    .prophet .period{font-size:.68rem;color:#969696;text-transform:uppercase;letter-spacing:.08em;margin:3px 0 8px}
+    .prophet p{font-size:.83rem;color:#a9a9a9;margin:0}
+    .tree{overflow:auto;border:1px solid #292929;padding:26px;margin-top:26px;background:#0d0d0d}
+    .tree-canvas{min-width:860px;display:grid;gap:22px;text-align:center}
+    .tree-row{display:flex;justify-content:center;gap:18px;align-items:center}
+    .node{border:1px solid #555;background:#111;padding:10px 16px;min-width:125px}
+    .node.primary{border-color:#fff}
+    .line-note{font-size:.7rem;color:#888}
+    .source-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .source{border-top:1px solid #444;padding-top:12px}
+    .source b{display:block;margin-bottom:6px}
+    .source p{font-size:.8rem;color:#999}
+    .footer{padding:36px 0 70px;color:#8e8e8e;font-size:.78rem}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;place-items:center;z-index:60;padding:20px}
+    .modal.open{display:grid}
+    .modal-card{width:min(680px,100%);max-height:82vh;overflow:auto;background:#f1f0eb;color:#111;padding:28px;position:relative}
+    .modal-card h3{font-size:2rem}
+    .modal-card p{color:#333}
+    .modal-card a{color:#000}
+    .close{position:absolute;right:16px;top:14px;background:none;border:0;font-size:1.5rem;cursor:pointer}
+    .filtered-out{display:none!important}
+    @media(max-width:900px){
+      .hero-grid,.section-head,.two-track,.sim-grid,.split-warning{grid-template-columns:1fr}
+      .hero{min-height:78vh}
+      .hero-note{max-width:620px}
+      .media-grid,.species-grid,.prophet-grid,.source-grid{grid-template-columns:1fr 1fr}
+      .era-grid{grid-template-columns:1fr 1fr}
+      .event{grid-template-columns:120px 1fr}
+      .legend{display:none}
+    }
+    @media(max-width:620px){
+      .wrap{width:min(100% - 22px,var(--max))}
+      .navlinks{display:none}
+      .hero{padding-top:40px}
+      h1{font-size:clamp(4rem,24vw,7rem)}
+      section{padding:62px 0}
+      .section-number{font-size:2rem}
+      .media-grid,.species-grid,.prophet-grid,.source-grid,.era-grid{grid-template-columns:1fr}
+      .event{grid-template-columns:1fr;gap:5px;padding-left:20px}
+      .modes{padding:8px 0}
+    }
+
+    /* Islamic narrative: warm monochrome, visually separate from science. */
+    :root{--faith-bg:#171511;--faith-panel:#211d18;--faith-line:#54493b;--faith-ink:#eee8dc;--faith-muted:#c3b8a8;--faith-accent:#c8ae82}
+    #before,#prophets{
+      background:
+        radial-gradient(ellipse at 85% 0%,rgba(200,174,130,.075),transparent 52%),
+        repeating-linear-gradient(135deg,transparent 0 46px,rgba(245,231,205,.012) 46px 47px),
+        var(--faith-bg);
+      border-bottom-color:var(--faith-line);
+    }
+    #before .section-number,#prophets .section-number{color:#897660}
+    #before .kicker,#prophets .kicker{color:var(--faith-accent)}
+    #before .lede,#prophets .lede{color:var(--faith-muted)}
+    [data-track="revelation"].track,
+    [data-track="revelation"].event,
+    [data-track="revelation"].prophet{
+      background:var(--faith-panel);color:var(--faith-ink);
+      border-color:var(--faith-line)
+    }
+    .two-track:has(> [data-track="revelation"]) {background:var(--faith-line);border-color:var(--faith-line)}
+    .track[data-track="revelation"] p,
+    .event[data-track="revelation"] p,
+    #prophets .prophet p{color:var(--faith-muted)}
+    [data-track="revelation"] .track-tag,
+    [data-track="revelation"] .when,
+    #prophets .prophet .period{color:var(--faith-accent)}
+    [data-track="revelation"] .fact{border-top-color:var(--faith-line)}
+    [data-track="revelation"] .fact small,
+    [data-track="revelation"] .ref{color:var(--faith-muted)}
+    [data-track="revelation"] .callout{
+      background:#2a241c;border-color:var(--faith-line);color:var(--faith-ink)
+    }
+    #prophets .timeline{border-left-color:var(--faith-line)}
+    #prophets .event{padding-left:26px;border-bottom:1px solid rgba(200,174,130,.15)}
+    #prophets .event:before{background:var(--faith-accent)}
+    #prophets .prophet-grid{gap:10px}
+    #prophets .prophet{background:#211d18;border-color:var(--faith-line)}
+    #prophets .prophet:hover{background:#29231c;border-color:var(--faith-accent)}
+    #prophets .tree{background:#1d1915;border-color:var(--faith-line)}
+    #prophets .node{background:#28221b;border-color:var(--faith-line)}
+    #prophets .node.primary{border-color:var(--faith-accent)}
+    #prophets .line-note{color:var(--faith-muted)}
+    #prophets .chip{border-color:var(--faith-line);color:var(--faith-muted)}
+    @media(prefers-reduced-motion:reduce){#prophets .prophet{transition:none}}
+
+    .language-switch{display:flex;align-items:center;gap:7px;margin-left:auto;white-space:nowrap}
+    .language-switch button{border:1px solid #595959;background:#151515;color:#eaeaea;padding:7px 11px;border-radius:5px;cursor:pointer;font-size:.75rem}
+    .language-switch button[aria-pressed="true"]{background:#f0ece4;border-color:#f0ece4;color:#101010}
+    #google_translate_element{position:absolute;left:-9999px;top:0;width:1px;height:1px;overflow:hidden}
+    body{top:0!important}.goog-te-banner-frame,.skiptranslate iframe{display:none!important}
+    @media(max-width:620px){.nav{flex-wrap:wrap}.language-switch{margin-left:0}.brand{margin-right:auto}}
+
+  /* Softer Bangla typography while leaving the English design unchanged */
+  @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+  html[lang="bn"] body,html[lang="bn"] button,html[lang="bn"] input,html[lang="bn"] select,html[lang="bn"] textarea,
+  html[lang="bn"] h1,html[lang="bn"] h2,html[lang="bn"] h3,html[lang="bn"] h4,
+  html[lang="bn"] .brand,html[lang="bn"] .sim-title{
+    font-family:'Hind Siliguri',sans-serif!important;font-weight:400;line-height:1.65;letter-spacing:0;
+  }
+  html[lang="bn"] h1,html[lang="bn"] h2,html[lang="bn"] h3{font-weight:500;line-height:1.3;letter-spacing:0}
+  html[lang="bn"] p,html[lang="bn"] li{line-height:1.85}
+  html[lang="bn"] .kicker,html[lang="bn"] .eyebrow{letter-spacing:.04em}
+  </style>
+  <link rel="stylesheet" href="biology.css" />\n
+<link rel="stylesheet" href="prophets.css" />
+  <link rel="stylesheet" href="unseen.css" />
+  <link rel="stylesheet" href="story.css" />
+<link rel="icon" type="image/jpeg" href="data:image/jpeg;base64,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"><meta property="og:site_name" content="Life History"><style>.brand-lockup{display:inline-flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}.brand-icon{width:38px;height:38px;border-radius:50%;object-fit:cover;background:#f7f4ef}.footer-brand{display:inline-flex;align-items:center;gap:10px}.footer-brand img{width:32px;height:32px;border-radius:50%}@media(max-width:620px){.brand-icon{width:32px;height:32px}.brand-lockup{font-size:.7rem}}</style>  <link rel="stylesheet" href="pages.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand brand-lockup" href="index.html" aria-label="Life History home"><img class="brand-icon" src="data:image/jpeg;base64,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" alt=""><span>LIFE HISTORY</span></a><div class="language-switch" role="group" aria-label="Website language"><button type="button" id="lang-en" aria-pressed="true">EN</button><button type="button" id="lang-bn" aria-pressed="false">বাংলা</button></div><div id="google_translate_element" aria-hidden="true"></div>
+      <nav class="navlinks">
+        <a href="index.html">Home</a>
+        <a href="before-humanity.html">Before humanity</a>
+        <a href="earth.html">Earth</a>
+        <a href="life.html" aria-current="page">Life</a>
+        <a href="dinosaurs.html">Dinosaurs</a>
+        <a href="fossils.html">Fossils</a>
+        <a href="humans.html">Human origins</a>
+        <a href="prophets.html">Prophets</a>
+        <a href="why.html">Why I built this</a>
+        <a href="sources.html">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="modebar">
+    <div class="wrap modes">
+      <button class="mode active" data-mode="all">Combined story</button>
+      <button class="mode" data-mode="science">Science only</button>
+      <button class="mode" data-mode="revelation">Islamic sources only</button>
+      <div class="legend"><span><i class="dot science-dot"></i>scientific evidence</span><span><i class="dot revelation-dot"></i>Qur'an / sahih hadith</span></div>
+    </div>
+  </div>
+
+  <main>
+<section id="life">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-number">03</div>
+          <div>
+            <div class="kicker">Biological history · deep dive</div>
+            <h2>From chemistry to cells, oceans to land</h2>
+            <p class="lede">This chapter separates <strong>abiogenesis</strong>—research into how non-living chemistry could have produced the first evolving systems—from <strong>biological evolution</strong>, which explains how populations change after heredity and reproduction already exist.</p>
+          </div>
+        </div>
+
+        <div class="bio-callout" data-track="science"><strong>Reading biological groups:</strong> Bacteria, Archaea and Eukaryotes are useful starting categories. Eukaryotes include plants, fungi, animals and many microscopic organisms. Fungi are more closely related to animals than to plants. Human beings belong to mammals, primates and great apes. These are branches of shared ancestry, not a ladder of progress. <strong>Remember:</strong> LUCA is the last universal common ancestor, not necessarily the first life, and precise dates for ancient splits are uncertain.</div>
+        <div class="bio-intro-grid">
+          <article class="bio-panel" data-track="science">
+            <div class="track-tag"><i class="dot science-dot"></i>What science can say</div>
+            <h3>We do not yet know the exact first-life pathway</h3>
+            <p>Scientists can reproduce many pieces of prebiotic chemistry, study ancient rocks, compare the genomes of living organisms and test hypotheses such as RNA-first chemistry, metabolism-first systems, hydrothermal settings and wet–dry cycling. But there is no recovered “first cell,” and no experiment has reconstructed the complete historical sequence that happened on early Earth.</p>
+            <p><strong>Important distinction:</strong> LUCA—the Last Universal Common Ancestor—was not necessarily the first life. It was the ancestral population from which all living organisms today ultimately descend.</p>
+            <div class="bio-source">Research context: Nature Reviews Genetics on the RNA world; Nature Reviews Microbiology on hydrothermal-vent hypotheses.</div>
+          </article>
+          <article class="bio-panel light" data-track="revelation">
+            <div class="track-tag" style="color:#555"><i class="dot revelation-dot"></i>Islamic lens</div>
+            <h3>Water is central in the Qur'anic description of living creatures</h3>
+            <p>Qur'an 21:30 and 24:45 connect living creatures with water. On this site those verses are presented as revelation, not as a laboratory prediction or a substitute for evolutionary biology.</p>
+            <p>The scientific track asks <em>what physical and biological processes can evidence reconstruct?</em> The Islamic track affirms that creation ultimately belongs to Allah. The page keeps those claims distinct rather than forcing one into the language of the other.</p>
+            <div class="bio-source"><a href="https://quran.com/21/30" target="_blank" rel="noreferrer">Qur'an 21:30 ↗</a> · <a href="https://quran.com/24/45" target="_blank" rel="noreferrer">Qur'an 24:45 ↗</a></div>
+          </article>
+        </div>
+
+
+        <div class="animation-pair" data-track="science">
+          <div class="verified-animation">
+            <div class="verified-animation-head">
+              <div>
+                <div class="kicker">Professional science animation · TED-Ed</div>
+                <h3>The mysterious origins of life on Earth</h3>
+                <p>A professionally animated overview of hydrothermal-vent hypotheses and the chemistry-to-life question. The video explicitly treats life's origin as an open scientific problem.</p>
+              </div>
+              <a class="verified-source" href="https://ed.ted.com/lessons/the-mysterious-origins-of-life-on-earth-luka-seamus-wright" target="_blank" rel="noreferrer">TED-Ed lesson ↗</a>
+            </div>
+            <div class="embed-frame ratio-16x9">
+              <iframe src="https://www.youtube-nocookie.com/embed/de1hiS_XjWg" loading="lazy" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen title="TED-Ed origin-of-life animation"></iframe>
+            </div>
+            <div class="verified-note">Created by TED-Ed; educator Luka Seamus Wright, animation directed by Nick Hilditch.</div>
+          </div>
+
+          <div class="verified-animation">
+            <div class="verified-animation-head">
+              <div>
+                <div class="kicker">Professional science animation · NOVA PBS</div>
+                <h3>The RNA Origin of Life</h3>
+                <p>NOVA's animation explores why RNA is central to one major origin-of-life hypothesis, while making clear that the complete historical pathway is not known.</p>
+              </div>
+              <a class="verified-source" href="https://www.pbs.org/video/nova-labs-rna-origin-life/" target="_blank" rel="noreferrer">PBS / NOVA source ↗</a>
+            </div>
+            <div class="embed-frame ratio-16x9">
+              <iframe src="https://www.youtube-nocookie.com/embed/VYQQD0KNOis" loading="lazy" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen title="NOVA PBS RNA origin of life animation"></iframe>
+            </div>
+            <div class="verified-note">Created by NOVA PBS. This presents the RNA-world hypothesis, not a proven reconstruction of the first life.</div>
+          </div>
+        </div>
+<div class="deep-details" data-track="science">
+          <details open>
+            <summary>How could chemistry become biology?</summary>
+            <div class="detail-body">
+              <p><strong>Step 1 — building blocks:</strong> simple organic compounds can arise through non-biological chemistry. Researchers study atmospheric reactions, meteorite-delivered organics, volcanic and hydrothermal chemistry, mineral surfaces and wet–dry cycles as possible contributors.</p>
+              <p><strong>Step 2 — polymers:</strong> life requires larger molecules able to store information or catalyse reactions. RNA is important because modern RNA can both carry sequence information and catalyse chemical reactions. This motivates the RNA-world hypothesis, but the route to the first self-replicating RNA-like system remains unresolved.</p>
+              <p><strong>Step 3 — membranes:</strong> amphiphilic molecules can spontaneously assemble into vesicles. Compartments allow chemistry to be concentrated and give a primitive “inside” and “outside.”</p>
+              <p><strong>Step 4 — heredity:</strong> once a system can reproduce with occasional heritable differences, natural selection can operate. From this point, increasingly efficient replication, metabolism and membranes can evolve together.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Hydrothermal vents, ponds and other competing origin-of-life settings</summary>
+            <div class="detail-body">
+              <p><strong>Alkaline hydrothermal vents:</strong> natural proton gradients, mineral catalysts and H₂-rich chemistry provide a possible energy source for early metabolism. The idea is influential but not proven.</p>
+              <p><strong>Surface ponds / wet–dry cycles:</strong> repeated evaporation can concentrate molecules and help condensation reactions. Ultraviolet light can be destructive, but in some prebiotic pathways it can also drive useful chemistry.</p>
+              <p><strong>Ice and mineral pores:</strong> freezing can concentrate solutes into small liquid channels, while rock pores can create microscopic reaction chambers. Modern origin-of-life research tests several settings rather than assuming one cradle.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Why the earliest fossil record is difficult</summary>
+            <div class="detail-body">
+              <p>Microbes are tiny and usually lack mineralized skeletons. Ancient rocks have also been heated, compressed, metamorphosed and recycled by plate tectonics. That is why scientists combine multiple lines of evidence: carbon chemistry, microscopic structures, stromatolites, sedimentary context and molecular comparisons among living organisms.</p>
+              <p>About <strong>3.5-billion-year-old stromatolites</strong> provide widely accepted evidence of ancient microbial communities. Older claims exist, but they are harder to interpret and remain more debated.</p>
+            </div>
+          </details>
+        </div>
+
+        <h3 style="margin-top:48px">The long ocean chapter</h3>
+        <p class="lede">For most of Earth's history, life was microscopic and aquatic. Complex land ecosystems are a very late development.</p>
+
+
+        <div class="real-image-note" data-track="science"><strong>Image rule:</strong> these are real specimens, environments or museum photographs from free/public-domain sources. No AI-generated reconstructions are used in this chapter.</div>
+        <div class="named-gallery" data-track="science">
+          <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Gfp-stromatolites.jpg?width=900" alt="Real stromatolite fossils"><div class="body"><b>Stromatolites</b><small>Layered structures built by microbial communities; important evidence for very ancient life.</small></div><div class="credit">Yinan Chen · Public domain · <a href="https://commons.wikimedia.org/wiki/File:Gfp-stromatolites.jpg" target="_blank" rel="noreferrer">source ↗</a></div></article>
+          <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/BlackSmoker.jpg?width=900" alt="Black smoker hydrothermal vent"><div class="body"><b>Hydrothermal vent</b><small>A real black-smoker chimney; vent chemistry is one researched setting for prebiotic reactions.</small></div><div class="credit">USGS · Public domain · <a href="https://commons.wikimedia.org/wiki/File:BlackSmoker.jpg" target="_blank" rel="noreferrer">source ↗</a></div></article>
+          <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Field%20microscope%20with%20Cyanobacteria%20sample.jpg?width=900" alt="Field microscope with cyanobacteria sample"><div class="body"><b>Cyanobacteria</b><small>Living representatives of a lineage famous for oxygenic photosynthesis and its role in Earth's oxygenation.</small></div><div class="credit">Kertu Liis Krigul · Wikimedia Commons free license · <a href="https://commons.wikimedia.org/wiki/File:Field%20microscope%20with%20Cyanobacteria%20sample.jpg" target="_blank" rel="noreferrer">source ↗</a></div></article>
+          <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Tiktaalik%20roseae.jpg?width=900" alt="Tiktaalik roseae fossil"><div class="body"><b>Tiktaalik roseae</b><small>A fossil showing a mosaic of fish and tetrapod-like traits around 375 million years ago.</small></div><div class="credit">Ghedoghedo · CC BY-SA · <a href="https://commons.wikimedia.org/wiki/File:Tiktaalik%20roseae.jpg" target="_blank" rel="noreferrer">source ↗</a></div></article>
+        </div>
+
+        <div class="evo-river" data-track="science" aria-label="Horizontal timeline of biological evolution">
+          <article class="evo-stop"><div class="age">~3.5 billion years ago</div><div class="glyph">◌</div><h3>Microbial worlds</h3><p>Prokaryotic cells dominate. Stromatolites preserve layered structures built by microbial mats.</p></article>
+          <article class="evo-stop"><div class="age">≥2.4 billion years ago</div><div class="glyph">☀</div><h3>Oxygenic photosynthesis</h3><p>Cyanobacteria release oxygen. The Great Oxidation Event transforms oceans, minerals and atmosphere.</p></article>
+          <article class="evo-stop"><div class="age">~2.1–1.8 billion years ago</div><div class="glyph">◎</div><h3>Eukaryotic cells</h3><p>Cells with nuclei and complex internal organization appear. Mitochondria trace to an ancient endosymbiosis with bacteria.</p></article>
+          <article class="evo-stop"><div class="age">later Proterozoic</div><div class="glyph">✣</div><h3>Multicellularity</h3><p>Independent lineages evolve multicellular bodies and specialized cells. Animals appear late in this long interval.</p></article>
+          <article class="evo-stop"><div class="age">635–541 Ma</div><div class="glyph">〰</div><h3>Ediacaran ecosystems</h3><p>Large soft-bodied organisms diversify. Many have body plans unlike later familiar animals.</p></article>
+          <article class="evo-stop"><div class="age">541–485 Ma</div><div class="glyph">✺</div><h3>Cambrian diversification</h3><p>Many major animal body plans become conspicuous in the fossil record. Hard shells, eyes, active predation and burrowing reshape ecosystems.</p></article>
+          <article class="evo-stop"><div class="age">Cambrian–Silurian</div><div class="glyph">🐟</div><h3>Early vertebrates</h3><p>Jawless fishes appear first; later jawed vertebrates diversify, transforming marine food webs.</p></article>
+          <article class="evo-stop"><div class="age">Devonian · ~419–359 Ma</div><div class="glyph">≈</div><h3>Age of fishes</h3><p>Placoderms, sharks, ray-finned and lobe-finned fishes flourish. One lobe-finned lineage gives rise to tetrapods.</p></article>
+          <article class="evo-stop"><div class="age">~375 Ma</div><div class="glyph">↗</div><h3>Shallow water to land</h3><p>Tiktaalik and related fossils show mosaics of fish and tetrapod traits—robust fins, mobile necks and stronger ribs.</p></article>
+          <article class="evo-stop"><div class="age">~320–310 Ma</div><div class="glyph">◉</div><h3>Amniotic reproduction</h3><p>The amniotic egg frees vertebrate reproduction from open water and opens much drier habitats to colonization.</p></article>
+        </div>
+
+
+        <div class="deep-details" data-track="science">
+          <details>
+            <summary>How animal bodies became more complex in the oceans</summary>
+            <div class="detail-body">
+              <p><strong>Sponges:</strong> among the simplest living animal body plans, with specialized cells but no true organs. They show that multicellularity does not require a brain, gut or muscles.</p>
+              <p><strong>Cnidarians:</strong> lineages including jellyfish and corals evolved true tissues, nerve nets, muscles and a digestive cavity. Their radial organization differs from the bilateral body plan that later dominates many mobile animals.</p>
+              <p><strong>Bilaterians:</strong> animals with left–right symmetry evolved a front and back end, concentrating sensory structures toward the direction of travel. Bilaterian lineages ultimately include arthropods, molluscs, annelids, echinoderms and chordates.</p>
+              <p><strong>Hard parts:</strong> shells, exoskeletons, spines and mineralized skeletons changed predator–prey interactions and also greatly improved the chance of fossilization. This is one reason the Cambrian fossil record looks so dramatically richer than much of the Precambrian record.</p>
+            </div>
+          </details>
+          <details>
+            <summary>From chordates to the first vertebrates</summary>
+            <div class="detail-body">
+              <p>Chordates are defined by traits including a notochord, dorsal hollow nerve cord, pharyngeal structures and a post-anal tail at some stage of life. Early vertebrates added a skull and increasingly elaborate sensory systems.</p>
+              <p>Jawless vertebrates came first. The later evolution of jaws transformed feeding: vertebrates could grasp, bite and process larger food items. Paired fins improved control and stability in water. Bony and cartilaginous fish lineages then diversified into very different swimming and feeding strategies.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Why oxygen changed what bodies could do</summary>
+            <div class="detail-body">
+              <p>Early Earth had extremely little free oxygen compared with today. Oxygenic photosynthesis by cyanobacteria gradually transformed ocean and atmosphere chemistry. Aerobic respiration yields much more usable energy from food than anaerobic pathways, helping support energy-intensive eukaryotic cells and, much later, active multicellular animals.</p>
+              <p>Oxygen did not simply “cause” complex life on its own. Ecology, genetics, developmental systems, nutrient cycles and environmental change all interacted across enormous spans of time.</p>
+            </div>
+          </details>
+        </div>
+<div class="innovation-grid" data-track="science">
+          <article class="innovation"><div class="n">01</div><b>Jaws</b><p>Early jawed vertebrates gained a powerful new way to capture and process food, probably through modification of ancestral pharyngeal arches.</p></article>
+          <article class="innovation"><div class="n">02</div><b>Paired fins → limbs</b><p>Internal bones of lobe fins form part of the anatomical story leading to humerus, radius/ulna and eventually digits.</p></article>
+          <article class="innovation"><div class="n">03</div><b>Neck + stronger ribs</b><p>Separating the head from the shoulder girdle and strengthening the trunk improved movement and support in shallow water and on land.</p></article>
+          <article class="innovation"><div class="n">04</div><b>Amniotic membranes</b><p>The embryo carries a protected watery environment, with membranes for protection, gas exchange, nutrients and waste management.</p></article>
+        </div>
+
+        <div class="bio-callout" data-track="science">
+          <strong>Do not picture evolution as a ladder.</strong> Fish did not “turn into amphibians” in a straight line, and modern fish are not primitive leftovers. Evolution branches. Most lineages remain aquatic; one branch of lobe-finned vertebrates produced the tetrapod lineage, while their aquatic relatives continued evolving too.
+        </div>
+
+
+        <div data-track="science">
+          <div class="section-head" style="margin-top:56px">
+            <div class="section-number" style="font-size:1rem">TREE</div>
+            <div>
+              <div class="kicker">Explore relationships, not a straight ladder</div>
+              <h2>Phylogenetic Tree of Life</h2>
+              <p class="lede">This section uses the phylogenetic simulation you provided, adapted into the Life History page with free-source images beside taxon names.</p>
+            </div>
+          </div>
+          <iframe src="phylogenetic-tree.html" title="Interactive phylogenetic tree of life" loading="lazy" style="width:100%;height:920px;border:1px solid #303030;background:#070707;display:block"></iframe>
+        </div>
+
+        <div class="external-explorer" data-track="science">
+          <article class="external-card">
+            <div class="kicker">External interactive</div>
+            <h3>OneZoom Tree of Life</h3>
+            <p>A zoomable evolutionary tree connecting more than two million living species. Its source code is publicly available and the project is designed for science education.</p>
+            <a href="https://www.onezoom.org/" target="_blank" rel="noreferrer">Explore OneZoom ↗</a>
+          </article>
+          <article class="external-card">
+            <div class="kicker">Open scientific tree data</div>
+            <h3>Open Tree of Life</h3>
+            <p>A synthetic phylogenetic tree built from published phylogenies and taxonomic data. Useful for understanding why evolution is a branching tree rather than a chain.</p>
+            <a href="https://tree.opentreeoflife.org/" target="_blank" rel="noreferrer">Browse Open Tree ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+<div class="chapter-pager wrap">
+    <a class="chapter-nav prev" href="earth.html"><span>← Previous</span><b>Earth</b></a>
+    <a class="chapter-nav next" href="dinosaurs.html"><span>Next →</span><b>Dinosaurs</b></a>
+  </div>
+</main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <span class="footer-brand"><img src="data:image/jpeg;base64,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" alt=""><b>LIFE HISTORY</b></span><br>
+      Built as an educational interface, not a fatwa and not a substitute for a science textbook. Where Islamic interpretation is disputed, the page should state the uncertainty rather than present one inference as revelation. This edition includes the standard 25-prophet learning list from Adam through Muhammad ﷺ.
+    </div>
+  </footer>
+
+<script>
+    const modeButtons=[...document.querySelectorAll('.mode')];
+    modeButtons.forEach(btn=>btn.addEventListener('click',()=>{
+      modeButtons.forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+      const mode=btn.dataset.mode;
+      document.querySelectorAll('[data-track]').forEach(el=>{
+        el.classList.toggle('filtered-out', mode!=='all' && el.dataset.track!==mode);
+      });
+    }));
+</script>
+\n
+<script src="prophets.js"></script>
+<script>
+(function(){
+  const en=document.getElementById('lang-en'), bn=document.getElementById('lang-bn');
+  const saved=localStorage.getItem('life-history-language')==='bn'?'bn':'en';
+  function update(lang){document.documentElement.lang=lang;en.setAttribute('aria-pressed',String(lang==='en'));bn.setAttribute('aria-pressed',String(lang==='bn'));}
+  function selectLanguage(lang){
+    update(lang);localStorage.setItem('life-history-language',lang);
+    const box=document.querySelector('#google_translate_element select.goog-te-combo');
+    if(box){box.value=lang==='bn'?'bn':'en';box.dispatchEvent(new Event('change',{bubbles:true}));return true;}
+    return false;
+  }
+  window.lifeHistoryTranslateReady=function(){
+    new google.translate.TranslateElement({pageLanguage:'en',includedLanguages:'bn,en',autoDisplay:false},'google_translate_element');
+    let attempts=0;const poll=setInterval(function(){attempts++;if(selectLanguage(saved)||attempts>35)clearInterval(poll);},200);
+  };
+  en.addEventListener('click',()=>{if(!selectLanguage('en'))location.reload();});
+  bn.addEventListener('click',()=>{if(!selectLanguage('bn')){const original=bn.textContent;bn.textContent='বাংলা…';setTimeout(()=>bn.textContent=original,1800);}});
+  update(saved);
+})();
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=lifeHistoryTranslateReady" async defer></script>
+</body>
+</html>

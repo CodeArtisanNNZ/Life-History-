@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Life History — a visual journey through natural history and the Islamic narrative, carefully keeping scientific evidence and revelation distinct." />
+  <title>Dinosaurs — Life History</title>
+  <style>
+    :root{
+      --ink:#0a0a0a;--paper:#f4f2ed;--muted:#a5a5a5;--line:#2a2a2a;--panel:#111;
+      --science:#8bd3ff;--revelation:#f7d77b;--life:#8ee0a1;--danger:#ff9b9b;
+      --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--ink);color:#f6f6f2;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+    a{color:inherit}
+    button,input{font:inherit}
+    .wrap{width:min(var(--max),calc(100% - 34px));margin:auto}
+    .topbar{position:sticky;top:0;z-index:20;background:rgba(10,10,10,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+    .nav{min-height:64px;display:flex;align-items:center;gap:20px;justify-content:space-between}
+    .brand{font-weight:900;letter-spacing:.22em;font-size:.8rem}
+    .navlinks{display:flex;gap:16px;flex-wrap:wrap}
+    .navlinks a{font-size:.76rem;color:#bdbdbd;text-decoration:none}
+    .navlinks a:hover{color:#fff}
+    .hero{min-height:86vh;display:grid;align-items:end;padding:70px 0 44px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+    .hero:before{content:"";position:absolute;inset:0;background:
+      linear-gradient(90deg,transparent 49.85%,#1c1c1c 50%,transparent 50.15%),
+      linear-gradient(#111 1px,transparent 1px);background-size:100% 100%,100% 76px;opacity:.6;pointer-events:none}
+    .hero-grid{display:grid;grid-template-columns:1.45fr .55fr;gap:40px;position:relative;z-index:1}
+    .eyebrow,.kicker{font-size:.72rem;text-transform:uppercase;letter-spacing:.18em;color:#9e9e9e}
+    h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(4rem,12vw,10.5rem);line-height:.77;margin:18px 0 24px;letter-spacing:-.065em;font-weight:400}
+    h1 span{display:block}
+    .hero-copy{max-width:690px;font-size:clamp(1rem,1.6vw,1.3rem);color:#c7c7c7}
+    .hero-note{align-self:end;border-left:1px solid #fff;padding-left:20px;color:#c8c8c8;font-size:.9rem}
+    .modebar{position:sticky;top:64px;z-index:19;background:#0d0d0d;border-bottom:1px solid var(--line)}
+    .modes{display:flex;gap:8px;align-items:center;padding:10px 0;overflow:auto}
+    .mode{border:1px solid #3a3a3a;background:transparent;color:#bbb;padding:8px 13px;border-radius:999px;cursor:pointer;white-space:nowrap;font-size:.78rem}
+    .mode.active{background:#f3f3ef;color:#0a0a0a;border-color:#f3f3ef}
+    .legend{margin-left:auto;display:flex;gap:14px;font-size:.7rem;color:#999;white-space:nowrap}
+    .dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}
+    .science-dot{background:var(--science)} .revelation-dot{background:var(--revelation)}
+    section{padding:84px 0;border-bottom:1px solid var(--line)}
+    .section-head{display:grid;grid-template-columns:180px 1fr;gap:24px;margin-bottom:34px}
+    .section-number{font-family:Georgia,serif;font-size:3rem;color:#424242;line-height:1}
+    h2{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(2.25rem,5vw,5rem);letter-spacing:-.045em;line-height:.96;margin:0}
+    h3{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:1.55rem;margin:.2rem 0 .7rem}
+    .lede{max-width:760px;color:#b8b8b8;font-size:1.02rem;margin-top:14px}
+    .two-track{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+    .track{background:#0b0b0b;padding:28px;min-height:280px}
+    .track-tag{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px}
+    .track p{color:#bcbcbc}
+    .fact{padding:13px 0;border-top:1px solid #282828}
+    .fact strong{display:block;color:#fff;margin-bottom:3px}
+    .fact small{color:#888}
+    .callout{border:1px solid #3c3c3c;padding:20px;margin-top:20px;background:#0f0f0f}
+    .callout strong{color:#fff}
+    .source-link{font-size:.76rem;color:#cfcfcf;text-underline-offset:3px}
+    .uncertain{display:inline-block;border:1px dashed #777;padding:3px 8px;border-radius:999px;font-size:.67rem;color:#aaa;text-transform:uppercase;letter-spacing:.08em}
+    .media-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+    .media-card{position:relative;min-height:330px;overflow:hidden;background:#151515;border:1px solid #252525}
+    .media-card img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.05)}
+    .media-card .cap{position:absolute;left:0;right:0;bottom:0;padding:48px 16px 14px;background:linear-gradient(transparent,rgba(0,0,0,.88));font-size:.78rem}
+    .media-card .cap b{display:block;font-size:1rem}
+    .timeline{display:grid;gap:0;border-left:1px solid #424242;margin-left:10px}
+    .event{display:grid;grid-template-columns:180px 1fr;gap:24px;padding:23px 0 23px 26px;position:relative}
+    .event:before{content:"";position:absolute;width:9px;height:9px;border-radius:50%;left:-5px;top:30px;background:#d9d9d9}
+    .event[data-track="science"]:before{background:var(--science)}
+    .event[data-track="revelation"]:before{background:var(--revelation)}
+    .when{font-size:.8rem;color:#9f9f9f}
+    .event p{margin:.35rem 0;color:#b6b6b6;max-width:740px}
+    .chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+    .chip{font-size:.67rem;border:1px solid #363636;border-radius:999px;padding:4px 8px;color:#aaa}
+    .sim{border:1px solid #303030;background:#0e0e0e;padding:24px;margin-top:26px}
+    .sim-grid{display:grid;grid-template-columns:260px 1fr;gap:30px;align-items:center}
+    .planet-stage{aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 33% 30%,#fff 0 3%,#86c5ff 12%,#245b94 38%,#081622 65%,#000 72%);box-shadow:0 0 70px rgba(125,190,255,.18);transition:.5s}
+    .range{width:100%;accent-color:#fff}
+    .sim-title{font-family:Georgia,serif;font-size:2rem;margin:.3rem 0}
+    .sim-copy{color:#b9b9b9;min-height:74px}
+    .scale-labels{display:flex;justify-content:space-between;color:#777;font-size:.66rem}
+    .era-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#252525;border:1px solid #252525;margin-top:26px}
+    .era{background:#0c0c0c;padding:20px;min-height:190px}
+    .era b{font-family:Georgia,serif;font-size:1.25rem}
+    .era .time{font-size:.72rem;color:#999;margin:4px 0 12px}
+    .era p{font-size:.86rem;color:#aaa}
+    .species-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .species{border:1px solid #2c2c2c;background:#0e0e0e;padding:19px}
+    .species .age{font-size:.7rem;color:var(--science);letter-spacing:.06em;text-transform:uppercase}
+    .species p{font-size:.88rem;color:#aaa}
+    .split-warning{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#333;border:1px solid #333;margin:28px 0}
+    .split-warning>div{background:#0d0d0d;padding:22px}
+    .quote{font-family:Georgia,serif;font-size:1.22rem;color:#e9e9e5;margin:10px 0}
+    .ref{font-size:.7rem;color:#8e8e8e}
+    .prophet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+    .prophet{border:1px solid #2a2a2a;padding:18px;background:#0d0d0d;cursor:pointer;transition:.2s}
+    .prophet:hover{border-color:#777;transform:translateY(-2px)}
+    .prophet .name{font-family:Georgia,serif;font-size:1.3rem}
+    .prophet .period{font-size:.68rem;color:#969696;text-transform:uppercase;letter-spacing:.08em;margin:3px 0 8px}
+    .prophet p{font-size:.83rem;color:#a9a9a9;margin:0}
+    .tree{overflow:auto;border:1px solid #292929;padding:26px;margin-top:26px;background:#0d0d0d}
+    .tree-canvas{min-width:860px;display:grid;gap:22px;text-align:center}
+    .tree-row{display:flex;justify-content:center;gap:18px;align-items:center}
+    .node{border:1px solid #555;background:#111;padding:10px 16px;min-width:125px}
+    .node.primary{border-color:#fff}
+    .line-note{font-size:.7rem;color:#888}
+    .source-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .source{border-top:1px solid #444;padding-top:12px}
+    .source b{display:block;margin-bottom:6px}
+    .source p{font-size:.8rem;color:#999}
+    .footer{padding:36px 0 70px;color:#8e8e8e;font-size:.78rem}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;place-items:center;z-index:60;padding:20px}
+    .modal.open{display:grid}
+    .modal-card{width:min(680px,100%);max-height:82vh;overflow:auto;background:#f1f0eb;color:#111;padding:28px;position:relative}
+    .modal-card h3{font-size:2rem}
+    .modal-card p{color:#333}
+    .modal-card a{color:#000}
+    .close{position:absolute;right:16px;top:14px;background:none;border:0;font-size:1.5rem;cursor:pointer}
+    .filtered-out{display:none!important}
+    @media(max-width:900px){
+      .hero-grid,.section-head,.two-track,.sim-grid,.split-warning{grid-template-columns:1fr}
+      .hero{min-height:78vh}
+      .hero-note{max-width:620px}
+      .media-grid,.species-grid,.prophet-grid,.source-grid{grid-template-columns:1fr 1fr}
+      .era-grid{grid-template-columns:1fr 1fr}
+      .event{grid-template-columns:120px 1fr}
+      .legend{display:none}
+    }
+    @media(max-width:620px){
+      .wrap{width:min(100% - 22px,var(--max))}
+      .navlinks{display:none}
+      .hero{padding-top:40px}
+      h1{font-size:clamp(4rem,24vw,7rem)}
+      section{padding:62px 0}
+      .section-number{font-size:2rem}
+      .media-grid,.species-grid,.prophet-grid,.source-grid,.era-grid{grid-template-columns:1fr}
+      .event{grid-template-columns:1fr;gap:5px;padding-left:20px}
+      .modes{padding:8px 0}
+    }
+
+    /* Islamic narrative: warm monochrome, visually separate from science. */
+    :root{--faith-bg:#171511;--faith-panel:#211d18;--faith-line:#54493b;--faith-ink:#eee8dc;--faith-muted:#c3b8a8;--faith-accent:#c8ae82}
+    #before,#prophets{
+      background:
+        radial-gradient(ellipse at 85% 0%,rgba(200,174,130,.075),transparent 52%),
+        repeating-linear-gradient(135deg,transparent 0 46px,rgba(245,231,205,.012) 46px 47px),
+        var(--faith-bg);
+      border-bottom-color:var(--faith-line);
+    }
+    #before .section-number,#prophets .section-number{color:#897660}
+    #before .kicker,#prophets .kicker{color:var(--faith-accent)}
+    #before .lede,#prophets .lede{color:var(--faith-muted)}
+    [data-track="revelation"].track,
+    [data-track="revelation"].event,
+    [data-track="revelation"].prophet{
+      background:var(--faith-panel);color:var(--faith-ink);
+      border-color:var(--faith-line)
+    }
+    .two-track:has(> [data-track="revelation"]) {background:var(--faith-line);border-color:var(--faith-line)}
+    .track[data-track="revelation"] p,
+    .event[data-track="revelation"] p,
+    #prophets .prophet p{color:var(--faith-muted)}
+    [data-track="revelation"] .track-tag,
+    [data-track="revelation"] .when,
+    #prophets .prophet .period{color:var(--faith-accent)}
+    [data-track="revelation"] .fact{border-top-color:var(--faith-line)}
+    [data-track="revelation"] .fact small,
+    [data-track="revelation"] .ref{color:var(--faith-muted)}
+    [data-track="revelation"] .callout{
+      background:#2a241c;border-color:var(--faith-line);color:var(--faith-ink)
+    }
+    #prophets .timeline{border-left-color:var(--faith-line)}
+    #prophets .event{padding-left:26px;border-bottom:1px solid rgba(200,174,130,.15)}
+    #prophets .event:before{background:var(--faith-accent)}
+    #prophets .prophet-grid{gap:10px}
+    #prophets .prophet{background:#211d18;border-color:var(--faith-line)}
+    #prophets .prophet:hover{background:#29231c;border-color:var(--faith-accent)}
+    #prophets .tree{background:#1d1915;border-color:var(--faith-line)}
+    #prophets .node{background:#28221b;border-color:var(--faith-line)}
+    #prophets .node.primary{border-color:var(--faith-accent)}
+    #prophets .line-note{color:var(--faith-muted)}
+    #prophets .chip{border-color:var(--faith-line);color:var(--faith-muted)}
+    @media(prefers-reduced-motion:reduce){#prophets .prophet{transition:none}}
+
+    .language-switch{display:flex;align-items:center;gap:7px;margin-left:auto;white-space:nowrap}
+    .language-switch button{border:1px solid #595959;background:#151515;color:#eaeaea;padding:7px 11px;border-radius:5px;cursor:pointer;font-size:.75rem}
+    .language-switch button[aria-pressed="true"]{background:#f0ece4;border-color:#f0ece4;color:#101010}
+    #google_translate_element{position:absolute;left:-9999px;top:0;width:1px;height:1px;overflow:hidden}
+    body{top:0!important}.goog-te-banner-frame,.skiptranslate iframe{display:none!important}
+    @media(max-width:620px){.nav{flex-wrap:wrap}.language-switch{margin-left:0}.brand{margin-right:auto}}
+
+  /* Softer Bangla typography while leaving the English design unchanged */
+  @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+  html[lang="bn"] body,html[lang="bn"] button,html[lang="bn"] input,html[lang="bn"] select,html[lang="bn"] textarea,
+  html[lang="bn"] h1,html[lang="bn"] h2,html[lang="bn"] h3,html[lang="bn"] h4,
+  html[lang="bn"] .brand,html[lang="bn"] .sim-title{
+    font-family:'Hind Siliguri',sans-serif!important;font-weight:400;line-height:1.65;letter-spacing:0;
+  }
+  html[lang="bn"] h1,html[lang="bn"] h2,html[lang="bn"] h3{font-weight:500;line-height:1.3;letter-spacing:0}
+  html[lang="bn"] p,html[lang="bn"] li{line-height:1.85}
+  html[lang="bn"] .kicker,html[lang="bn"] .eyebrow{letter-spacing:.04em}
+  </style>
+  <link rel="stylesheet" href="biology.css" />\n
+<link rel="stylesheet" href="prophets.css" />
+  <link rel="stylesheet" href="unseen.css" />
+  <link rel="stylesheet" href="story.css" />
+<link rel="icon" type="image/jpeg" href="data:image/jpeg;base64,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"><meta property="og:site_name" content="Life History"><style>.brand-lockup{display:inline-flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}.brand-icon{width:38px;height:38px;border-radius:50%;object-fit:cover;background:#f7f4ef}.footer-brand{display:inline-flex;align-items:center;gap:10px}.footer-brand img{width:32px;height:32px;border-radius:50%}@media(max-width:620px){.brand-icon{width:32px;height:32px}.brand-lockup{font-size:.7rem}}</style>  <link rel="stylesheet" href="pages.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand brand-lockup" href="index.html" aria-label="Life History home"><img class="brand-icon" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABIMDhAOCxIQDxAUExIVGy0dGxkZGzcoKiEtQjpFREA6Pz5IUWhYSE1iTj4/WntcYmtvdHZ0RleAiX9xiGhydHD/2wBDARMUFBsYGzUdHTVwSz9LcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHD/wAARCABMAEwDASIAAhEBAxEB/8QAGwAAAgMBAQEAAAAAAAAAAAAAAwQAAgUBBgf/xAA7EAACAQMCBAMFBQQLAAAAAAABAgMABBESIQUxQVETYXEiMjSBsSNCcpHRYqGy4QYUJDM1Q1JzgsHw/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAHREBAQEAAgMBAQAAAAAAAAAAAAERITECElFBcf/aAAwDAQACEQMRAD8A9vUqVKCVxmCqWYgAcyaDNPofw41Mkp30jp5k9BVVti7B7lvFYbhfuL6Dr86mq4Z5ZvhlGgb632DeQ/WiRTpI2g5SQc0bn/OhXzXK+H4CgjUM/wDu1HkiWaMCZAT5dD5Gp+glSlSZrb3tU0Pf76/r9aYR1kQOjBlPIirqLVKlSqJQLiVlKxRYMz8s8lHUmj0tZ/aa7k85T7Pko2H6/OpVgkEKwoVXJJ3ZjzY9zScN7M1vcq6f2iEbbc+1UmW6tbou94htnPuyHBHpRZLiGUJJrUPGwLAHmvX1HX5VWReGJMlkguCTISWOee5paO4mtYbt5wW0P7A7knkP3Va+8ePiNrPESYWIjkAO252Ncdri4vUe3jRoEJbW7YBb3e2+N6Bqxad7ZXuBiRiTjGMDpVZVNq5niH2Z3lQfxDzoK2bLdf1q7n8Qg+yqjCjoOtHivYZ7loIsuVHtMBsKz/WzAIZQQcg7giu0tafZvLb9IzlPwn9DmmasZUnJWCQjmFJ/dWab9rUQQrGGXQvXfkK0bj4aX8B+lZFxHqkidpEjAjAGo7n2eeKs7L0aWeyv2AmjXWpwNf8A0avfXcdkEWS3LQkYyoGB5YrJeAiNWUrIi4909e57Vp8LujMrQTMruNweeRSz4k8vpG4RhCtpaylrW70m3YHeIhgSoPbGSO2DWhxIGDh6Q25WJchMk4Cr69KT4468PktrkAiEzqzgdGwdx6jI/Kuu0cCR3fFB4t1LvHDzEY7Adx1NTcXsVrmK5MaLJptIsM8rHTrI5Be+++fKm7AWaxkWXh6euk7/ADrqBb6zHjwlVfcKTvjoaAi8P4bKEGEkfqck49elNnZz0OduJD9qE5+R/nTNLN/iSf7J+opmkWh3Hw0v4D9Kx5UUyBmGcoigf8etbMv90+F1eyfZ7+VZWXcHxeHyLkAezIOnLGablTNgSqEuFUDCupDDmMd6Xt55YnE0fhyadyAuCBTjRr4bAR3UTNsZCmvb5UAQN76usgX/ADY/eT8S9q1PKVmywxxN4r+xtGAyr3UQIPTfcU3qgtmL3BDTyHJ2yR2A7AVmMpTwRgBWuomwOQOd8eXI/OmxG7zM4QPM2/te6g6Zpi6vPeTy/CxuF/1ac5pWdIriVZLxZYnUYOF2b9KI66mw13LKw5rCpbH5bVZDJH7sV4w7MygfkazfW8LPacmYJRNeRyKCAYWwD+IU7SVozPcZa0aEKhAYkYO/lTtItYX9KOKW1tamzdpDLMNxERqC+p5Zry0cXi72/CLib9p3dvoBX0BbaBZWlWGMSMcl9IyfnRqqPApa8SjOqPhE0fmjyKf4qYTit9aOpvba6Cj70qkkej4B/PNe2qHcYPKgybeSHitnBJbOp8OdHbHkc4x0NIcY41FDM1tAPFkzuqjUM+YHP05etNcVsorV457QtbSXEqwymI4DK3l38607OxtrKPRbQrGOpA3PqeZoPGyScXuh8DeunQFmRfyXApd7O8XeXgbnzBkz9TX0KpQfP+H31vw2/jne1vLcqcFdepSD5ED617yCWO4hSaFw8bjKsOoqzorrpdQw7MM1SK3hhUrDGsak50oMDPpQf//Z" alt=""><span>LIFE HISTORY</span></a><div class="language-switch" role="group" aria-label="Website language"><button type="button" id="lang-en" aria-pressed="true">EN</button><button type="button" id="lang-bn" aria-pressed="false">বাংলা</button></div><div id="google_translate_element" aria-hidden="true"></div>
+      <nav class="navlinks">
+        <a href="index.html">Home</a>
+        <a href="before-humanity.html">Before humanity</a>
+        <a href="earth.html">Earth</a>
+        <a href="life.html">Life</a>
+        <a href="dinosaurs.html" aria-current="page">Dinosaurs</a>
+        <a href="fossils.html">Fossils</a>
+        <a href="humans.html">Human origins</a>
+        <a href="prophets.html">Prophets</a>
+        <a href="why.html">Why I built this</a>
+        <a href="sources.html">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="modebar">
+    <div class="wrap modes">
+      <button class="mode active" data-mode="all">Combined story</button>
+      <button class="mode" data-mode="science">Science only</button>
+      <button class="mode" data-mode="revelation">Islamic sources only</button>
+      <div class="legend"><span><i class="dot science-dot"></i>scientific evidence</span><span><i class="dot revelation-dot"></i>Qur'an / sahih hadith</span></div>
+    </div>
+  </div>
+
+  <main>
+<section id="dinosaurs">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-number">04</div>
+          <div>
+            <div class="kicker">Reptile radiation · Mesozoic</div>
+            <h2>How reptiles changed—and how dinosaurs took over</h2>
+            <p class="lede">The move onto land did not end with amphibian-like tetrapods. Amniotes split into major lineages. One branch, the sauropsids, produced the reptile lineages that eventually included archosaurs, dinosaurs, pterosaurs, crocodilian relatives and birds.</p>
+          </div>
+        </div>
+
+        <div class="bio-intro-grid">
+          <article class="bio-panel" data-track="science">
+            <div class="track-tag"><i class="dot science-dot"></i>Before dinosaurs</div>
+            <h3>The amniote revolution</h3>
+            <p>Early amniotes were no longer tied to laying shell-less eggs in water. Over time, two great branches emerged: <strong>synapsids</strong>, the lineage that eventually produced mammals, and <strong>sauropsids</strong>, the lineage containing reptiles and birds.</p>
+            <p>The end-Permian mass extinction about 252 million years ago devastated ecosystems. During the Triassic recovery, archosaurs diversified. Dinosaurs were one archosaur branch—not the only reptiles on Earth.</p>
+          </article>
+          <article class="bio-panel" data-track="science">
+            <div class="track-tag"><i class="dot science-dot"></i>What makes a dinosaur?</div>
+            <h3>Not just “a giant ancient reptile”</h3>
+            <p>Dinosaurs had a distinctive hip and limb system that placed the legs beneath the body rather than sprawling sideways. An open hip socket and changes in the sacrum, femur, knee and ankle helped create this upright stance.</p>
+            <p><strong>Pterosaurs were not dinosaurs.</strong> Neither were ichthyosaurs, plesiosaurs, mosasaurs or Dimetrodon. Birds, however, are living dinosaurs because they evolved within theropod Dinosauria.</p>
+          </article>
+        </div>
+
+
+        <h3 style="margin-top:42px">The biological changes that made amniotes better at life on land</h3>
+        <div class="verified-animation" data-track="science">
+          <div class="verified-animation-head">
+            <div>
+              <div class="kicker">Real fossil-derived 3D interactive · HHMI BioInteractive</div>
+              <h3>Tiktaalik fossil: humerus</h3>
+              <p>Rotate and inspect a 3D model of Tiktaalik's humerus, based on fossil material from an animal that lived about 375 million years ago and preserves a combination of fish and tetrapod traits.</p>
+            </div>
+            <a class="verified-source" href="https://www.biointeractive.org/classroom-resources/tiktaalik-fossil-humerus" target="_blank" rel="noreferrer">HHMI source ↗</a>
+          </div>
+          <div class="embed-frame tiktaalik">
+            <iframe src="https://media.hhmi.org/biointeractive/3d_app/tiktaalik/tiktaalik_3d.html?load=.%2Fcontent%2Ftiktaalik_humerus%2Ftiktaalik_humerus.json&autorotate=" scrolling="yes" allowfullscreen="true" loading="lazy" title="Tiktaalik Fossil: Humerus Interactive"></iframe>
+          </div>
+          <div class="verified-note">Publisher: HHMI BioInteractive · official 3D model and embed. The model is based on fossil anatomy, not an AI reconstruction.</div>
+        </div>
+
+        <div class="innovation-grid" data-track="science">
+          <article class="innovation"><div class="n">A</div><b>Amniotic membranes</b><p>The embryo developed inside fluid-filled membranes that provided protection, gas exchange, nutrient storage and waste handling without requiring an open pond.</p></article>
+          <article class="innovation"><div class="n">B</div><b>More water-resistant skin</b><p>Keratinized outer coverings reduced water loss compared with the highly permeable skin typical of amphibians, helping many sauropsids occupy drier habitats.</p></article>
+          <article class="innovation"><div class="n">C</div><b>Stronger air-breathing systems</b><p>Rib-driven ventilation and increasingly differentiated lungs supported sustained life away from aquatic gill breathing.</p></article>
+          <article class="innovation"><div class="n">D</div><b>Water-conserving physiology</b><p>Amniote kidneys and reproductive systems evolved ways to conserve water and package embryos for terrestrial development; different lineages later solved these problems in different ways.</p></article>
+        </div>
+        <div class="bio-callout" data-track="science"><strong>Mammals did not evolve from modern reptiles.</strong> The early amniote tree split into synapsid and sauropsid branches. Mammals come from the synapsid branch; living reptiles and birds belong to the sauropsid branch. Both share a deeper amniote ancestor.</div>
+
+        <div class="anatomy-grid" data-track="science">
+          <article class="anatomy-card"><div class="icon">🦴</div><h3>Upright skeleton</h3><p>Legs positioned under the body improved weight support and locomotor efficiency compared with a fully sprawling gait.</p></article>
+          <article class="anatomy-card"><div class="icon">◌</div><h3>Air-filled bones</h3><p>Many saurischian dinosaurs had air sacs extending into bones. This lightened the skeleton and was part of a highly efficient respiratory system in the lineage leading to birds.</p></article>
+          <article class="anatomy-card"><div class="icon">〰</div><h3>Feathers</h3><p>Feathers are strongly documented in many theropods. They likely served insulation and display before powered flight evolved in the bird lineage.</p></article>
+          <article class="anatomy-card"><div class="icon">◉</div><h3>Eggs & nests</h3><p>Dinosaurs reproduced with eggs. Fossil nests, embryos and adults preserved near nests show complex reproductive behavior in several groups.</p></article>
+          <article class="anatomy-card"><div class="icon">◎</div><h3>Fast growth</h3><p>Microscopic bone structure and growth lines show many dinosaurs grew quickly. Physiology likely varied among lineages rather than fitting a simple “cold-blooded” stereotype.</p></article>
+          <article class="anatomy-card"><div class="icon">✦</div><h3>Bird continuity</h3><p>Wishbones, feathers, hollow bones, air sacs, three-toed limbs, nesting behavior and many skeletal details connect birds with small theropod dinosaurs.</p></article>
+        </div>
+
+        <div class="animation-pair" data-track="science">
+          <div class="verified-animation">
+            <div class="verified-animation-head">
+              <div>
+                <div class="kicker">Official interactive · HHMI BioInteractive</div>
+                <h3>The Making of Mass Extinctions</h3>
+                <p>Explore the environmental factors and organisms involved in Earth's five major mass extinctions, including the event that ended the age of non-avian dinosaurs.</p>
+              </div>
+              <a class="verified-source" href="https://www.biointeractive.org/classroom-resources/making-mass-extinctions-0" target="_blank" rel="noreferrer">HHMI source ↗</a>
+            </div>
+            <div class="embed-frame mass-extinction">
+              <iframe src="https://media.hhmi.org/biointeractive/embed/extinctions-embed/index.html" scrolling="no" allowfullscreen="true" loading="lazy" title="Mass Extinctions Interactive"></iframe>
+            </div>
+            <div class="verified-note">Publisher: HHMI BioInteractive · official embed supplied by HHMI.</div>
+          </div>
+
+          <div class="verified-animation">
+            <div class="verified-animation-head">
+              <div>
+                <div class="kicker">Paleontology film · HHMI BioInteractive</div>
+                <h3>Great Transitions: The Origin of Birds</h3>
+                <p>Paleontologist Julia Clarke follows fossil evidence linking birds to theropod dinosaurs, including Archaeopteryx and later discoveries.</p>
+              </div>
+              <a class="verified-source" href="https://www.biointeractive.org/classroom-resources/great-transitions-origin-birds" target="_blank" rel="noreferrer">HHMI source ↗</a>
+            </div>
+            <div class="embed-frame ratio-16x9">
+              <iframe src="https://www.youtube-nocookie.com/embed/1m55t3eJZa4" loading="lazy" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen title="Great Transitions The Origin of Birds"></iframe>
+            </div>
+            <div class="verified-note">Created by HHMI BioInteractive. This is the publisher's original film, not a site-generated animation.</div>
+          </div>
+        </div>
+
+        <div class="deep-details" data-track="science">
+          <details open>
+            <summary>Triassic · 252–201.3 million years ago</summary>
+            <div class="detail-body">
+              <p>Earth was recovering from the end-Permian mass extinction. Pangaea dominated the globe and many continental interiors were hot and dry. Dinosaurs appeared and diversified alongside numerous other archosaurs.</p>
+              <p><strong>Representative dinosaurs:</strong> Eoraptor, Herrerasaurus, Coelophysis and early sauropodomorphs such as Plateosaurus. Early mammaliaforms also appeared.</p>
+              <p>At the end of the Triassic, enormous Central Atlantic Magmatic Province volcanism coincided with another mass extinction. Dinosaurs survived and expanded into newly emptied ecological roles.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Jurassic · 201.3–145 million years ago</summary>
+            <div class="detail-body">
+              <p>Pangaea continued to fragment. Warm climates and widespread vegetation supported giant sauropods, stegosaurs and large theropod predators.</p>
+              <p><strong>Representative dinosaurs:</strong> Diplodocus, Brachiosaurus/Giraffatitan, Stegosaurus and Allosaurus. Small feathered theropods also diversified, and Archaeopteryx records an early bird-like dinosaur by the Late Jurassic.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Cretaceous · 145–66 million years ago</summary>
+            <div class="detail-body">
+              <p>Continents separated further and flowering plants expanded. Dinosaur communities became strongly regional, including titanosaurs, hadrosaurs, ceratopsians, ankylosaurs and highly specialized theropods.</p>
+              <p><strong>Representative dinosaurs:</strong> Tyrannosaurus, Triceratops, Ankylosaurus, Velociraptor and Spinosaurus. The period ended with the K–Pg mass extinction 66 million years ago.</p>
+            </div>
+          </details>
+        </div>
+
+        <h3 style="margin-top:46px">The main dinosaur body plans</h3>
+        <p class="lede">Traditional textbooks often divide dinosaurs into Saurischia and Ornithischia by pelvic anatomy. Modern phylogenetic work has tested alternative relationships, so the exact deepest branching pattern is still an active research question. The major familiar groups below remain useful.</p>
+
+        <div class="dino-tree" data-track="science">
+          <article class="dino-branch">
+            <h3>Saurischian lineages</h3>
+            <div class="dino-groups">
+              <div class="dino-group"><img class="mini-img" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Tyrannosaurus%20Rex%20Full%20Skeleton.JPG?width=500" alt="Tyrannosaurus rex skeleton"><div class="mini-copy"><b>Theropoda</b><small>T. rex · Allosaurus · Velociraptor · birds</small><small>WildFrogs · CC BY-SA 3.0</small></div></div>
+              <div class="dino-group"><img class="mini-img" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Diplodocus%20skeleton%20NMNH.jpg?width=500" alt="Diplodocus skeleton"><div class="mini-copy"><b>Sauropodomorpha</b><small>Plateosaurus · Diplodocus · Brachiosaurus · titanosaurs</small><small>Ryan Schwark · CC0</small></div></div>
+            </div>
+          </article>
+          <article class="dino-branch">
+            <h3>Ornithischian lineages</h3>
+            <div class="dino-groups">
+              <div class="dino-group"><img class="mini-img" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Iguanodon%20skeleton.JPG?width=500" alt="Iguanodon skeleton"><div class="mini-copy"><b>Ornithopoda</b><small>Iguanodon · hadrosaurs</small><small>Laikayiu · CC BY-SA 2.5</small></div></div>
+              <div class="dino-group"><img class="mini-img" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/A%20Triceratops%20skeleton.jpg?width=500" alt="Triceratops skeleton"><div class="mini-copy"><b>Ceratopsia</b><small>Psittacosaurus · Centrosaurus · Triceratops</small><small>Vanadium Erbium · CC BY 4.0</small></div></div>
+              <div class="dino-group"><img class="mini-img" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Stegosaurus%20Skeleton.jpg?width=500" alt="Stegosaurus skeleton"><div class="mini-copy"><b>Thyreophora</b><small>Stegosaurus · Ankylosaurus</small><small>Motokoka · CC BY-SA 4.0</small></div></div>
+              <div class="dino-group"><img class="mini-img" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Pachycephalosaurus%20skull.jpg?width=500" alt="Pachycephalosaurus skull"><div class="mini-copy"><b>Pachycephalosauria</b><small>Pachycephalosaurus and relatives</small><small>Eduard Solà · CC BY 3.0</small></div></div>
+            </div>
+          </article>
+        </div>
+
+        <h3 style="margin-top:34px">Real fossils and museum skeletons of the named dinosaurs</h3>
+        <p class="lede">Each named animal below uses a real fossil, skull or mounted skeleton from a free/public-domain source—not an AI image.</p>
+        <div class="named-gallery" data-track="science">
+          <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Tyrannosaurus%20Rex%20Full%20Skeleton.JPG?width=900" alt="Tyrannosaurus rex skeleton"><div class="body"><b>Tyrannosaurus rex</b><small>Late Cretaceous theropod.</small></div><div class="credit">WildFrogs · CC BY-SA 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Tyrannosaurus%20Rex%20Full%20Skeleton.JPG" target="_blank" rel="noreferrer">source ↗</a></div></article>
+          <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Allosaurus%20skeleton.jpg?width=900" alt="Allosaurus skeleton"><div class="body"><b>Allosaurus</b><small>Large Jurassic theropod predator.</small></div><div class="credit">ejk · CC BY-SA 2.0 · <a href="https://commons.wikimedia.org/wiki/File:Allosaurus%20skeleton.jpg" target="_blank" rel="noreferrer">source ↗</a></div></article>
+          <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Velociraptor%20skeleton.jpg?width=900" alt="Velociraptor skeleton"><div class="body"><b>Velociraptor</b><small>Small dromaeosaurid theropod.</small></div><div class="credit">Eduard Solà Vázquez · CC BY 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Velociraptor%20skeleton.jpg" target="_blank" rel="noreferrer">source ↗</a></div></article>
+          <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Spinosaurus%20aegyptiacus%20skeletal.jpg?width=900" alt="Spinosaurus aegyptiacus skeletal reconstruction based on fossil material"><div class="body"><b>Spinosaurus</b><small>Large spinosaurid theropod with unusual aquatic adaptations.</small></div><div class="credit">Marco Auditore et al. · CC BY 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Spinosaurus%20aegyptiacus%20skeletal.jpg" target="_blank" rel="noreferrer">source ↗</a></div></article>
+          <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Plateosaurus%20skeletal%20mount%2001.jpg?width=900" alt="Plateosaurus skeletal mount"><div class="body"><b>Plateosaurus</b><small>Early sauropodomorph from the Late Triassic.</small></div><div class="credit">Kritzolina · Wikimedia Commons free license · <a href="https://commons.wikimedia.org/wiki/File:Plateosaurus%20skeletal%20mount%2001.jpg" target="_blank" rel="noreferrer">source ↗</a></div></article>
+          <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Diplodocus%20skeleton%20NMNH.jpg?width=900" alt="Diplodocus skeleton at Smithsonian"><div class="body"><b>Diplodocus</b><small>Long-necked Jurassic sauropod.</small></div><div class="credit">Ryan Schwark · CC0 · <a href="https://commons.wikimedia.org/wiki/File:Diplodocus%20skeleton%20NMNH.jpg" target="_blank" rel="noreferrer">source ↗</a></div></article>
+          <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Brachiosaurus%20brancal%20in%20Berlin.JPG?width=900" alt="Brachiosaurus museum skeleton"><div class="body"><b>Brachiosaurus / Giraffatitan-type sauropod</b><small>Tall-shouldered giant sauropod body plan.</small></div><div class="credit">Interfase · Public domain · <a href="https://commons.wikimedia.org/wiki/File:Brachiosaurus%20brancal%20in%20Berlin.JPG" target="_blank" rel="noreferrer">source ↗</a></div></article>
+          <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Iguanodon%20skeleton.JPG?width=900" alt="Iguanodon skeleton"><div class="body"><b>Iguanodon</b><small>Large ornithopod herbivore.</small></div><div class="credit">Laikayiu · CC BY-SA 2.5 · <a href="https://commons.wikimedia.org/wiki/File:Iguanodon%20skeleton.JPG" target="_blank" rel="noreferrer">source ↗</a></div></article>
+          <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Edmontosaurus%20skeletons.JPG?width=900" alt="Edmontosaurus skeletons"><div class="body"><b>Hadrosaur — Edmontosaurus</b><small>Duck-billed ornithopod with a sophisticated dental battery.</small></div><div class="credit">Ninjatacoshell · CC BY-SA 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Edmontosaurus%20skeletons.JPG" target="_blank" rel="noreferrer">source ↗</a></div></article>
+          <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Psittacosaurus%20Dinosaur%20Fossil%20Skeleton.jpg?width=900" alt="Psittacosaurus fossil skeleton"><div class="body"><b>Psittacosaurus</b><small>Small early ceratopsian.</small></div><div class="credit">Rauantiques · Wikimedia Commons free license · <a href="https://commons.wikimedia.org/wiki/File:Psittacosaurus%20Dinosaur%20Fossil%20Skeleton.jpg" target="_blank" rel="noreferrer">source ↗</a></div></article>
+          <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Centrosaurus%20skulls.png?width=900" alt="Centrosaurus fossil skulls"><div class="body"><b>Centrosaurus</b><small>Ceratopsian known from abundant skull material.</small></div><div class="credit">Wikimedia Commons free scientific figure · <a href="https://commons.wikimedia.org/wiki/File:Centrosaurus%20skulls.png" target="_blank" rel="noreferrer">source ↗</a></div></article>
+          <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/A%20Triceratops%20skeleton.jpg?width=900" alt="Triceratops skeleton"><div class="body"><b>Triceratops</b><small>Large horned ceratopsid from the latest Cretaceous.</small></div><div class="credit">Vanadium Erbium · CC BY 4.0 · <a href="https://commons.wikimedia.org/wiki/File:A%20Triceratops%20skeleton.jpg" target="_blank" rel="noreferrer">source ↗</a></div></article>
+          <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Stegosaurus%20Skeleton.jpg?width=900" alt="Stegosaurus skeleton"><div class="body"><b>Stegosaurus</b><small>Armoured Jurassic herbivore with plates and tail spikes.</small></div><div class="credit">Motokoka · CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Stegosaurus%20Skeleton.jpg" target="_blank" rel="noreferrer">source ↗</a></div></article>
+          <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Ankylosaurus%20Skeleton%20(31556851166).jpg?width=900" alt="Ankylosaurus skeleton"><div class="body"><b>Ankylosaurus</b><small>Heavily armoured Cretaceous herbivore.</small></div><div class="credit">Gary Todd · CC0 · <a href="https://commons.wikimedia.org/wiki/File:Ankylosaurus%20Skeleton%20(31556851166).jpg" target="_blank" rel="noreferrer">source ↗</a></div></article>
+          <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Pachycephalosaurus%20skull.jpg?width=900" alt="Pachycephalosaurus skull"><div class="body"><b>Pachycephalosaurus</b><small>Dome-skulled ornithischian.</small></div><div class="credit">Eduard Solà · CC BY 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Pachycephalosaurus%20skull.jpg" target="_blank" rel="noreferrer">source ↗</a></div></article>
+          <article class="named-card"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Archaeopteryx%2C%20Berlin%20specimen%2C%20replica.JPG?width=900" alt="Archaeopteryx Berlin specimen replica"><div class="body"><b>Archaeopteryx</b><small>Jurassic feathered avialan preserving both dinosaur-like and bird-like traits.</small></div><div class="credit">HTO · Public domain · <a href="https://commons.wikimedia.org/wiki/File:Archaeopteryx%2C%20Berlin%20specimen%2C%20replica.JPG" target="_blank" rel="noreferrer">source ↗</a></div></article>
+        </div>
+<div class="deep-details" data-track="science">
+          <details open>
+            <summary>Triassic: dinosaurs begin as one competitor among many</summary>
+            <div class="detail-body">
+              <p>The Triassic opened after the worst mass extinction known in the fossil record. Early ecosystems included synapsids, amphibians and many non-dinosaur archosaurs. The oldest proposed dinosaur remains may approach 245 million years old, while definite dinosaurs are abundant later in the Triassic.</p>
+              <p>Early dinosaurs were generally much smaller than the gigantic forms of later periods. Many were bipedal. By the Late Triassic, theropods and sauropodomorphs had already diversified, while early mammaliaforms lived alongside them.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Jurassic: giants, predators and the dinosaur–bird transition</summary>
+            <div class="detail-body">
+              <p>Pangaea continued to fragment. Sauropods evolved extraordinarily long necks, pillar-like limbs and pneumatic skeletons. Stegosaurs became widespread herbivores, while large theropods such as Allosaurus occupied top predatory roles.</p>
+              <p>Small theropods were evolving increasingly bird-like features. Archaeopteryx, from about 150 million years ago, combines flight feathers and a wishbone with teeth, clawed fingers and a long bony tail.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Cretaceous: regional dinosaur worlds and flowering plants</summary>
+            <div class="detail-body">
+              <p>As continents separated, dinosaur communities became geographically distinctive. Horned dinosaurs and hadrosaurs flourished in parts of the Northern Hemisphere, titanosaurs became important large herbivores across many southern landmasses, and theropods evolved a wide range of body forms and diets.</p>
+              <p>Flowering plants expanded dramatically during the Cretaceous, restructuring terrestrial ecosystems together with insects and other pollinators.</p>
+            </div>
+          </details>
+          <details>
+            <summary>How did dinosaurs breathe, grow and regulate temperature?</summary>
+            <div class="detail-body">
+              <p>Many theropods and sauropods show skeletal pneumaticity—air spaces in bones associated with air sacs. Living birds use a flow-through lung and air-sac system that is exceptionally efficient; fossil anatomy suggests parts of this respiratory architecture were already present in dinosaur relatives.</p>
+              <p>Bone histology shows rapid growth in many dinosaurs. Whether every dinosaur lineage was fully endothermic in the mammal/bird sense is too simplistic a question: metabolism likely varied with size, lineage and ecology.</p>
+            </div>
+          </details>
+        </div>
+
+        <div class="bio-panel" data-track="science" style="margin:26px 0">
+          <div class="track-tag"><i class="dot science-dot"></i>K–Pg extinction</div>
+          <h3>66 million years ago</h3>
+          <p><strong>Impact:</strong> a roughly 10-km-scale asteroid struck near today's Yucatán Peninsula, forming the Chicxulub crater. Ejecta, dust and sulfur-rich aerosols spread globally, disrupting photosynthesis and food webs.</p>
+          <p><strong>Background stress:</strong> Deccan volcanism was also altering climate around this interval. Evidence strongly supports the impact as the principal immediate trigger of the end-Cretaceous mass extinction.</p>
+          <p><strong>Survivors:</strong> all non-avian dinosaurs disappeared, but birds survived.</p>
+        </div>
+
+        <div class="myth-box" data-track="science">
+          <b>Dinosaurs did not completely go extinct.</b>
+          <p>Every sparrow, crow, chicken, eagle and penguin is part of the surviving dinosaur lineage: birds are living theropods.</p>
+        </div>
+
+        <div class="external-explorer" data-track="science">
+          <article class="external-card">
+            <div class="kicker">Museum animation</div><h3>Why did birds survive?</h3>
+            <p>The Natural History Museum provides an animation and explanation of why birds were the dinosaur lineage that made it through the end-Cretaceous extinction.</p>
+            <a href="https://www.nhm.ac.uk/discover/why-are-birds-the-only-surviving-dinosaurs.html" target="_blank" rel="noreferrer">Watch / read at NHM ↗</a>
+          </article>
+          <article class="external-card">
+            <div class="kicker">Dinosaur directory</div><h3>Compare real species</h3>
+            <p>Use museum databases to compare body shape, diet, period and locality instead of relying on movie reconstructions.</p>
+            <a href="https://www.nhm.ac.uk/discover/what-are-dinosaurs.html" target="_blank" rel="noreferrer">Natural History Museum dinosaur resources ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+<div class="chapter-pager wrap">
+    <a class="chapter-nav prev" href="life.html"><span>← Previous</span><b>Life</b></a>
+    <a class="chapter-nav next" href="fossils.html"><span>Next →</span><b>Fossils</b></a>
+  </div>
+</main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <span class="footer-brand"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABIMDhAOCxIQDxAUExIVGy0dGxkZGzcoKiEtQjpFREA6Pz5IUWhYSE1iTj4/WntcYmtvdHZ0RleAiX9xiGhydHD/2wBDARMUFBsYGzUdHTVwSz9LcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHD/wAARCABMAEwDASIAAhEBAxEB/8QAGwAAAgMBAQEAAAAAAAAAAAAAAwQAAgUBBgf/xAA7EAACAQMCBAMFBQQLAAAAAAABAgMABBESIQUxQVETYXEiMjSBsSNCcpHRYqGy4QYUJDM1Q1JzgsHw/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAHREBAQEAAgMBAQAAAAAAAAAAAAERITECElFBcf/aAAwDAQACEQMRAD8A9vUqVKCVxmCqWYgAcyaDNPofw41Mkp30jp5k9BVVti7B7lvFYbhfuL6Dr86mq4Z5ZvhlGgb632DeQ/WiRTpI2g5SQc0bn/OhXzXK+H4CgjUM/wDu1HkiWaMCZAT5dD5Gp+glSlSZrb3tU0Pf76/r9aYR1kQOjBlPIirqLVKlSqJQLiVlKxRYMz8s8lHUmj0tZ/aa7k85T7Pko2H6/OpVgkEKwoVXJJ3ZjzY9zScN7M1vcq6f2iEbbc+1UmW6tbou94htnPuyHBHpRZLiGUJJrUPGwLAHmvX1HX5VWReGJMlkguCTISWOee5paO4mtYbt5wW0P7A7knkP3Va+8ePiNrPESYWIjkAO252Ncdri4vUe3jRoEJbW7YBb3e2+N6Bqxad7ZXuBiRiTjGMDpVZVNq5niH2Z3lQfxDzoK2bLdf1q7n8Qg+yqjCjoOtHivYZ7loIsuVHtMBsKz/WzAIZQQcg7giu0tafZvLb9IzlPwn9DmmasZUnJWCQjmFJ/dWab9rUQQrGGXQvXfkK0bj4aX8B+lZFxHqkidpEjAjAGo7n2eeKs7L0aWeyv2AmjXWpwNf8A0avfXcdkEWS3LQkYyoGB5YrJeAiNWUrIi4909e57Vp8LujMrQTMruNweeRSz4k8vpG4RhCtpaylrW70m3YHeIhgSoPbGSO2DWhxIGDh6Q25WJchMk4Cr69KT4468PktrkAiEzqzgdGwdx6jI/Kuu0cCR3fFB4t1LvHDzEY7Adx1NTcXsVrmK5MaLJptIsM8rHTrI5Be+++fKm7AWaxkWXh6euk7/ADrqBb6zHjwlVfcKTvjoaAi8P4bKEGEkfqck49elNnZz0OduJD9qE5+R/nTNLN/iSf7J+opmkWh3Hw0v4D9Kx5UUyBmGcoigf8etbMv90+F1eyfZ7+VZWXcHxeHyLkAezIOnLGablTNgSqEuFUDCupDDmMd6Xt55YnE0fhyadyAuCBTjRr4bAR3UTNsZCmvb5UAQN76usgX/ADY/eT8S9q1PKVmywxxN4r+xtGAyr3UQIPTfcU3qgtmL3BDTyHJ2yR2A7AVmMpTwRgBWuomwOQOd8eXI/OmxG7zM4QPM2/te6g6Zpi6vPeTy/CxuF/1ac5pWdIriVZLxZYnUYOF2b9KI66mw13LKw5rCpbH5bVZDJH7sV4w7MygfkazfW8LPacmYJRNeRyKCAYWwD+IU7SVozPcZa0aEKhAYkYO/lTtItYX9KOKW1tamzdpDLMNxERqC+p5Zry0cXi72/CLib9p3dvoBX0BbaBZWlWGMSMcl9IyfnRqqPApa8SjOqPhE0fmjyKf4qYTit9aOpvba6Cj70qkkej4B/PNe2qHcYPKgybeSHitnBJbOp8OdHbHkc4x0NIcY41FDM1tAPFkzuqjUM+YHP05etNcVsorV457QtbSXEqwymI4DK3l38607OxtrKPRbQrGOpA3PqeZoPGyScXuh8DeunQFmRfyXApd7O8XeXgbnzBkz9TX0KpQfP+H31vw2/jne1vLcqcFdepSD5ED617yCWO4hSaFw8bjKsOoqzorrpdQw7MM1SK3hhUrDGsak50oMDPpQf//Z" alt=""><b>LIFE HISTORY</b></span><br>
+      Built as an educational interface, not a fatwa and not a substitute for a science textbook. Where Islamic interpretation is disputed, the page should state the uncertainty rather than present one inference as revelation. This edition includes the standard 25-prophet learning list from Adam through Muhammad ﷺ.
+    </div>
+  </footer>
+
+<script>
+    const modeButtons=[...document.querySelectorAll('.mode')];
+    modeButtons.forEach(btn=>btn.addEventListener('click',()=>{
+      modeButtons.forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+      const mode=btn.dataset.mode;
+      document.querySelectorAll('[data-track]').forEach(el=>{
+        el.classList.toggle('filtered-out', mode!=='all' && el.dataset.track!==mode);
+      });
+    }));
+</script>
+\n
+<script src="prophets.js"></script>
+<script>
+(function(){
+  const en=document.getElementById('lang-en'), bn=document.getElementById('lang-bn');
+  const saved=localStorage.getItem('life-history-language')==='bn'?'bn':'en';
+  function update(lang){document.documentElement.lang=lang;en.setAttribute('aria-pressed',String(lang==='en'));bn.setAttribute('aria-pressed',String(lang==='bn'));}
+  function selectLanguage(lang){
+    update(lang);localStorage.setItem('life-history-language',lang);
+    const box=document.querySelector('#google_translate_element select.goog-te-combo');
+    if(box){box.value=lang==='bn'?'bn':'en';box.dispatchEvent(new Event('change',{bubbles:true}));return true;}
+    return false;
+  }
+  window.lifeHistoryTranslateReady=function(){
+    new google.translate.TranslateElement({pageLanguage:'en',includedLanguages:'bn,en',autoDisplay:false},'google_translate_element');
+    let attempts=0;const poll=setInterval(function(){attempts++;if(selectLanguage(saved)||attempts>35)clearInterval(poll);},200);
+  };
+  en.addEventListener('click',()=>{if(!selectLanguage('en'))location.reload();});
+  bn.addEventListener('click',()=>{if(!selectLanguage('bn')){const original=bn.textContent;bn.textContent='বাংলা…';setTimeout(()=>bn.textContent=original,1800);}});
+  update(saved);
+})();
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=lifeHistoryTranslateReady" async defer></script>
+</body>
+</html>

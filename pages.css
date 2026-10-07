@@ -1,0 +1,20 @@
+/* Multi-page chapter layout */
+.navlinks a[aria-current="page"]{color:#fff;text-decoration:underline;text-underline-offset:6px}
+.chapter-home{padding:82px 0;border-bottom:1px solid var(--line)}
+.chapter-home-head{max-width:850px;margin-bottom:34px}
+.chapter-list{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.chapter-card{display:grid;grid-template-columns:52px 1fr auto;gap:15px;align-items:center;border:1px solid #2d2d2d;background:#0d0d0d;padding:19px;text-decoration:none;min-height:112px;transition:.18s}
+.chapter-card:hover{border-color:#777;transform:translateY(-2px);background:#111}
+.chapter-no{font:700 1.55rem/1 Georgia,serif;color:#555}
+.chapter-card b{display:block;font:400 1.3rem/1.2 Georgia,serif;color:#efeee9;margin-bottom:5px}
+.chapter-card small{display:block;color:#8f8f8f;line-height:1.45}
+.chapter-arrow{font-size:1.35rem;color:#777}
+.chapter-pager{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:22px;padding-bottom:60px}
+.chapter-nav{border:1px solid #303030;background:#0d0d0d;padding:18px;text-decoration:none}
+.chapter-nav.next{text-align:right}
+.chapter-nav span{display:block;color:#777;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.chapter-nav b{font:400 1.15rem/1.2 Georgia,serif;color:#eee}
+.chapter-nav:hover{border-color:#777}
+@media(max-width:1100px){.nav{align-items:flex-start;flex-wrap:wrap}.navlinks{width:100%;overflow-x:auto;flex-wrap:nowrap;padding-bottom:8px}}
+@media(max-width:700px){.chapter-list{grid-template-columns:1fr}.chapter-pager{grid-template-columns:1fr}.chapter-nav.next{text-align:left}}
+@media(max-width:620px){.navlinks{display:flex!important;width:100%;overflow-x:auto;flex-wrap:nowrap;gap:12px;padding:3px 0 9px}.navlinks a{flex:0 0 auto}.chapter-home{padding:56px 0}}
