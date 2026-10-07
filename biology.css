@@ -179,3 +179,44 @@
 .real-image-note strong{color:#fff}
 @media(max-width:900px){.named-gallery{grid-template-columns:1fr 1fr}}
 @media(max-width:620px){.named-gallery{grid-template-columns:1fr}.dino-group{grid-template-columns:80px 1fr}.dino-group .mini-img{width:80px;height:68px}}
+
+
+/* Third-party science animations/interactives — embedded from original publishers */
+.verified-animation{
+  margin:28px 0;border:1px solid #303030;background:#0a0a0a;overflow:hidden;
+}
+.verified-animation-head{
+  display:flex;justify-content:space-between;gap:16px;align-items:flex-start;
+  padding:18px 20px;border-bottom:1px solid #282828;background:#0d0d0d;
+}
+.verified-animation-head h3{margin:.25rem 0 .35rem;font-size:1.35rem}
+.verified-animation-head p{margin:0;color:#999;font-size:.84rem;max-width:760px;line-height:1.5}
+.verified-source{
+  flex:0 0 auto;border:1px solid #353535;border-radius:999px;padding:6px 9px;
+  color:#aaa;text-decoration:none;font-size:.66rem;white-space:nowrap;
+}
+.verified-source:hover{border-color:#777;color:#fff}
+.embed-frame{position:relative;width:100%;background:#050505}
+.embed-frame.ratio-16x9{aspect-ratio:16/9}
+.embed-frame.deep-history{height:730px}
+.embed-frame.tiktaalik{height:680px}
+.embed-frame.mass-extinction{height:560px}
+.embed-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#050505}
+.verified-note{
+  padding:10px 18px;border-top:1px solid #242424;color:#777;font-size:.68rem;line-height:1.5;
+}
+.animation-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:28px 0}
+.animation-pair .verified-animation{margin:0}
+@media(max-width:900px){
+  .animation-pair{grid-template-columns:1fr}
+  .verified-animation-head{display:block}
+  .verified-source{display:inline-block;margin-top:10px}
+  .embed-frame.deep-history{height:600px}
+  .embed-frame.tiktaalik{height:600px}
+  .embed-frame.mass-extinction{height:520px}
+}
+@media(max-width:600px){
+  .embed-frame.deep-history{height:520px}
+  .embed-frame.tiktaalik{height:500px}
+  .embed-frame.mass-extinction{height:500px}
+}
