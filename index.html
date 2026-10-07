@@ -187,6 +187,17 @@
     #google_translate_element{position:absolute;left:-9999px;top:0;width:1px;height:1px;overflow:hidden}
     body{top:0!important}.goog-te-banner-frame,.skiptranslate iframe{display:none!important}
     @media(max-width:620px){.nav{flex-wrap:wrap}.language-switch{margin-left:0}.brand{margin-right:auto}}
+
+  /* Softer Bangla typography while leaving the English design unchanged */
+  @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+  html[lang="bn"] body,html[lang="bn"] button,html[lang="bn"] input,html[lang="bn"] select,html[lang="bn"] textarea,
+  html[lang="bn"] h1,html[lang="bn"] h2,html[lang="bn"] h3,html[lang="bn"] h4,
+  html[lang="bn"] .brand,html[lang="bn"] .sim-title{
+    font-family:'Hind Siliguri',sans-serif!important;font-weight:400;line-height:1.65;letter-spacing:0;
+  }
+  html[lang="bn"] h1,html[lang="bn"] h2,html[lang="bn"] h3{font-weight:500;line-height:1.3;letter-spacing:0}
+  html[lang="bn"] p,html[lang="bn"] li{line-height:1.85}
+  html[lang="bn"] .kicker,html[lang="bn"] .eyebrow{letter-spacing:.04em}
   </style>
   <link rel="stylesheet" href="biology.css" />\n
 <link rel="stylesheet" href="prophets.css" />
