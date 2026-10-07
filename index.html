@@ -137,7 +137,8 @@
       .modes{padding:8px 0}
     }
   </style>
-  <link rel="stylesheet" href="biology.css" />\n</head>
+  <link rel="stylesheet" href="biology.css" />\n  <link rel="stylesheet" href="life-tree.css" />
+</head>
 <body>
   <header class="topbar">
     <div class="wrap nav">
@@ -408,6 +409,19 @@
 
         <div class="bio-callout" data-track="science">
           <strong>Do not picture evolution as a ladder.</strong> Fish did not “turn into amphibians” in a straight line, and modern fish are not primitive leftovers. Evolution branches. Most lineages remain aquatic; one branch of lobe-finned vertebrates produced the tetrapod lineage, while their aquatic relatives continued evolving too.
+        </div>
+
+
+        <div data-track="science">
+          <div class="section-head" style="margin-top:56px">
+            <div class="section-number" style="font-size:1rem">TREE</div>
+            <div>
+              <div class="kicker">Explore relationships, not a straight ladder</div>
+              <h2>A zoomable Tree of Life inside Life History</h2>
+              <p class="lede">Inspired by the map-like exploration idea of OneZoom and the node-based phylogenetic navigation of Open Tree of Life, this is an original Life History visualization built for this project. It includes extinct groups that matter to our story, from trilobites and placoderms to Tiktaalik, dinosaurs and extinct hominins.</p>
+            </div>
+          </div>
+          <div id="lifeTreeExplorer"></div>
         </div>
 
         <div class="external-explorer" data-track="science">
@@ -938,5 +952,6 @@
     modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
     document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
   </script>
-  <script src="biology.js"></script>\n</body>
+  <script src="biology.js"></script>\n  <script src="life-tree.js"></script>
+</body>
 </html>
