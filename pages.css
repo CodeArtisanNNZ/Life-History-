@@ -230,3 +230,73 @@ body:has(#prophets) .brand{
   #before .section-head,
   #prophets .section-head{padding-bottom:18px}
 }
+
+
+/* Reference-inspired home page */
+.home-page{background:#060606;color:#f4f2ec}
+.home-page .topbar{background:rgba(5,5,5,.94);backdrop-filter:blur(14px);border-bottom:1px solid #2a2a2a}
+.home-page .modebar{display:none!important}
+.home-page main{overflow:hidden}
+.site-brand-logo{display:block;width:74px;height:74px;object-fit:contain;background:#fff;border:1px solid #303030;border-radius:8px}
+.footer-logo-link{display:inline-block;text-decoration:none}
+.footer-site-logo{display:block;width:145px;height:auto;object-fit:contain;background:#fff;border:1px solid #303030;border-radius:8px}
+
+.ref-home-hero{
+  min-height:calc(100svh - 86px);
+  display:grid;grid-template-rows:1fr auto;
+  border-bottom:1px solid #262626;
+  background:
+    linear-gradient(90deg,transparent calc(25% - .5px),#1d1d1d 25%,transparent calc(25% + .5px)),
+    linear-gradient(90deg,transparent calc(75% - .5px),#1d1d1d 75%,transparent calc(75% + .5px)),
+    radial-gradient(circle at 50% 42%,rgba(255,255,255,.045),transparent 28rem),
+    #070707;
+}
+.ref-home-frame{width:min(1500px,100%);margin:0 auto;display:grid;grid-template-columns:minmax(180px,1fr) minmax(460px,2.1fr) minmax(180px,1fr);min-height:680px}
+.ref-home-rail{padding:44px 28px 36px;display:flex;flex-direction:column;justify-content:space-between;border-color:#242424}
+.ref-home-rail-left{border-right:1px solid #242424}.ref-home-rail-right{border-left:1px solid #242424}
+.ref-rail-no{font:400 4.2rem/1 Georgia,serif;color:#333}
+.ref-rail-rule{width:1px;min-height:150px;flex:1;margin:24px 0;background:linear-gradient(#2e2e2e,#666,#2e2e2e)}
+.ref-rail-label{font-size:.64rem;letter-spacing:.17em;font-weight:700;color:#d5d2ca;margin-bottom:10px}
+.ref-home-rail p{color:#818181;font-size:.78rem;line-height:1.65;max-width:210px}
+.ref-home-rail a{display:inline-block;margin-top:12px;color:#ddd9cf;text-decoration:none;font-size:.72rem;border-bottom:1px solid #464646;padding-bottom:4px}
+.ref-home-center{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:58px 38px 54px}
+.ref-home-center::before,.ref-home-center::after{content:"";position:absolute;width:8px;height:8px;border:1px solid #4b4b4b;transform:rotate(45deg)}
+.ref-home-center::before{top:34px;left:50%}.ref-home-center::after{bottom:34px;left:50%}
+.ref-home-kicker{text-transform:uppercase;letter-spacing:.19em;font-size:.64rem;color:#777;margin-bottom:20px}
+.ref-home-logo{width:min(270px,42vw);aspect-ratio:1;object-fit:contain;display:block;background:#fff;border-radius:50%;box-shadow:0 0 0 1px #2f2f2f,0 24px 80px rgba(0,0,0,.38);margin-bottom:-4px}
+.ref-home-title{font:400 clamp(4.4rem,9.8vw,10.2rem)/.76 Georgia,"Times New Roman",serif;letter-spacing:-.075em;margin:0;color:#f1efe9;position:relative;z-index:2}
+.ref-home-title span{display:block}
+.ref-home-copy{max-width:680px;color:#999;font-size:.9rem;line-height:1.75;margin:28px auto 0}
+.ref-home-actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-top:24px}
+.ref-home-actions a{padding:10px 14px;border:1px solid #373737;text-decoration:none;font-size:.72rem;letter-spacing:.03em}
+.ref-primary{background:#eeeae1;color:#0d0d0d;border-color:#eeeae1!important}.ref-secondary{background:#0d0d0d;color:#d6d2c9}
+.ref-home-meta{border-top:1px solid #292929;display:grid;grid-template-columns:repeat(4,1fr);width:min(1500px,100%);margin:0 auto}
+.ref-home-meta span{min-height:82px;display:flex;align-items:center;justify-content:center;gap:8px;color:#777;font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;border-right:1px solid #242424;text-align:center;padding:14px}
+.ref-home-meta span:last-child{border-right:0}.ref-home-meta b{font:400 1.35rem/1 Georgia,serif;color:#dedbd3}
+
+.ref-chapters{padding:100px 0 110px;background:#0a0a0a;border-bottom:1px solid #272727}
+.ref-chapters-head{display:grid;grid-template-columns:1.35fr .65fr;gap:40px;align-items:end;margin-bottom:34px}
+.ref-chapters-head h2{font:400 clamp(2.5rem,5vw,5.4rem)/.95 Georgia,serif;letter-spacing:-.045em;margin:.25rem 0 0}
+.ref-chapters-head p{color:#858585;line-height:1.7;max-width:460px;justify-self:end;margin:0}
+.ref-chapter-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:minmax(170px,auto);gap:8px}
+.ref-chapter{border:1px solid #292929;background:#0d0d0d;text-decoration:none;padding:18px;display:grid;grid-template-columns:54px 1fr auto;gap:14px;align-items:end;min-height:180px;position:relative;overflow:hidden;transition:transform .2s,border-color .2s,background .2s}
+.ref-chapter::before{content:"";position:absolute;inset:0;background:linear-gradient(145deg,rgba(255,255,255,.035),transparent 45%);pointer-events:none}
+.ref-chapter:hover{transform:translateY(-3px);border-color:#727272;background:#111}
+.ref-chapter-wide{grid-column:span 2}.ref-chapter-tall{grid-row:span 2;min-height:360px}
+.ref-chapter-faith{background:linear-gradient(145deg,#17130f,#0d0d0d 66%);border-color:#4a3e30}
+.ref-chapter-no{align-self:start;font:400 1.8rem/1 Georgia,serif;color:#4c4c4c}
+.ref-chapter b{display:block;color:#f0ede5;font:400 1.55rem/1.15 Georgia,serif;margin-bottom:7px}
+.ref-chapter small{display:block;color:#808080;font-size:.73rem;line-height:1.5;max-width:360px}
+.ref-chapter i{align-self:start;font-style:normal;color:#777;font-size:1.15rem}
+
+@media(max-width:1050px){
+  .ref-home-frame{grid-template-columns:160px minmax(0,1fr) 160px}.ref-home-rail{padding:32px 18px}.ref-home-title{font-size:clamp(4rem,10vw,7rem)}
+}
+@media(max-width:780px){
+  .ref-home-hero{min-height:auto;background:#070707}.ref-home-frame{display:block;min-height:0}.ref-home-center{padding:52px 18px 46px}.ref-home-rail{display:none}.ref-home-logo{width:min(230px,58vw)}.ref-home-title{font-size:clamp(4rem,17vw,7.2rem)}
+  .ref-home-meta{grid-template-columns:1fr 1fr}.ref-home-meta span:nth-child(2){border-right:0}.ref-home-meta span:nth-child(-n+2){border-bottom:1px solid #242424}
+  .ref-chapters{padding:70px 0}.ref-chapters-head{grid-template-columns:1fr;gap:16px}.ref-chapters-head p{justify-self:start}.ref-chapter-grid{grid-template-columns:1fr 1fr}.ref-chapter-wide{grid-column:span 2}.ref-chapter-tall{grid-row:auto;min-height:180px}
+}
+@media(max-width:540px){
+  .site-brand-logo{width:58px;height:58px}.ref-home-title{font-size:clamp(3.5rem,18vw,5.4rem)}.ref-home-copy{font-size:.82rem}.ref-chapter-grid{grid-template-columns:1fr}.ref-chapter-wide{grid-column:auto}.ref-chapter{min-height:155px}
+}
