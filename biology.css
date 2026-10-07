@@ -156,3 +156,28 @@
   .evo-stop{min-width:210px;max-width:210px}
   #abiogenesisCanvas{height:280px}
 }
+
+
+/* Free-source scientific image system */
+.entity-figure{margin:0 0 12px;border:1px solid #292929;background:#090909;overflow:hidden}
+.entity-figure img{display:block;width:100%;height:190px;object-fit:cover;background:#111}
+.entity-figure.contain img{object-fit:contain;padding:10px;background:#111}
+.entity-credit{font-size:.62rem;line-height:1.35;color:#858585;padding:7px 9px;border-top:1px solid #242424}
+.entity-credit a{color:#a9a9a9;text-underline-offset:2px}
+.species .entity-figure{margin:-19px -19px 14px}
+.species .entity-figure img{height:210px}
+.dino-group{display:grid;grid-template-columns:92px 1fr;gap:12px;align-items:center}
+.dino-group .mini-img{width:92px;height:72px;object-fit:cover;border:1px solid #292929;background:#111}
+.dino-group .mini-copy{min-width:0}
+.named-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:22px 0}
+.named-card{border:1px solid #2c2c2c;background:#0d0d0d;overflow:hidden}
+.named-card img{width:100%;height:165px;object-fit:cover;display:block;background:#111}
+.named-card .body{padding:12px}
+.named-card b{display:block;color:#eee;margin-bottom:4px}
+.named-card small{display:block;color:#888;line-height:1.35}
+.named-card .credit{padding:0 12px 12px;font-size:.6rem;color:#777;line-height:1.35}
+.named-card .credit a{color:#999}
+.real-image-note{border:1px solid #333;padding:14px 16px;margin:16px 0;background:#0d0d0d;color:#aaa;font-size:.8rem}
+.real-image-note strong{color:#fff}
+@media(max-width:900px){.named-gallery{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.named-gallery{grid-template-columns:1fr}.dino-group{grid-template-columns:80px 1fr}.dino-group .mini-img{width:80px;height:68px}}
