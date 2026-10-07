@@ -537,3 +537,23 @@ body:has(#prophets) .brand{
     font-size:1.5rem;
   }
 }
+
+
+/* Remove Google Translate original-text hover UI */
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.goog-tooltip,
+.goog-tooltip:hover{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+}
+.goog-text-highlight{
+  background:transparent!important;
+  box-shadow:none!important;
+  border:0!important;
+}
+html[lang="bn"] [title]{
+  pointer-events:auto;
+}
