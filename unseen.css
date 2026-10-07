@@ -1,0 +1,46 @@
+
+/* Angels, Iblis and jinn chapter */
+.unseen-intro{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0}
+.unseen-card{border:1px solid #2e2e2e;background:#0c0c0c;padding:21px}
+.unseen-card p{color:#a3a3a3;line-height:1.65}
+.unseen-card strong{color:#eee}
+.source-pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.source-pill{display:inline-block;border:1px solid #353535;border-radius:999px;padding:5px 8px;color:#aaa;text-decoration:none;font-size:.67rem}
+.source-pill:hover{border-color:#777;color:#fff}
+
+.four-angels{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:20px 0 28px}
+.angel-card{border:1px solid #2d2d2d;background:#0d0d0d;padding:18px;min-height:260px}
+.angel-card .num{font:700 2rem/1 Georgia,serif;color:#555}
+.angel-card h3{margin:.55rem 0 .15rem}
+.angel-card .arabic{font-family:"Noto Naskh Arabic","Traditional Arabic",serif;color:#aaa;font-size:1.25rem}
+.angel-card p{font-size:.81rem;color:#999;line-height:1.55}
+.angel-card .duty{border-left:2px solid #777;padding-left:10px;margin-top:12px;color:#ccc;font-size:.78rem}
+.angel-card .boundary{font-size:.68rem;color:#7e756b;margin-top:11px}
+
+.angel-roles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0 34px}
+.role-card{border:1px solid #292929;background:#0b0b0b;padding:16px}
+.role-card b{display:block;color:#eee;margin-bottom:5px}
+.role-card p{font-size:.78rem;color:#969696;line-height:1.5;margin:.3rem 0}
+
+.iblis-story{border:1px solid #39312c;background:#0c0a09;margin:28px 0;padding:22px}
+.iblis-story h3{font-size:1.55rem;margin:.2rem 0 .5rem}
+.story-steps{display:grid;gap:7px;margin:16px 0}
+.story-step{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start;border:1px solid #2b2724;background:#0a0908;padding:11px}
+.story-step .stepn{width:30px;height:30px;border:1px solid #51443b;border-radius:50%;display:grid;place-items:center;color:#9c806d;font-size:.68rem}
+.story-step p{margin:0;color:#a99c93;line-height:1.52;font-size:.81rem}
+.primary-warning{border:1px solid #765d45;background:#17110c;padding:15px 17px;margin:17px 0;color:#c3aa91;font-size:.8rem;line-height:1.55}
+.primary-warning strong{color:#f0d7bd}
+
+.jinn-types{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:18px 0 26px}
+.jinn-type{border:1px solid #2d2d2d;background:#0d0d0d;padding:16px}
+.jinn-type h3{font-size:1.05rem;margin:.25rem 0}
+.jinn-type p{font-size:.77rem;color:#999;line-height:1.5}
+.jinn-type .tag{font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:#777}
+
+.myth-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:18px 0}
+.myth-item{border:1px solid #302d2a;background:#0c0b0a;padding:16px}
+.myth-item b{display:block;margin-bottom:5px;color:#eee}
+.myth-item p{font-size:.8rem;color:#999;line-height:1.55;margin:.3rem 0}
+
+@media(max-width:1000px){.four-angels,.angel-roles{grid-template-columns:1fr 1fr}.jinn-types{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.unseen-intro,.myth-grid{grid-template-columns:1fr}.four-angels,.angel-roles,.jinn-types{grid-template-columns:1fr}}
