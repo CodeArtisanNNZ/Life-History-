@@ -14,6 +14,40 @@
    }
  }
  let busy=false;
+
+ function suppressOriginalEnglishHover(){
+   const bn=document.documentElement.lang==='bn';
+
+   // Google Translate can create a delayed hover balloon showing the original
+   // English. Remove/hide that UI whenever Bangla is active.
+   document.querySelectorAll('#goog-gt-tt,.goog-te-balloon-frame,.goog-tooltip').forEach(el=>{
+     if(bn) el.remove();
+   });
+
+   // Preserve genuine site titles, but never allow translated text to expose
+   // the English original as a browser tooltip in Bangla mode.
+   document.querySelectorAll('[title]').forEach(el=>{
+     if(el.closest('#google_translate_element')) return;
+     if(bn){
+       if(!el.hasAttribute('data-lifehistory-title') && el.getAttribute('title')){
+         el.setAttribute('data-lifehistory-title',el.getAttribute('title'));
+       }
+       el.removeAttribute('title');
+     }else if(el.hasAttribute('data-lifehistory-title')){
+       el.setAttribute('title',el.getAttribute('data-lifehistory-title'));
+       el.removeAttribute('data-lifehistory-title');
+     }
+   });
+
+   // Google wraps translated text with highlight classes that trigger its
+   // hover UI. Strip the visual/hover marker without touching the text.
+   if(bn){
+     document.querySelectorAll('.goog-text-highlight').forEach(el=>{
+       el.classList.remove('goog-text-highlight');
+     });
+   }
+ }
+
  function apply(){
    if(busy)return;
    busy=true;
@@ -23,6 +57,7 @@
      const next=bn?translated:original;
      if(node.nodeValue.trim()!==next && (bn || node.nodeValue.trim()===translated)) node.nodeValue=node.nodeValue.replace(node.nodeValue.trim(),next);
    });
+   suppressOriginalEnglishHover();
    busy=false;
  }
 
@@ -57,10 +92,10 @@
  function init(){
    applySiteLogo();
    index();apply();
-   const observer=new MutationObserver(()=>{if(document.documentElement.lang==='bn')apply()});
-   observer.observe(document.body,{subtree:true,characterData:true,childList:true});
-   document.getElementById('lang-bn')?.addEventListener('click',()=>setTimeout(apply,50));
-   document.getElementById('lang-en')?.addEventListener('click',()=>setTimeout(apply,50));
+   const observer=new MutationObserver(()=>{if(document.documentElement.lang==='bn'){apply();suppressOriginalEnglishHover();}});
+   observer.observe(document.body,{subtree:true,characterData:true,childList:true,attributes:true,attributeFilter:['title','class']});
+   document.getElementById('lang-bn')?.addEventListener('click',()=>setTimeout(()=>{apply();suppressOriginalEnglishHover();},50));
+   document.getElementById('lang-en')?.addEventListener('click',()=>setTimeout(()=>{apply();suppressOriginalEnglishHover();},50));
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
