@@ -25,7 +25,37 @@
    });
    busy=false;
  }
+
+ function applySiteLogo(){
+   const src='assets/life-history-logo.jpg';
+   document.querySelectorAll('.brand-lockup').forEach(a=>{
+     a.setAttribute('href','index.html');
+     a.setAttribute('aria-label','Life History home');
+     a.innerHTML='<img class="site-brand-logo" src="'+src+'" alt="Life History">';
+   });
+   document.querySelectorAll('.footer-brand').forEach(el=>{
+     el.innerHTML='<a class="footer-logo-link" href="index.html" aria-label="Life History home"><img class="footer-site-logo" src="'+src+'" alt="Life History"></a>';
+   });
+   let icon=document.querySelector('link[rel="icon"]');
+   if(!icon){icon=document.createElement('link');icon.rel='icon';document.head.appendChild(icon);}
+   icon.type='image/jpeg'; icon.href=src;
+   let touch=document.querySelector('link[rel="apple-touch-icon"]');
+   if(!touch){touch=document.createElement('link');touch.rel='apple-touch-icon';document.head.appendChild(touch);}
+   touch.href=src;
+ }
+ Object.assign(copy,{
+   "A visual history of life · evidence · revelation":"প্রাণের ইতিহাস · প্রমাণ · ওহি",
+   "From the earliest Earth and the first life to dinosaurs, human origins and the prophetic story—built so one question naturally leads to another.":"পৃথিবীর শুরুর ইতিহাস, প্রথম প্রাণ, ডাইনোসর, মানুষের উৎপত্তি ও নবীদের কাহিনি—এভাবে সাজানো, যেন একটি প্রশ্ন থেকেই আরেকটি প্রশ্নের জন্ম হয়।",
+   "Explore the chapters":"অধ্যায়গুলো ঘুরে দেখো",
+   "Nine chapters. One connected history.":"নয়টি অধ্যায়। একটি যুক্ত গল্প।",
+   "Choose where to enter":"যেখান থেকে ইচ্ছা শুরু করো",
+   "Each chapter is its own page. Move in order, or jump straight to the question that brought you here.":"প্রতিটি অধ্যায় আলাদা পাতায়। চাইলে ধারাবাহিকভাবে পড়ো, অথবা যে প্রশ্নটি তোমাকে এখানে এনেছে সেখান থেকেই শুরু করো।",
+   "SCIENCE":"বিজ্ঞান",
+   "REVELATION":"ওহি"
+ });
+
  function init(){
+   applySiteLogo();
    index();apply();
    const observer=new MutationObserver(()=>{if(document.documentElement.lang==='bn')apply()});
    observer.observe(document.body,{subtree:true,characterData:true,childList:true});
