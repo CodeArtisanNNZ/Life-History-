@@ -16,7 +16,7 @@ html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helve
 body{padding:14px}
 .widget{max-width:1500px;margin:auto}
 .header{border:1px solid var(--line);background:var(--panel);padding:18px}
-.top{display:flex;gap:16px;justify-content:space-between;align-items:flex-start}
+.top{display:flex;gap:16px;justify-content:space-between;align-items:flex-start}.sim-brand{display:flex;align-items:center;gap:12px}.sim-brand img{width:56px;height:56px;object-fit:contain;display:block}
 h1{font-family:Georgia,serif;font-size:26px;margin:0 0 4px}
 .subtitle{color:var(--muted);font-size:13px}
 .actions,.chips{display:flex;gap:6px;flex-wrap:wrap}
@@ -58,12 +58,14 @@ button:hover,button.active{background:#eee;color:#111}
 @media(max-width:980px){.main{grid-template-columns:1fr}.details{min-height:0}.tree-card{min-height:570px}#tree-svg{height:570px}}
 @media(max-width:650px){body{padding:7px}.top{display:block}.actions{margin-top:10px}.controls{grid-template-columns:1fr}.chips{max-height:84px;overflow:auto}.tree-card{min-height:510px}#tree-svg{height:510px}.details{padding:12px}}
 </style>
+<link rel="shortcut icon" type="image/png" href="assets/life-history-logo.png?v=4">
+<link rel="apple-touch-icon" href="assets/life-history-logo.png?v=4">
 </head>
 <body>
 <div class="widget">
   <div class="header">
     <div class="top">
-      <div><h1>Phylogenetic Tree of Life</h1><div class="subtitle">The uploaded simulation, adapted for Life History — now with a free-source image beside every taxon name.</div></div>
+      <div class="sim-brand"><a href="index.html" target="_top" aria-label="Life History home"><img src="assets/life-history-logo.png?v=4" alt="Life History"></a><div><h1>Phylogenetic Tree of Life</h1><div class="subtitle">The uploaded simulation, adapted for Life History — now with a free-source image beside every taxon name.</div></div></div>
       <div class="actions">
         <button id="btn-expand">Expand All</button>
         <button id="btn-collapse">Collapse</button>
