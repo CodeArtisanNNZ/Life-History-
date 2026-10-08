@@ -557,3 +557,6 @@ body:has(#prophets) .brand{
 html[lang="bn"] [title]{
   pointer-events:auto;
 }
+
+/* Quran-first chapter framing and in-chapter connections. */
+.islamic-introduction{margin-top:30px;margin-bottom:24px;padding:24px;border:1px solid var(--line,#ddd);border-radius:12px;background:var(--faith-bg,#f7f4ef);color:#25231f}.islamic-introduction h2{font-size:clamp(1.3rem,3vw,1.9rem);margin:8px 0 12px}.islamic-introduction p{font-size:1rem;line-height:1.8;max-width:78ch;color:#444}.islamic-introduction a{display:inline-block;margin-top:12px;color:#584b35}.story-connection{margin:32px 0 18px;padding:16px 20px;border-left:3px solid #897660;line-height:1.7;color:var(--muted,#666)}.prehistory-explorer,.darwin-study,.fair-viewpoints{scroll-margin-top:100px}.viewpoint-grid .islamic{order:-1}.brand-icon,.footer-brand img{object-fit:contain!important;border-radius:0!important;background:transparent!important;width:56px!important;height:56px!important}@media(max-width:620px){.brand-icon{width:42px!important;height:42px!important}.islamic-introduction{width:calc(100% - 32px);padding:18px}}
