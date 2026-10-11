@@ -1,0 +1,39 @@
+
+/* Curated educational photography: charcoal structure, restrained natural colour. */
+.visual-gallery{margin:30px 0 36px;padding:20px;border:1px solid #34383a;background:linear-gradient(145deg,#15191c,#0e0f10 75%);border-radius:12px;clear:both}
+.visual-gallery.visual-faith{background:linear-gradient(145deg,#211d17,#121210 74%);border-color:#574a38}
+.visual-gallery-head{display:flex;gap:20px;align-items:end;justify-content:space-between;flex-wrap:wrap;margin:0 0 17px}
+.visual-gallery-kicker{font:600 .68rem/1.4 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.15em;color:#bdc9ce}
+.visual-faith .visual-gallery-kicker{color:#d4bea0}
+.visual-gallery-title{font:400 clamp(1.3rem,2.4vw,2.15rem)/1.2 Georgia,serif;color:#f0eeea;margin:7px 0 6px}
+.visual-gallery-subtitle{font-size:.84rem;color:#b7bbbf;line-height:1.6;max-width:800px;margin:0}
+.visual-gallery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.visual-gallery-grid.is-four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.visual-media-card{margin:0;min-width:0;background:#171a1c;border:1px solid #383d40;border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+.visual-faith .visual-media-card{background:#211e1a;border-color:#4e4435}
+.visual-media-image{position:relative;height:185px;background:linear-gradient(135deg,#151819,#343634);display:block;overflow:hidden}
+.visual-media-image img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.72);transition:filter .22s ease,transform .35s ease}
+.visual-media-card:hover .visual-media-image img{filter:saturate(1);transform:scale(1.025)}
+.visual-media-card figcaption{padding:13px 14px 15px;flex:1;display:flex;flex-direction:column}
+.visual-media-card strong{font:400 1.09rem/1.25 Georgia,serif;color:#f0efeb;display:block;margin-bottom:6px}
+.visual-media-description{font:.77rem/1.55 system-ui,sans-serif;color:#c0c6c8;display:block}
+.visual-source-credit{display:block;margin-top:auto;padding-top:11px;font:.65rem/1.45 system-ui,sans-serif;color:#a7adb0}
+.visual-source-credit a{color:#dbe7ed;text-decoration:underline;text-underline-offset:3px}
+.visual-gallery-note{font:.73rem/1.65 system-ui,sans-serif;color:#b6bab7;margin:14px 0 0}
+.visual-placeholder{display:none;padding:22px;font:.78rem/1.5 system-ui,sans-serif;color:#dedede}
+.visual-image-unavailable .visual-placeholder{display:block}
+.visual-image-unavailable img{display:none!important}
+.ref-chapter>.visual-chapter-photo{position:absolute;inset:0;z-index:0;display:block;pointer-events:none;overflow:hidden}
+.ref-chapter>.visual-chapter-photo img{display:block;width:100%;height:100%;object-fit:cover;opacity:.31;filter:saturate(.65) contrast(1.1);transition:transform .3s ease,opacity .3s ease}
+.ref-chapter:hover>.visual-chapter-photo img{transform:scale(1.04);opacity:.45}
+.ref-chapter::before{z-index:1;background:linear-gradient(90deg,rgba(4,5,6,.87),rgba(5,5,6,.45) 64%,rgba(0,0,0,.25))!important}
+.ref-chapter>.ref-chapter-no,.ref-chapter>div:not(.visual-chapter-photo),.ref-chapter>i{position:relative;z-index:2}
+.ref-chapter b{color:#fff}
+.ref-chapter small{color:#d4d3cf}
+.ref-chapter-no{color:#e6ded2}
+.ref-home-center{position:relative;isolation:isolate}
+.ref-home-center::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,rgba(6,6,6,.91),rgba(7,7,7,.45),rgba(6,6,6,.9)),url("https://commons.wikimedia.org/wiki/Special:FilePath/Pillars_of_Creation.jpeg?width=1200") center / cover no-repeat;opacity:.65}
+@media(max-width:1050px){.visual-gallery-grid.is-four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:800px){.visual-gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.visual-gallery{padding:13px;margin:22px 0 28px}.visual-gallery-grid,.visual-gallery-grid.is-four{grid-template-columns:1fr}.visual-media-image{height:210px}.visual-gallery-head{display:block}.visual-gallery-title{font-size:1.5rem}.ref-chapter>.visual-chapter-photo img{opacity:.24}}
+@media(prefers-reduced-motion:reduce){.visual-media-image img,.ref-chapter>.visual-chapter-photo img{transition:none!important;transform:none!important}}
